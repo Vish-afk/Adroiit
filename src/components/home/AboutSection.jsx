@@ -1,6 +1,7 @@
 // AboutSection.jsx
 import React from 'react';
 import { Lightbulb } from 'lucide-react';
+import sideImage from '../home/about-CmYOi0Js.png';
 
 export default function AboutSection() {
   return (
@@ -15,7 +16,7 @@ export default function AboutSection() {
           </div>
           <div className="about__icon-container">
             <div className="about__icon">
-              <Lightbulb />
+              <img src={sideImage} alt="About Icon" />
             </div>
           </div>
         </div>
