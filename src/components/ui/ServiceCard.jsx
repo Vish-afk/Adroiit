@@ -1,3 +1,4 @@
+// ServiceCard.jsx (UI Component)
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
@@ -9,21 +10,21 @@ export default function ServiceCard({ title, description, icon, link }) {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow hover:transform hover:scale-105">
-      <div className="text-4xl mb-4">
+    <div className="service-card">
+      <div className="service-card__icon">
         {icon}
       </div>
-      <h3 className="font-telegraf text-deep-purple text-2xl font-bold mb-3">
+      <h3 className="service-card__title">
         {title}
       </h3>
-      <p className="font-inter text-dark-charcoal text-base mb-4">
+      <p className="service-card__description">
         {description}
       </p>
       <button 
+        className="service-card__link" 
         onClick={handleExplore}
-        className="font-poppins text-deep-purple hover:text-neon-pink font-semibold transition-colors flex items-center"
       >
-        Explore <ArrowRight className="inline-block ml-1 w-4 h-4" />
+        Explore <ArrowRight />
       </button>
     </div>
   );
