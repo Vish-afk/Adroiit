@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '../ui/Button';
 import { ArrowRight } from 'lucide-react';
 import SequentialTypewriter from './SequentialTypewriter'; // Import the new component
+import bg from '../home/bg-removebg-preview.png'; // Import the background image
 
 export default function HeroSection() {
   const handleLearnMore = () => {
@@ -22,7 +23,7 @@ export default function HeroSection() {
   const commonLoopDelay = 1000; // Delay before the cycle restarts after clearing everything
 
   return (
-    <section className="hero">
+    <section className="hero" style={{ backgroundImage: `url(${bg})` }}>
       <div className="hero__content">
         <h1 className="hero__title">
           <span className="hero__line-one">Empowering Next-</span> {/* Line 1 */}
@@ -38,7 +39,7 @@ export default function HeroSection() {
           />
         </h1>
         <Button onClick={handleLearnMore} aria-label="Learn more about us">
-          Learn More
+          Dive Deep
           <ArrowRight className="btn__icon" />
         </Button>
       </div>
