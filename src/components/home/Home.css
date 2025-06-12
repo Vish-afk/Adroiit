@@ -3,29 +3,39 @@
 /* CSS Custom Properties for Metallic Palette */
 :root {
     /* Base Tones - Deeper, more desaturated, almost concrete-like */
-    --primary-dark: #121212; /* Near Black, but with depth */
-    --secondary-dark: #202020; /* Very Dark Grey, less blue, more neutral */
+    --primary-dark: #0D0D0D; /* Slightly darker, even more profound black */
+    --secondary-dark: #1A1A1A; /* Very Dark Grey, less blue, more neutral */
+    --tertiary-dark: #2A2A2A; /* New: For subtle background elements/card backs */
 
     /* Metallic Accents - Subdued Copper & Silver, aged and less vibrant */
     --copper-main: #7B4720; /* Deeper, oxidized copper */
     --copper-light: #9B5D2F; /* Still subdued, hint of aged warmth */
     --silver-main: #8A929B; /* Desaturated, almost gunmetal silver */
     --silver-light: #A0A8AE; /* Cooler, muted highlight */
+
+    /* Gradients - More refined and subtle variations */
     --gradient-metallic: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
     --gradient-copper: linear-gradient(135deg, var(--copper-main) 0%, var(--copper-light) 100%);
     --gradient-silver: linear-gradient(135deg, var(--silver-main) 0%, var(--silver-light) 100%);
+    --gradient-subtle-dark: linear-gradient(135deg, var(--secondary-dark) 0%, var(--tertiary-dark) 100%); /* New subtle dark gradient */
+
 
     /* Text Colors - More muted, less stark white */
     --text-primary: #C0C0C0; /* Muted Off-White, slightly greyed */
     --text-secondary: #909090; /* Darker Grey for secondary text, almost faded */
     --text-muted: #6A6A6A; /* Deep, almost vanishing grey */
+    --text-highlight: #FFFFFF; /* Pure white for absolute highlights, sparingly used */
 
     /* Borders & Shadows - Sharper, more oppressive shadows, more industrial borders */
     --border-color: #383838; /* Darker, more defined border */
-    --shadow-light: rgba(0, 0, 0, 0.15); /* Slightly darker, more present light shadow */
-    --shadow-medium: rgba(0, 0, 0, 0.5); /* Stronger, more foreboding medium shadow */
-    --shadow-dark: rgba(0, 0, 0, 0.8); /* Opaque, oppressive shadow for deep contrast */
-    --transition: all 0.4s cubic-bezier(0.6, 0.05, 0.2, 0.9); /* Slower, more deliberate and slightly uneasy transition */
+    --border-subtle: rgba(255, 255, 255, 0.08); /* New: For subtle inner borders */
+    --shadow-light: rgba(0, 0, 0, 0.2); /* Slightly darker, more present light shadow */
+    --shadow-medium: rgba(0, 0, 0, 0.6); /* Stronger, more foreboding medium shadow */
+    --shadow-dark: rgba(0, 0, 0, 0.9); /* Opaque, oppressive shadow for deep contrast */
+
+    /* Transitions - Slower, more deliberate and slightly uneasy transition, with a hint of bounce */
+    --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother, slightly more deliberate */
+    --transition-slow: all 0.7s cubic-bezier(0.6, 0.05, 0.2, 0.9); /* Slower, more uneasy */
 
     /* Vibrant Accent (for typewriter text, etc.) - Now a very subtle, clinical aqua */
     --vibrant-accent: #007A8A; /* Kept previous dark teal for blink cursor */
@@ -42,13 +52,21 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 body {
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--primary-dark);
     color: var(--text-primary);
-    line-height: 1.7; /* Slightly more spacious for readability in dark themes */
+    line-height: 1.8; /* Slightly more spacious for readability in dark themes */
     overflow-x: hidden;
     position: relative;
+    /* subtle perspective for a modern feel */
+    perspective: 1000px;
 }
 
 body::before {
@@ -62,10 +80,13 @@ body::before {
     pointer-events: none;
     z-index: -1;
     opacity: 1; /* Make the texture more prominent */
+    /* Subtle animation for background texture */
+    animation: texturePan 60s linear infinite;
 }
 
-html {
-    scroll-behavior: smooth;
+@keyframes texturePan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
 }
 
 /* Selection Color - Less vibrant, more industrial */
@@ -80,56 +101,68 @@ html {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(8, 8, 8, 0.98); /* Almost opaque, very dark */
-    backdrop-filter: blur(15px); /* Stronger blur, less transparency */
+    background: rgba(8, 8, 8, 0.96); /* Almost opaque, very dark, slight transparency */
+    backdrop-filter: blur(18px); /* Stronger blur, less transparency */
     border-bottom: 1px solid var(--border-color);
     padding: 1rem 0;
     z-index: 1000;
     transition: var(--transition);
+    /* Subtle 3D lift */
+    transform: translateZ(0);
 }
 
 .navbar__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1300px; /* Wider for more expansive feel */
     margin: 0 auto;
-    height: 65px; /* Slightly taller, more imposing */
-    padding: 0 2rem;
+    height: 70px; /* Slightly taller, more imposing */
+    padding: 0 2.5rem; /* Increased padding */
 }
 
 .navbar__logo {
     display: flex;
     align-items: center;
     height: 100%;
+    /* Subtle hover effect for logo */
+    transition: var(--transition);
+}
+
+.navbar__logo:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
 }
 
 .navbar__logo img {
-    height: 65px; /* Matches navbar height */
+    height: 60px; /* Adjusted to fit better within 70px height */
     width: auto;
     filter: grayscale(0.5) contrast(1.2); /* Gritty logo */
+    transition: var(--transition);
 }
 
 .navbar__menu {
     display: flex;
-    gap: 2.5rem;
+    gap: 3rem; /* Increased gap for better spacing */
     align-items: center;
 }
 
 .navbar__link {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem; /* Slightly more gap */
     color: var(--text-secondary);
     text-decoration: none;
-    padding: 0.75rem 1.6rem; /* Slightly more angular padding */
-    border-radius: 4px; /* Sharper corners, less friendly */
+    padding: 0.85rem 1.8rem; /* Slightly more angular padding */
+    border-radius: 6px; /* Sharper corners, less friendly */
     transition: var(--transition);
     font-weight: 500;
     position: relative;
     overflow: hidden;
     font-size: 1.05rem; /* Slightly smaller, more subdued */
     border: 1px solid transparent;
+    /* Perspective for inner elements */
+    transform: translateZ(0);
 }
 
 .navbar__link::before {
@@ -142,28 +175,28 @@ html {
     background: var(--gradient-copper); /* Copper fill on hover for a subtle, intense glow */
     transition: var(--transition);
     z-index: -1;
-    border-radius: 4px; /* Match link border-radius */
+    border-radius: 6px; /* Match link border-radius */
+    transform: skewX(-20deg); /* Skew for a dynamic slide effect */
+    transform-origin: left center;
 }
 
 .navbar__link:hover::before {
     left: 0;
+    transform: skewX(0deg); /* Unskew on hover */
 }
 
 .navbar__link:hover {
     color: var(--primary-dark);
-    box-shadow: 0 5px 15px var(--shadow-dark); /* More direct, less spread out shadow */
+    box-shadow: 0 8px 25px var(--shadow-dark); /* More direct, less spread out shadow */
     border-color: var(--copper-main); /* Copper border on hover */
+    transform: translateY(-2px); /* Subtle lift on hover */
 }
 
 .navbar__icon {
-    width: 20px; /* Slightly smaller */
-    height: 20px;
+    width: 22px; /* Slightly larger */
+    height: 22px;
     fill: currentColor;
     filter: grayscale(0.1); /* Subtle desaturation */
-}
-
-.navbar__link:hover .navbar__icon {
-    /* No specific icon transform, let it inherit color change */
 }
 
 /* Hero Section */
@@ -178,10 +211,12 @@ html {
 
     /* Background Image setup */
     background-image: url('C:\Users\ADMIN\Desktop\adroiit\src\components\home\bg-removebg-preview.png'); /* Replace with your image URL */
-    background-size: auto 150%; /* Image height is 150% of container, width is auto. */
+    background-size: auto 160%; /* Image height is 160% of container, width is auto. */
     background-position: 100% 0%; /* Start at top-right of the background */
     background-repeat: no-repeat;
-    animation: heroBackgroundMoveVerticalRight 10s linear infinite; /* Apply the new animation */
+    animation: heroBackgroundMoveVerticalRight 15s linear infinite alternate; /* Apply the new animation, added 'alternate' */
+    /* INCREASED BRIGHTNESS HERE */
+    filter: brightness(1.3) contrast(1.2); /* Changed from 0.7 to 1.3 for increased brightness */
 }
 
 /* NEW: Keyframe animation for vertically downwards movement on the right side */
@@ -197,36 +232,40 @@ html {
 /* Ensure hero content is above the background */
 .hero__content {
     text-align: center;
-    max-width: 850px; /* Wider, more commanding presence */
-    padding: 4rem 5rem;
+    max-width: 900px; /* Wider, more commanding presence */
+    padding: 4.5rem 6rem; /* More generous padding */
     position: relative;
     z-index: 2; /* Ensure content is above the background effect */
-    background: rgba(0, 0, 0, 0.85); /* More opaque, stark */
-    backdrop-filter: blur(12px); /* Stronger blur, less visible behind */
-    border-radius: 6px; /* Sharper corners */
-    border: 1px solid rgba(255, 255, 255, 0.08); /* More subtle, less prominent border */
-    box-shadow:
-        0 0 50px var(--shadow-dark), /* Deeper, more encompassing shadow */
-        inset 0 0 25px rgba(255, 255, 255, 0.03); /* Fainter inner light */
-    transition: var(--transition);
+    /* REMOVED: background: rgba(0, 0, 0, 0.9); */
+    /* ADJUSTED: backdrop-filter to be less opaque for text to blend */
+    /* REMOVED: backdrop-filter: blur(8px) saturate(0.8); */
+    /* REMOVED: border-radius: 8px; */
+    /* REMOVED: border: 1px solid var(--border-subtle); */
+    /* REMOVED: box-shadow:
+        0 0 60px var(--shadow-dark),
+        inset 0 0 30px rgba(255, 255, 255, 0.04); */
+    transition: var(--transition-slow); /* Slower transition for a more deliberate feel */
+    transform: translateZ(0); /* For smoother 3D transforms */
 }
 
 .hero__content:hover {
-    box-shadow:
-        0 0 70px var(--shadow-dark),
-        0 0 120px var(--shadow-dark), /* Increased shadow on hover for a sense of deepening */
-        inset 0 0 35px rgba(255, 255, 255, 0.07);
+    /* REMOVED: box-shadow:
+        0 0 80px var(--shadow-dark),
+        0 0 150px var(--shadow-dark),
+        inset 0 0 40px rgba(255, 255, 255, 0.08); */
+    transform: translateY(-3px) translateZ(10px); /* Subtle lift and forward push on hover */
 }
 
 .hero__title {
-    font-size: 5rem; /* Larger, more impactful */
+    font-size: 5.5rem; /* Larger, more impactful */
     font-weight: 900;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.8rem;
     line-height: 1; /* Tighter line height for intensity */
-    letter-spacing: -0.04em; /* Very tight for a cold, modern feel */
+    letter-spacing: -0.05em; /* Very tight for a cold, modern feel */
     font-family: 'Telegraf', sans-serif; /* Keep Telegraf */
     text-align: center;
     color: var(--text-primary); /* Default color for other parts of the title */
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.05); /* Subtle text shadow for depth */
 }
 
 .hero__title > span {
@@ -236,53 +275,61 @@ html {
 
 .hero__line-one,
 .hero__line-two {
-    /* These lines should generally inherit from .hero__title color, or be explicitly set to --text-primary */
     color: var(--text-primary); /* Ensuring they are the primary text color */
 }
 
 /* Base style for animated lines (e.g., "and", "Education", "Innovation!") */
 .hero__animated-line {
-    /* All special effects removed. Using primary text color for consistency. */
-    color: var(--text-primary);
+    /* REMOVED: color: var(--text-primary); */
     margin-bottom: 0.1em;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     text-indent: -0.03em;
     /* Type-blink animation for cursor, unsettle-text for slight movement */
     animation: type-blink 1s steps(40, end) infinite,
-               unsettle-text 0.8s ease-out;
+                unsettle-text 0.8s ease-out;
     -webkit-font-smoothing: antialiased; /* Improve text rendering */
     -moz-osx-font-smoothing: grayscale;
     font-weight: 900; /* Keep consistent with hero__title for impact */
     display: inline-block; /* Ensure it respects line-height and margin if needed */
-    /* No background, no special text-shadow, no filters, no text-clip properties */
     transition: none; /* Remove any previous transitions from special effects */
     padding: 0; /* Remove any padding from previous block styles */
     border-radius: 0; /* Remove any border-radius from previous block styles */
+    position: relative; /* For the subtle underline effect */
+    z-index: 1;
+
+    /* Apply copper gradient directly to the text */
+    background: var(--gradient-copper);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none; /* Remove existing text shadow if it interferes with the gradient */
 }
 
 /* Specific styling for "Education" - Now regular text */
+/* These styles will be overridden by the .hero__animated-line for the copper gradient */
 .hero__animated-line--education {
-    /* Inherits from .hero__animated-line, no additional overrides for normal state */
+    /* Subtle copper highlight for emphasis */
+    /* REMOVED: color: var(--copper-light); */
+    /* REMOVED: text-shadow: 0 0 10px rgba(155, 93, 47, 0.5); */
 }
 
 .hero__animated-line--education:hover {
-    /* No specific hover effects for a completely normal look */
-    filter: none;
-    transform: none;
-    box-shadow: none;
+    transform: scale(1.02);
+    /* REMOVED: text-shadow: 0 0 15px rgba(155, 93, 47, 0.8); */
 }
 
 
 /* Specific styling for "Innovation!" - Now regular text */
+/* These styles will be overridden by the .hero__animated-line for the copper gradient */
 .hero__animated-line--innovation {
-    /* Inherits from .hero__animated-line, no additional overrides for normal state */
+    /* Subtle silver highlight for emphasis */
+    /* REMOVED: color: var(--silver-light); */
+    /* REMOVED: text-shadow: 0 0 10px rgba(160, 168, 174, 0.5); */
 }
 
 .hero__animated-line--innovation:hover {
-    /* No specific hover effects for a completely normal look */
-    filter: none;
-    transform: none;
-    box-shadow: none;
+    transform: scale(1.02);
+    /* REMOVED: text-shadow: 0 0 15px rgba(160, 168, 174, 0.8); */
 }
 
 
@@ -305,53 +352,57 @@ html {
 .btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem; /* Slightly more gap */
     background: var(--gradient-copper);
     color: var(--primary-dark);
     border: none;
-    padding: 1.1rem 2.2rem; /* Slightly larger, more substantial */
-    border-radius: 4px; /* Sharper corners */
-    font-size: 1.15rem; /* Slightly larger */
+    padding: 1.2rem 2.4rem; /* Slightly larger, more substantial */
+    border-radius: 6px; /* Sharper corners */
+    font-size: 1.2rem; /* Slightly larger */
     font-weight: 600;
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--transition-slow); /* Slower transition for a premium feel */
     text-decoration: none;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 6px 20px var(--shadow-medium); /* More defined initial shadow */
+    box-shadow: 0 8px 30px var(--shadow-medium); /* More defined initial shadow */
+    transform: translateZ(0); /* For smoother 3D transforms */
 }
 
 .btn::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: -110%; /* Starts further off-screen */
     width: 100%;
     height: 100%;
     background: var(--gradient-silver); /* Silver on hover */
-    transition: var(--transition);
+    transition: var(--transition-slow);
     z-index: -1;
+    transform: skewX(-20deg); /* Skew for a dynamic slide effect */
+    transform-origin: left center;
 }
 
 .btn:hover::before {
     left: 0;
+    transform: skewX(0deg); /* Unskew on hover */
 }
 
 .btn:hover {
-    box-shadow: 0 10px 40px var(--shadow-dark); /* Deeper, more ominous shadow on hover */
+    box-shadow: 0 12px 50px var(--shadow-dark); /* Deeper, more ominous shadow on hover */
     color: var(--primary-dark);
-    transform: translateY(-2px); /* Subtle lift */
+    transform: translateY(-3px) translateZ(10px); /* Subtle lift and forward push */
 }
 
 .btn__icon {
-    width: 22px;
-    height: 22px;
+    width: 24px; /* Slightly larger */
+    height: 24px;
     transition: var(--transition);
     fill: currentColor;
 }
 
 .btn:hover .btn__icon {
-    transform: translateX(8px); /* More pronounced, almost forced slide */
+    transform: translateX(10px) rotate(5deg); /* More pronounced, almost forced slide and slight rotation */
 }
 
 .btn--outline {
@@ -367,21 +418,23 @@ html {
 
 .btn--outline:hover {
     color: var(--primary-dark);
-    box-shadow: 0 8px 30px var(--shadow-dark);
+    box-shadow: 0 10px 40px var(--shadow-dark);
 }
 
 /* Section Base Styles */
 .section {
-    padding: 9rem 0; /* More substantial padding */
-    animation: fadeInGritty 1s ease-out forwards; /* Custom Fincher-esque fade */
+    padding: 10rem 0; /* More substantial padding */
+    animation: fadeInGritty 1.2s ease-out forwards; /* Custom Fincher-esque fade */
+    position: relative; /* For potential internal animations */
+    overflow: hidden;
 }
 
 /* New: Gritty Fade-in Animation */
 @keyframes fadeInGritty {
     from {
         opacity: 0;
-        transform: translateY(40px) scale(0.98);
-        filter: blur(5px) grayscale(0.5);
+        transform: translateY(60px) scale(0.96);
+        filter: blur(8px) grayscale(0.7);
     }
     to {
         opacity: 1;
@@ -405,21 +458,21 @@ html {
     top: 0;
     left: 0;
     right: 0;
-    height: 2px; /* Thicker, more pronounced divider */
+    height: 3px; /* Thicker, more pronounced divider */
     background: var(--gradient-silver);
-    box-shadow: 0 1px 5px rgba(0,0,0,0.5); /* Subtle shadow on divider */
+    box-shadow: 0 1px 8px rgba(0,0,0,0.7); /* Subtle shadow on divider */
 }
 
 .section__container {
-    max-width: 1200px;
+    max-width: 1300px; /* Wider container */
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 2.5rem; /* Increased padding */
 }
 
 /* Headings: h1, h2, h4 - Telegraf font */
 h1, h2, h4 {
     font-family: 'Telegraf', sans-serif;
-    letter-spacing: -0.03em; /* Even tighter for a stark feel */
+    letter-spacing: -0.04em; /* Even tighter for a stark feel */
 }
 
 /* Exclude h3 from Telegraf font where it's a service card title */
@@ -434,27 +487,29 @@ h3:not(.service-card__title) {
 }
 
 .section__title {
-    font-size: 3.5rem; /* Larger, more imposing */
+    font-size: 4rem; /* Larger, more imposing */
     font-weight: 800;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
     color: var(--text-primary);
     position: relative;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.03); /* Subtle shadow for depth */
 }
 
 .section__title--center {
     text-align: center;
-    margin-bottom: 5rem; /* More space around centered titles */
+    margin-bottom: 6rem; /* More space around centered titles */
 }
 
 .section__title::after {
     content: '';
     position: absolute;
-    bottom: -15px; /* Deeper underline */
+    bottom: -20px; /* Deeper underline */
     left: 0;
-    width: 70px; /* Longer underline */
-    height: 5px; /* Thicker underline */
+    width: 80px; /* Longer underline */
+    height: 6px; /* Thicker underline */
     background: var(--gradient-copper);
-    border-radius: 2px;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(123, 71, 32, 0.5); /* Subtle glow for the underline */
 }
 
 .section__title--center::after {
@@ -463,47 +518,52 @@ h3:not(.service-card__title) {
 }
 
 .section__text {
-    font-size: 1.25rem; /* Slightly larger for emphasis */
+    font-size: 1.35rem; /* Slightly larger for emphasis */
     color: var(--text-secondary);
-    line-height: 1.9; /* More generous line height */
+    line-height: 2; /* More generous line height */
 }
 
 /* About Section */
 .about {
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr; /* Slightly asymmetric for visual tension */
-    gap: 4rem;
+    grid-template-columns: 0.8fr 1.2fr; /* More asymmetric for visual tension */
+    gap: 5rem;
     align-items: center;
 }
 
 .about__icon img {
     width: 100%;
     height: 100%;
-    filter: grayscale(0.5) contrast(1.5) brightness(0.8); /* More desaturated, higher contrast, slightly darker */
-    border-radius: 4px; /* Sharper image corners */
-    box-shadow: 0 10px 30px var(--shadow-medium); /* Shadow to give depth */
+    filter: grayscale(0.6) contrast(1.4) brightness(0.7); /* More desaturated, higher contrast, darker */
+    border-radius: 6px; /* Sharper image corners */
+    box-shadow: 0 12px 35px var(--shadow-medium); /* Deeper shadow for depth */
+    transition: transform var(--transition-slow), filter var(--transition-slow);
+}
+
+.about__icon img:hover {
+    transform: scale(1.01) rotateZ(1deg); /* Subtle scale and rotate on hover */
+    filter: grayscale(0.4) contrast(1.5) brightness(0.8);
 }
 
 /* Services Section */
 .services__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly smaller min-width for more cards */
-    gap: 2.5rem; /* Increased gap */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Slightly larger min-width for more substantial cards */
+    gap: 3rem; /* Increased gap */
 }
 
 /* Service Card Component - Refined */
 .service-card {
-    background: var(--secondary-dark); /* Slightly darker background for more depth */
+    background: var(--tertiary-dark); /* Slightly darker background for more depth */
     border: 1px solid var(--border-color);
-    box-shadow: 0 8px 25px var(--shadow-medium); /* Stronger initial shadow */
-    border-radius: 6px; /* Sharper corners, more industrial */
-    padding: 3rem; /* Generous padding for content */
-    transition: var(--transition);
+    box-shadow: 0 10px 30px var(--shadow-medium); /* Stronger initial shadow */
+    border-radius: 8px; /* Sharper corners, more industrial */
+    padding: 3.5rem; /* Generous padding for content */
+    transition: var(--transition-slow);
     position: relative;
     overflow: hidden;
     transform: translateZ(0); /* For smooth 3D transforms */
 
-    /* Alignment ensured from previous iteration */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -515,72 +575,79 @@ h3:not(.service-card__title) {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%; /* Starts off-screen */
+    left: -120%; /* Starts further off-screen */
     width: 100%;
     height: 100%;
     background: var(--gradient-copper); /* Subtle copper gradient */
     opacity: 0; /* Initially hidden */
-    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
     z-index: 0; /* Behind content */
+    transform: skewX(-20deg); /* Skew for a dynamic slide effect */
 }
 
 .service-card:hover::before {
     left: 0;
-    opacity: 0.08; /* Even more subtle, faint metallic sheen */
-    transform: scale(1.01); /* Minimal scale for depth */
+    opacity: 0.1; /* Even more subtle, faint metallic sheen */
+    transform: scale(1.02) skewX(0deg); /* Minimal scale for depth, unskew */
 }
 
 .service-card:hover {
-    box-shadow: 0 20px 60px var(--shadow-dark), inset 0 0 10px rgba(255,255,255,0.02); /* Deeper, more immersive shadow with a faint inner glint */
+    box-shadow: 0 25px 70px var(--shadow-dark), inset 0 0 15px rgba(255,255,255,0.04); /* Deeper, more immersive shadow with a faint inner glint */
     border-color: var(--copper-main); /* More pronounced copper border on hover */
-    transform: translateY(-8px) scale(1.005); /* Noticeable lift with a slight, almost imperceptible scale */
+    transform: translateY(-10px) scale(1.008) translateZ(15px); /* Noticeable lift with a slight, almost imperceptible scale */
 }
 
 .service-card__icon {
-    font-size: 4.8rem; /* Slightly larger icon for emphasis */
-    margin-bottom: 2rem; /* More space below icon */
+    font-size: 5rem; /* Slightly larger icon for emphasis */
+    margin-bottom: 2.2rem; /* More space below icon */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 95px; /* Taller container for larger icon */
+    height: 100px; /* Taller container for larger icon */
     color: var(--copper-main);
-    filter: brightness(1.3) contrast(1.1); /* Slightly brighter, more defined glow */
-    text-shadow: 0 0 10px rgba(123, 71, 32, 0.4); /* Subtle copper glow around the icon */
+    filter: brightness(1.4) contrast(1.2); /* Slightly brighter, more defined glow */
+    text-shadow: 0 0 15px rgba(123, 71, 32, 0.6); /* Subtle copper glow around the icon */
+    transition: var(--transition);
+}
+
+.service-card:hover .service-card__icon {
+    transform: rotateY(15deg) scale(1.05); /* Slight 3D rotation and scale */
 }
 
 .service-card__title {
-    font-size: 1.7rem; /* Slightly larger title for stronger presence */
+    font-size: 1.8rem; /* Slightly larger title for stronger presence */
     font-weight: 700;
-    margin-bottom: 1.4rem; /* More space below title */
-    color: var(--text-primary);
+    margin-bottom: 1.6rem; /* More space below title */
+    color: var(--text-highlight); /* Use text-highlight for key titles */
     line-height: 1.3;
 }
 
 .service-card__description {
     color: var(--text-secondary);
-    margin-bottom: 2.5rem; /* Increased space before the button */
-    line-height: 1.8; /* More generous line height for readability */
+    margin-bottom: 2.8rem; /* Increased space before the button */
+    line-height: 1.9; /* More generous line height for readability */
     flex-grow: 1; /* Ensures descriptions take up available space uniformly */
-    font-size: 1.05rem; /* Slightly larger text for better readability in dark mode */
+    font-size: 1.1rem; /* Slightly larger text for better readability in dark mode */
 }
 
-/* No changes to .service-card__link or its child elements, as requested - Re-included for full code */
+/* Service Card Link (No changes requested, but adding a subtle lift for sleekness) */
 .service-card__link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     font-weight: 600;
-    padding: 0.9rem 1.8rem;
+    padding: 1rem 2rem;
     border: 2px solid var(--silver-main);
-    border-radius: 4px; /* Sharper corners */
-    transition: var(--transition);
+    border-radius: 6px; /* Sharper corners */
+    transition: var(--transition-slow);
     background: transparent;
     cursor: pointer;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     position: relative;
     overflow: hidden;
     color: var(--silver-main);
+    transform: translateZ(0); /* For smoother 3D transforms */
 }
 
 .service-card__link--effect .button-effect__fill {
@@ -590,25 +657,28 @@ h3:not(.service-card__title) {
     width: 0;
     height: 100%;
     background: var(--gradient-silver);
-    transition: width 0.4s cubic-bezier(0.6, 0.05, 0.2, 0.9); /* Slower, more deliberate fill */
+    transition: width 0.5s cubic-bezier(0.6, 0.05, 0.2, 0.9); /* Slower, more deliberate fill */
     z-index: 1;
+    transform: skewX(-20deg);
+    transform-origin: right center;
 }
 
 .service-card__link--effect:hover .button-effect__fill {
     width: 100%;
+    transform: skewX(0deg);
 }
 
 .service-card__link--effect .button-effect__text {
     position: relative;
     z-index: 2;
-    transition: color 0.3s ease-in-out, transform 0.4s ease-out, opacity 0.4s ease-out; /* Slower transitions */
+    transition: color 0.4s ease-in-out, transform 0.5s ease-out, opacity 0.5s ease-out; /* Slower transitions */
     color: var(--silver-main);
     white-space: nowrap;
 }
 
 .service-card__link--effect:hover .button-effect__text {
     color: var(--primary-dark);
-    transform: translateX(-120%); /* More dramatic slide out */
+    transform: translateX(-150%); /* More dramatic slide out */
     opacity: 0;
 }
 
@@ -621,10 +691,10 @@ h3:not(.service-card__title) {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.4s ease-out;
+    transition: opacity 0.5s ease-out;
     z-index: 2;
-    width: 50px; /* Larger arrow hit area */
-    height: 50px;
+    width: 55px; /* Larger arrow hit area */
+    height: 55px;
 }
 
 .service-card__link--effect .button-effect__arrow--right {
@@ -641,151 +711,184 @@ h3:not(.service-card__title) {
     object-fit: contain;
     color: var(--primary-dark);
     stroke: currentColor;
-    filter: brightness(0.8); /* Slightly darker arrow */
+    filter: brightness(0.7); /* Slightly darker arrow */
 }
 
 
 /* Partnership Section */
 .partnership {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr; /* Asymmetric balance */
-    gap: 5rem; /* Larger gap */
+    grid-template-columns: 1.2fr 0.8fr; /* More asymmetric balance */
+    gap: 6rem; /* Larger gap */
     align-items: center;
     border: 1px solid var(--border-color);
-    padding: 4rem; /* More substantial padding */
-    border-radius: 8px; /* Sharper corners */
-    box-shadow: 0 15px 50px var(--shadow-dark); /* Deeper, more encompassing shadow */
-    background: var(--secondary-dark); /* Ensure a consistent background */
+    padding: 5rem; /* More substantial padding */
+    border-radius: 10px; /* Sharper corners */
+    box-shadow: 0 20px 60px var(--shadow-dark), inset 0 0 20px rgba(255,255,255,0.02); /* Deeper, more encompassing shadow with inner glint */
+    background: var(--gradient-subtle-dark); /* Ensure a consistent background, using new subtle gradient */
+    transition: var(--transition-slow);
+    transform: translateZ(0);
+}
+
+.partnership:hover {
+    box-shadow: 0 25px 80px var(--shadow-dark), inset 0 0 25px rgba(255,255,255,0.03);
+    transform: translateY(-5px) translateZ(15px);
 }
 
 .partnership__content h2 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
     color: var(--copper-light); /* Slightly lighter copper for content heading */
+    font-size: 3.2rem; /* Make heading more prominent */
+    text-shadow: 0 0 8px rgba(155, 93, 47, 0.4);
 }
 
 .partnership__content p {
-    font-size: 1.35rem; /* Slightly larger text */
-    margin-bottom: 2.5rem;
+    font-size: 1.45rem; /* Slightly larger text */
+    margin-bottom: 3rem;
     color: var(--text-secondary);
+    line-height: 2.1; /* More generous line height */
 }
 
 .partnership__icon {
     width: 100%;
     height: 100%;
-    filter: grayscale(0.6) contrast(1.3) brightness(0.9); /* More desaturated, higher contrast, darker */
-    /* REMOVED: animation property for rotation */
+    filter: grayscale(0.7) contrast(1.5) brightness(0.8); /* More desaturated, higher contrast, darker */
+    opacity: 0.9;
+    transition: var(--transition-slow);
 }
 
-/* REMOVED: @keyframes icon-slow-spin { ... } */
+.partnership:hover .partnership__icon {
+    filter: grayscale(0.5) contrast(1.6) brightness(0.9); /* More vibrant on hover */
+    opacity: 1;
+    transform: scale(1.02); /* Subtle scale on hover */
+}
+
 
 /* Footer */
 .footer {
     background: var(--primary-dark);
     border-top: 1px solid var(--border-color);
-    padding: 5rem 0 2.5rem; /* More padding */
+    padding: 6rem 0 3rem; /* More padding */
 }
 
 .footer__container {
-    max-width: 1200px;
+    max-width: 1300px; /* Wider container */
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 2.5rem; /* Increased padding */
 }
 
 .footer__content {
     display: grid;
     grid-template-columns: 2.5fr 1fr 1fr; /* Brand section is wider */
-    gap: 5rem; /* Larger gap */
-    margin-bottom: 3.5rem;
+    gap: 6rem; /* Larger gap */
+    margin-bottom: 4rem;
 }
 
 .footer__brand h3 {
-    font-size: 2rem; /* Larger brand name */
+    font-size: 2.2rem; /* Larger brand name */
     font-weight: 800;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
     background: var(--gradient-copper);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: brightness(1.1); /* Slight glow on brand name */
+    filter: brightness(1.2) drop-shadow(0 0 5px rgba(123, 71, 32, 0.5)); /* Stronger glow on brand name */
 }
 
 .footer__brand p {
     color: var(--text-muted);
-    margin-bottom: 2.5rem;
-    line-height: 1.7;
+    margin-bottom: 3rem;
+    line-height: 1.8;
 }
 
 .footer__section h4 {
-    font-size: 1.3rem; /* Slightly larger section titles */
+    font-size: 1.4rem; /* Slightly larger section titles */
     font-weight: 700;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
     color: var(--silver-light);
 }
 
 .footer__list {
     list-style: none;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .footer__list li {
-    margin-bottom: 0.7rem; /* More space between list items */
+    margin-bottom: 0.8rem; /* More space between list items */
 }
 
 .footer__list a {
     color: var(--text-muted);
     text-decoration: none;
     transition: var(--transition);
+    position: relative;
+}
+
+.footer__list a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 1px;
+    background: var(--silver-main);
+    transition: width 0.3s ease-in-out;
 }
 
 .footer__list a:hover {
     color: var(--silver-main); /* Stronger silver on hover */
 }
 
+.footer__list a:hover::after {
+    width: 100%;
+}
+
 /* Social Icons */
 .social-icons {
     display: flex;
-    gap: 1.2rem; /* Slightly larger gap */
+    gap: 1.5rem; /* Slightly larger gap */
 }
 
 .social-icon {
-    width: 45px; /* Larger social icons */
-    height: 45px;
+    width: 50px; /* Larger social icons */
+    height: 50px;
     color: var(--text-muted);
     cursor: pointer;
-    transition: var(--transition);
-    padding: 10px; /* More padding */
+    transition: var(--transition-slow);
+    padding: 12px; /* More padding */
     background: var(--secondary-dark);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid var(--border-color);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3); /* Subtle initial shadow */
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4); /* Subtle initial shadow */
+    transform: translateZ(0);
 }
 
 .social-icon:hover {
     color: var(--primary-dark);
     background: var(--gradient-copper);
-    transform: translateY(-5px) rotate(5deg); /* More dynamic lift and slight tilt */
-    box-shadow: 0 6px 20px rgba(123, 71, 32, 0.6); /* Deeper copper shadow */
+    transform: translateY(-8px) rotate(8deg) scale(1.05) translateZ(10px); /* More dynamic lift and slight tilt */
+    box-shadow: 0 8px 25px rgba(123, 71, 32, 0.8); /* Deeper copper shadow */
 }
 
 /* Contact Info */
 .contact-info {
-    margin-top: 2.5rem;
+    margin-top: 3rem;
 }
 
 .contact-item {
     display: flex;
     align-items: flex-start; /* Align to top if text wraps */
-    gap: 0.85rem;
-    margin-bottom: 1.2rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
     color: var(--text-muted);
 }
 
 .contact-item svg {
-    width: 20px; /* Larger contact icons */
-    height: 20px;
+    width: 22px; /* Larger contact icons */
+    height: 22px;
     color: var(--copper-main);
     flex-shrink: 0; /* Prevent icon from shrinking */
 }
@@ -793,7 +896,7 @@ h3:not(.service-card__title) {
 /* Footer Copyright */
 .footer__copyright {
     text-align: center;
-    padding-top: 2.5rem;
+    padding-top: 3rem;
     border-top: 1px solid var(--border-color);
 }
 
@@ -803,93 +906,146 @@ h3:not(.service-card__title) {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 992px) { /* Adjusted breakpoint for slightly larger tablets */
     .navbar__container {
-        padding: 0 1rem;
-        height: 60px; /* Slightly reduced for smaller screens */
+        padding: 0 1.5rem;
+        height: 65px;
     }
 
     .navbar__menu {
-        gap: 0.8rem; /* Tighter for space */
-    }
-
-    .navbar__link span {
-        display: none;
+        gap: 1.5rem;
     }
 
     .hero__title {
-        font-size: 3.5rem;
-        line-height: 1.15;
+        font-size: 4.5rem;
+        line-height: 1.1;
     }
 
     .hero__title > span {
-        font-size: 3.5rem;
-        line-height: 1.15;
+        font-size: 4.5rem;
+        line-height: 1.1;
     }
 
     .hero__animated-line {
-        font-size: 3.2rem;
-        line-height: 1.15;
+        font-size: 4rem;
+        line-height: 1.1;
+    }
+
+    .section {
+        padding: 8rem 0;
+    }
+
+    .section__title {
+        font-size: 3rem;
+        margin-bottom: 2.5rem;
     }
 
     .about,
     .partnership {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 3.5rem;
         text-align: center;
-        padding: 2.5rem;
+        padding: 3.5rem;
     }
 
-    .section__title {
-        font-size: 2.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .section__title--center::after {
-        bottom: -10px;
+    .about__icon,
+    .partnership__icon {
+        order: -1; /* Puts image/icon above text on smaller screens */
     }
 
     .services__grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
     }
 
     .footer__content {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 3rem;
         text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .contact-info {
+        text-align: center;
+    }
+
+    .contact-item {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) { /* Original 768px breakpoint */
+    .navbar__link span {
+        display: none;
+    }
+
+    .hero__content {
+        padding: 3.5rem 3rem;
+    }
+
+    .hero__title {
+        font-size: 3.8rem;
+    }
+
+    .hero__title > span {
+        font-size: 3.8rem;
+    }
+
+    .hero__animated-line {
+        font-size: 3.5rem;
+    }
+
+    .section__title {
+        font-size: 2.8rem;
+    }
+
+    .btn {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+
+    .service-card {
+        padding: 2.8rem;
     }
 }
 
 @media (max-width: 480px) {
     .hero__content {
-        padding: 2.5rem 2rem;
+        padding: 2.5rem 1.8rem;
     }
 
     .hero__title {
-        font-size: 2.8rem;
+        font-size: 3rem;
         line-height: 1.1;
     }
     .hero__title > span {
-        font-size: 2.8rem;
+        font-size: 3rem;
         line-height: 1.1;
     }
 
     .hero__animated-line {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
         line-height: 1.1;
     }
 
-    .service-card {
-        padding: 2.2rem;
-    }
-
     .section__title {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
     .btn {
         padding: 0.9rem 1.8rem;
         font-size: 1rem;
+    }
+
+    .service-card__icon {
+        font-size: 4rem;
+        height: 80px;
+    }
+
+    .service-card__title {
+        font-size: 1.5rem;
     }
 }
