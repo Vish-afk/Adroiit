@@ -2,7 +2,7 @@
 import React from 'react';
 import Button from '../ui/Button';
 import { ArrowRight, Users } from 'lucide-react';
-import sideImage from '../assets/reach-C6YMuyIS.png';
+import sideImage from '../../assets//reach-C6YMuyIS.png';
 
 export default function PartnershipSection() {
   const handleReachOut = () => {
@@ -10,7 +10,7 @@ export default function PartnershipSection() {
   };
 
   return (
-    <section className="section section--primary">
+    <section className="section section--secondary">
       <div className="section__container">
         <div className="partnership">
           <div className="partnership__icon-container">

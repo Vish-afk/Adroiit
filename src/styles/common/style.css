@@ -164,17 +164,6 @@ h1, h2, h4 {
     letter-spacing: -0.04em; /* Even tighter for a stark feel */
 }
 
-/* Exclude h3 from Telegraf font where it's a service card title */
-h3:not(.service-card__title) {
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Re-apply Inter to service card titles specifically */
-.service-card__title {
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    letter-spacing: normal;
-}
-
 .section__title {
     /* Reduced font size and margin */
     font-size: 3rem; /* Was 4rem */

@@ -1,8 +1,10 @@
 // Navbar.jsx
 import React from 'react';
-import logo from '../assets/logowhite2.png';
+import logo from '../../assets/logowhite2.png';
+// Import HashLink from react-router-hash-link
+import { HashLink } from 'react-router-hash-link';
 
-// Custom SVG Icons - Reverted viewBox to original for smaller icons
+// Custom SVG Icons (remain unchanged)
 const HomeIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="navbar__icon">
     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
@@ -43,22 +45,24 @@ export default function Navbar() {
           <img src={logo} alt="Adroiit Logo" />
         </div>
         <div className="navbar__menu">
-          <a href="/" className="navbar__link">
+          {/* Use HashLink with 'to="/#id-name"' for smooth scrolling */}
+          <HashLink smooth to="/#hero-section" className="navbar__link">
             <HomeIcon />
             <span>Home</span>
-          </a>
-          <a href="/about" className="navbar__link">
+          </HashLink>
+          <HashLink smooth to="/#about-section" className="navbar__link">
             <AboutIcon />
             <span>About Us</span>
-          </a>
-          <a href="/services" className="navbar__link">
+          </HashLink>
+          <HashLink smooth to="/#services-section" className="navbar__link">
             <ServicesIcon />
             <span>Services</span>
-          </a>
-          <a href="/contact" className="navbar__link">
+          </HashLink>
+          {/* For "Reach Out", link to the Partnership section */}
+          <HashLink smooth to="/#partnership-section" className="navbar__link">
             <ContactIcon />
             <span>Reach Out</span>
-          </a>
+          </HashLink>
         </div>
       </div>
     </nav>

@@ -1,67 +1,64 @@
-/* components/partnership.css */
+/* services.css */
 
-/* Partnership Section */
-.partnership {
+/* Services Section Grid - no changes needed here */
+.services__grid {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr; /* More asymmetric balance */
-    /* Reduced gap and padding */
-    gap: 4rem; /* Was 6rem */
-    align-items: center;
-    border: 1px solid var(--border-color);
-    padding: 3.5rem; /* Was 5rem */
-    border-radius: 10px; /* Sharper corners */
-    box-shadow: 0 20px 60px var(--shadow-dark), inset 0 0 20px rgba(255,255,255,0.02); /* Deeper, more encompassing shadow with inner glint */
-    background: var(--gradient-subtle-dark); /* Ensure a consistent background, using new subtle gradient */
-    transition: var(--transition-slow);
-    transform: translateZ(0);
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
 }
 
-.partnership:hover {
-    box-shadow: 0 25px 80px var(--shadow-dark), inset 0 0 25px rgba(255,255,255,0.03);
-    /* Kept transform for the section hover, as it's not an image effect */
-    transform: translateY(-5px) translateZ(15px);
+/* Services Section (Primary) Styles */
+.section--primary {
+    position: relative; /* Essential for positioning the ::before pseudo-element */
+    background-color: var(--section-primary-bg); /* Fallback color for the section */
+    overflow: hidden; /* Clips any content/background that might try to extend outside */
+    z-index: 1; /* Establishes a stacking context. Ensures this section's content is above its own background. */
 }
 
-.partnership__content h2 {
-    /* Reduced font size and margin */
-    margin-bottom: 1.2rem; /* Was 1.8rem */
-    color: var(--purple-light); /* Changed from blue to purple light */
-    font-size: 2.5rem; /* Was 3.2rem */
-    text-shadow: 0 0 8px rgba(94, 60, 126, 0.4); /* Purple text shadow */
-}
-
-.partnership__content p {
-    /* Reduced font size and margin */
-    font-size: 1.25rem; /* Was 1.45rem */
-    margin-bottom: 2rem; /* Was 3rem */
-    color: var(--text-secondary);
-    line-height: 2.1; /* More generous line height */
-}
-
-.partnership__icon {
+/* Background image for the Services Section */
+.section--primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    filter: grayscale(0.7) contrast(1.5) brightness(0.8); /* More desaturated, higher contrast, darker */
-    opacity: 0.9;
-    transition: none; /* Removed transition for hover (as there's no hover effect) */
+    background-image: url('../../assets/output-onlinepngtools.png'); /* YOUR IMAGE URL HERE */
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    opacity: 0.08; /* Adjust for desired subtlety */
+    mix-blend-mode: luminosity; /* Blends nicely with the section's background color */
+    z-index: 0; /* Ensures the image is behind the section's content (service cards) */
 }
 
-/* REMOVED hover filter and transform effect for partnership icon */
-.partnership:hover .partnership__icon {
-    filter: grayscale(0.7) contrast(1.5) brightness(0.8); /* Reset to default, no change on hover */
-    opacity: 0.9; /* Reset to default */
-    transform: none; /* Removed subtle scale on hover */
+/* --- NEW: Styles for the Partnership Section's outer container --- */
+/* This ensures the PartnershipSection itself has a solid background and doesn't show through */
+.section--secondary { /* This class is now used by PartnershipSection.jsx */
+    background-color: var(--section-secondary-bg); /* Use your desired background color for this section */
+    position: relative; /* Needed for z-index to work */
+    z-index: 2; /* Ensures this section sits above the ServicesSection */
+    /* Add any other general styles you want for all 'secondary' sections */
 }
 
-/* Responsive Design Adjustments */
-@media (max-width: 992px) { /* Adjusted breakpoint for slightly larger tablets */
-    .partnership {
-        grid-template-columns: 1fr;
-        gap: 2.5rem; /* Adjusted from 3.5rem */
-        padding: 2.5rem; /* Adjusted from 3.5rem */
-    }
 
-    .partnership__icon {
-        order: -1; /* Puts image/icon above text on smaller screens */
-    }
+/* Service Card Component - Refined (no changes here) */
+.service-card {
+    background: var(--purple-main);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px var(--shadow-medium);
+    border-radius: 8px;
+    padding: 2.5rem;
+    transition: var(--transition-slow);
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+    z-index: 1; /* Ensure service cards are above their own ::before background */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
 }
+/* ... (rest of your service-card and other styles) ... */

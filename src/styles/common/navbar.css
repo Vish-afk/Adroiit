@@ -1,118 +1,110 @@
 /* components/navbar.css */
 
 .navbar {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
     background: rgba(10, 5, 15, 0.96); /* Almost opaque, very dark purple, slight transparency */
     backdrop-filter: blur(18px); /* Stronger blur, less transparency */
     border-bottom: 1px solid var(--border-color);
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     z-index: 1000;
-    transition: var(--transition);
-    /* Subtle 3D lift */
-    transform: translateZ(0);
 }
 
 .navbar__container {
+    width: 100%;
+    height: 60px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
-    max-width: 1300px; /* Wider for more expansive feel */
-    margin: 0 auto;
-    height: 70px; /* Slightly taller, more imposing */
-    padding: 0 2.5rem; /* Increased padding */
+    padding-left: 15px;
+    padding-right: 25px;
+    justify-content: space-between;
 }
 
 .navbar__logo {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    /* Subtle hover effect for logo */
-    transition: var(--transition);
+  padding: 0;
+  margin-left: 10;
+  box-sizing: border-box;
 }
 
 .navbar__logo img {
-    height: 60px; /* Adjusted to fit better within 70px height */
-    width: auto;
-    filter: grayscale(0.5) contrast(1.2); /* Gritty logo */
-    transition: var(--transition);
-}
-
-/* REMOVED hover filter effect for navbar logo */
-.navbar__logo:hover img {
-    filter: grayscale(0.5) contrast(1.2); /* Reset to default, no brightness change on hover */
+  height: 70px;
+  width: 150px;
+  object-fit:fill;
 }
 
 
 .navbar__menu {
     display: flex;
-    gap: 3rem; /* Increased gap for better spacing */
+    gap: -10rem; /* MODIFIED: Reduced gap here (e.g., to 2rem, adjust as needed) */
     align-items: center;
+    margin-left: auto; /* ADDED: This is key to pushing the menu to the far right */
+    /* REMOVED: flex: 1 or flex-grow: 1 as margin-left: auto handles the push */
 }
 
 .navbar__link {
     display: flex;
     align-items: center;
-    gap: 0.85rem; /* Slightly more gap */
+    gap: 1rem;
     color: var(--text-secondary);
     text-decoration: none;
-    padding: 0.85rem 1.8rem; /* Slightly more angular padding */
-    border-radius: 6px; /* Sharper corners, less friendly */
-    transition: color var(--transition); /* Only transition color now */
+    padding: 0.75rem 1.6rem;
+    border-radius: 6px;
+    transition: color var(--transition);
     font-weight: 500;
     position: relative;
-    /* REMOVED overflow: hidden; */
-    font-size: 1.05rem; /* Slightly smaller, more subdued */
-    /* REMOVED border: 1px solid transparent; */
-    /* REMOVED Perspective for inner elements (no longer needed for this effect) */
-    transform: translateZ(0); /* Keep for general smoothness */
+    font-size: 1.15rem;
+    transform: translateZ(0);
 }
 
 /* Navbar button effect: Underline from center */
 .navbar__link::before {
     content: '';
     position: absolute;
-    bottom: 0; /* Position at the bottom */
-    left: 50%; /* Start from the center */
-    width: 0; /* Initially no width */
-    height: 2px; /* Underline thickness */
-    background-color: var(--platinum-main); /* Underline color */
-    transition: all 0.3s ease-out; /* Smooth transition for width */
-    transform: translateX(-50%); /* Center the line */
-    /* REMOVED z-index, border-radius, skew transforms */
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--platinum-main);
+    transition: all 0.3s ease-out;
+    transform: translateX(-50%);
 }
 
 .navbar__link:hover::before {
-    width: 100%; /* Expand to full width on hover */
-    /* REMOVED skew transform from here */
+    width: 100%;
 }
 
 .navbar__link:hover {
-    color: var(--platinum-light); /* Slightly lighter color on hover */
-    /* REMOVED box-shadow, border-color, transform: translateY */
+    color: var(--platinum-light);
     box-shadow: none;
     border-color: transparent;
-    transform: translateZ(0); /* Reset transform to ensure no unwanted translateY */
+    transform: translateZ(0);
 }
 
 .navbar__icon {
-    width: 22px; /* Slightly larger */
-    height: 22px;
+    width: 26px;
+    height: 26px;
     fill: currentColor;
-    filter: grayscale(0.1); /* Subtle desaturation */
+    filter: grayscale(0.1);
+    transition: none;
+    transform: none;
 }
 
 .navbar__link:hover .navbar__icon {
-    transform: translateX(5px);
+    transform: none;
 }
 
 /* Responsive Design Adjustments */
-@media (max-width: 992px) { /* Adjusted breakpoint for slightly larger tablets */
+@media (max-width: 992px) {
     .navbar__container {
         padding: 0 1.5rem;
-        height: 65px;
+        height: 60px;
+    }
+
+    .navbar__logo img {
+        height: 45px;
     }
 
     .navbar__menu {
@@ -120,7 +112,7 @@
     }
 }
 
-@media (max-width: 768px) { /* Original 768px breakpoint */
+@media (max-width: 768px) {
     .navbar__link span {
         display: none;
     }
