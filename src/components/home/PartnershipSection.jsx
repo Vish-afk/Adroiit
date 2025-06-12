@@ -2,7 +2,7 @@
 import React from 'react';
 import Button from '../ui/Button';
 import { ArrowRight, Users } from 'lucide-react';
-import sideImage from '../home/reach-C6YMuyIS.png';
+import sideImage from '../assets/reach-C6YMuyIS.png';
 
 export default function PartnershipSection() {
   const handleReachOut = () => {

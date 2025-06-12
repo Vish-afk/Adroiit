@@ -1,0 +1,237 @@
+/* components/styles/style.css */
+
+/* --- IMPORT COMPONENT STYLES HERE --- */
+/* These are in components/home/styles, so relative path from components/styles is ../home/styles/ */
+@import url('../home/hero.css');
+@import url('../home/about.css');
+@import url('../home/services.css');
+@import url('../home/partnership.css');
+
+/* These are in the same components/styles directory */
+@import url('./navbar.css');
+@import url('./buttons.css');
+@import url('./footer.css');
+/* --- END OF IMPORT STATEMENTS --- */
+
+
+/* CSS Custom Properties for Dark Purple Metallic Palette - NO BLUES */
+:root {
+    /* Base Tones - Deeper, more desaturated, almost concrete-like */
+    --primary-dark: #120A1A; /* Very deep, almost black-purple */
+    --secondary-dark: #1F1527; /* Dark purple-grey */
+    --tertiary-dark: #2F223B; /* New: For subtle background elements/card backs, slightly lighter purple-grey */
+
+    /* Metallic Accents - Subdued Platinum & Rich Purple, aged and less vibrant */
+    --platinum-main: #7F8DA6; /* Desaturated, almost gunmetal platinum */
+    --platinum-light: #A7B8D0; /* Cooler, muted highlight platinum */
+    --purple-main: #5E3C7E; /* Deep, rich purple */
+    --purple-light: #8A6DAA; /* Subtler, desaturated purple */
+
+    /* Gradients - More refined and subtle variations */
+    --gradient-metallic: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+    --gradient-platinum: linear-gradient(135deg, var(--platinum-main) 0%, var(--platinum-light) 100%);
+    --gradient-purple: linear-gradient(135deg, var(--purple-main) 0%, var(--purple-light) 100%); /* Changed from blue */
+    --gradient-subtle-dark: linear-gradient(135deg, var(--secondary-dark) 0%, var(--tertiary-dark) 100%); /* New subtle dark gradient */
+
+
+    /* Text Colors - More muted, less stark white */
+    --text-primary: #D0D0D0; /* Muted Off-White, slightly greyed */
+    --text-secondary: #A0A0A0; /* Darker Grey for secondary text, almost faded */
+    --text-muted: #7A7A7A; /* Deep, almost vanishing grey */
+    --text-highlight: #FFFFFF; /* Pure white for absolute highlights, sparingly used */
+
+    /* Borders & Shadows - Sharper, more oppressive shadows, more industrial borders */
+    --border-color: #403050; /* Darker, more defined purple border */
+    --border-subtle: rgba(255, 255, 255, 0.08); /* New: For subtle inner borders */
+    --shadow-light: rgba(0, 0, 0, 0.25); /* Slightly darker, more present light shadow */
+    --shadow-medium: rgba(0, 0, 0, 0.7); /* Stronger, more foreboding medium shadow */
+    --shadow-dark: rgba(0, 0, 0, 0.95); /* Opaque, oppressive shadow for deep contrast */
+
+    /* Transitions - Slower, more deliberate and slightly uneasy transition, with a hint of bounce */
+    --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother, slightly more deliberate */
+    --transition-slow: all 0.7s cubic-bezier(0.6, 0.05, 0.2, 0.9); /* Slower, more uneasy */
+
+    /* Vibrant Accent (for typewriter text, etc.) - Now a very subtle, clinical aqua/electric blue */
+    --vibrant-accent: #9A2E72; /* Changed to a bright, vibrant pink-purple */
+    --vibrant-accent-subtle: #C96DB8; /* Subtler, desaturated pink-purple for text content */
+
+    /* Optional: Subtle background texture/pattern - Increased opacity for a more tangible grit */
+    --background-texture: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.08"/></svg>'); /* More noticeable noise/grain */
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--primary-dark);
+    color: var(--text-primary);
+    line-height: 1.8; /* Slightly more spacious for readability in dark themes */
+    overflow-x: hidden;
+    position: relative;
+    /* subtle perspective for a modern feel */
+    perspective: 1000px;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--background-texture);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 1; /* Make the texture more prominent */
+    /* Subtle animation for background texture */
+    animation: texturePan 60s linear infinite;
+}
+
+@keyframes texturePan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+/* Selection Color - Less vibrant, more industrial */
+::selection {
+    background: var(--purple-main); /* Changed from blue to purple */
+    color: var(--primary-dark);
+}
+
+/* Section Base Styles */
+.section {
+    /* Reduced padding */
+    padding: 6rem 0; /* Was 10rem 0 */
+    animation: fadeInGritty 1.2s ease-out forwards; /* Custom Fincher-esque fade */
+    position: relative;
+    overflow: hidden;
+}
+
+/* New: Gritty Fade-in Animation */
+@keyframes fadeInGritty {
+    from {
+        opacity: 0;
+        transform: translateY(60px) scale(0.96);
+        filter: blur(8px) grayscale(0.7);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0) grayscale(0);
+    }
+}
+
+.section--primary {
+    background: var(--primary-dark);
+}
+
+.section--secondary {
+    background: var(--secondary-dark);
+    position: relative;
+}
+
+.section--secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px; /* Thicker, more pronounced divider */
+    background: var(--gradient-platinum); /* Keeping platinum for divider */
+    box-shadow: 0 1px 8px rgba(0,0,0,0.7); /* Subtle shadow on divider */
+}
+
+.section__container {
+    max-width: 1300px; /* Wider container */
+    margin: 0 auto;
+    padding: 0 2.5rem; /* Maintained padding for horizontal consistency */
+}
+
+/* Headings: h1, h2, h4 - Telegraf font */
+h1, h2, h4 {
+    font-family: 'Telegraf', sans-serif;
+    letter-spacing: -0.04em; /* Even tighter for a stark feel */
+}
+
+/* Exclude h3 from Telegraf font where it's a service card title */
+h3:not(.service-card__title) {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Re-apply Inter to service card titles specifically */
+.service-card__title {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: normal;
+}
+
+.section__title {
+    /* Reduced font size and margin */
+    font-size: 3rem; /* Was 4rem */
+    font-weight: 800;
+    margin-bottom: 2rem; /* Was 3rem */
+    color: var(--text-primary);
+    position: relative;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.03); /* Subtle shadow for depth */
+}
+
+.section__title--center {
+    text-align: center;
+    /* Reduced margin */
+    margin-bottom: 4rem; /* Was 6rem */
+}
+
+.section__title::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; /* Deeper underline */
+    left: 0;
+    width: 80px; /* Longer underline */
+    height: 6px; /* Thicker underline */
+    background: var(--gradient-purple); /* Changed from blue */
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(94, 60, 126, 0.5); /* Subtle glow for the underline (purple) */
+}
+
+.section__title--center::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section__text {
+    /* Reduced font size */
+    font-size: 1.15rem; /* Was 1.35rem */
+    color: var(--text-secondary);
+    line-height: 2; /* More generous line height */
+}
+
+/* Responsive Design Adjustments for smaller base sizes (global adjustments) */
+@media (max-width: 992px) { /* Adjusted breakpoint for slightly larger tablets */
+    .section {
+        padding: 5rem 0; /* Adjusted from 8rem for the new base */
+    }
+
+    .section__title {
+        font-size: 2.5rem; /* Adjusted from 3rem */
+        margin-bottom: 1.8rem; /* Adjusted from 2.5rem */
+    }
+    .section__title--center {
+        margin-bottom: 3rem; /* Adjusted from 5rem */
+    }
+}
+
+@media (max-width: 768px) { /* Original 768px breakpoint */
+    .section__title {
+        font-size: 2.2rem; /* Adjusted from 2.8rem */
+    }
+}

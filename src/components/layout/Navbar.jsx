@@ -1,6 +1,6 @@
 // Navbar.jsx
 import React from 'react';
-import logo from '../home/logowhite2.png';
+import logo from '../assets/logowhite2.png';
 
 // Custom SVG Icons - Reverted viewBox to original for smaller icons
 const HomeIcon = () => (

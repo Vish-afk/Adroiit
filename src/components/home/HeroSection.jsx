@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '../ui/Button';
 import { ArrowRight } from 'lucide-react';
 import SequentialTypewriter from './SequentialTypewriter'; // Import the new component
-import bg from '../home/bg-removebg-preview.png'; // Import the background image
+import bg from '../assets/bg-removebg-preview.png'; // Import the background image
 
 export default function HeroSection() {
   const handleLearnMore = () => {

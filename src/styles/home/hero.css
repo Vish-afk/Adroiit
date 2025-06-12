@@ -1,0 +1,130 @@
+/* components/hero.css */
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-dark); /* Solid dark base */
+    position: relative;
+    overflow: hidden;
+
+    /* Background Image setup */
+    /* You MUST replace 'YOUR_RELATIVE_PATH_TO_IMAGE.png' with the actual path to your image file */
+    /* e.g., if image is in same folder as CSS: url('./bg-removebg-preview.png') */
+    /* e.g., if image is in 'assets' folder one level up: url('../../assets/bg-removebg-preview.png') */
+    background-image: url('YOUR_RELATIVE_PATH_TO_IMAGE.png');
+    background-size: auto 160%; /* Image height is 160% of container, width is auto. */
+    background-position: 100% 0%; /* Start at top-right of the background */
+    background-repeat: no-repeat;
+    animation: heroBackgroundMoveVerticalRight 15s linear infinite alternate; /* Apply the new animation, added 'alternate' */
+    filter: brightness(1) contrast(1.2); /* NO BRIGHTNESS REDUCTION */
+}
+
+/* NEW: Keyframe animation for vertically downwards movement on the right side */
+@keyframes heroBackgroundMoveVerticalRight {
+    0% {
+        background-position: 100% 0%; /* Start at top-right (X=100%, Y=0%) */
+    }
+    100% {
+        background-position: 100% 100%; /* Move to bottom-right (X=100%, Y=100%) */
+    }
+}
+
+/* Ensure hero content is above the background */
+.hero__content {
+    text-align: center;
+    max-width: 900px; /* Wider, more commanding presence */
+    padding: 4.5rem 6rem; /* More generous padding */
+    position: relative;
+    z-index: 2; /* Ensure content is above the background effect */
+    transition: var(--transition-slow); /* Slower transition for a more deliberate feel */
+    transform: translateZ(0); /* For smoother 3D transforms */
+}
+
+.hero__content:hover {
+    transform: translateY(-3px) translateZ(10px); /* Subtle lift and forward push on hover */
+}
+
+.hero__title {
+    font-size: 5.5rem; /* Larger, more impactful */
+    font-weight: 900;
+    margin-bottom: 2.8rem;
+    line-height: 1; /* Tighter line height for intensity */
+    letter-spacing: -0.05em; /* Very tight for a cold, modern feel */
+    font-family: 'Telegraf', sans-serif; /* Keep Telegraf */
+    text-align: center;
+    color: var(--text-primary); /* Default color for other parts of the title */
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.05); /* Subtle text shadow for depth */
+}
+
+.hero__title > span {
+    display: block;
+    text-align: center;
+}
+
+.hero__line-one,
+.hero__line-two {
+    color: var(--text-primary); /* Ensuring they are the primary text color */
+}
+
+/* Base style for animated lines (e.g., "and", "Education", "Innovation!") */
+.hero__animated-line {
+    margin-bottom: 0.1em;
+    letter-spacing: -0.03em;
+    text-indent: -0.03em;
+    /* Type-blink animation for cursor, unsettle-text for slight movement */
+    animation: type-blink 1s steps(40, end) infinite,
+                unsettle-text 0.8s ease-out;
+    -webkit-font-smoothing: antialiased; /* Improve text rendering */
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 900; /* Keep consistent with hero__title for impact */
+    display: inline-block; /* Ensure it respects line-height and margin if needed */
+    transition: none; /* Remove any previous transitions from special effects */
+    padding: 0; /* Remove any padding from previous block styles */
+    border-radius: 0; /* Remove any border-radius from previous block styles */
+    position: relative; /* For the subtle underline effect */
+    z-index: 1;
+
+    /* Reverted "Education" and "Innovation" text color back to gradient */
+    background: var(--gradient-purple); /* Changed from blue */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none; /* Remove existing text shadow if it interferes with the gradient */
+}
+
+
+/* New: Typing and Unsettling Animations */
+@keyframes type-blink {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--vibrant-accent); } /* Use vibrant accent purple for blink cursor for contrast */
+}
+
+@keyframes unsettle-text {
+    0% { transform: translateX(0); opacity: 1; }
+    25% { transform: translateX(-2px); opacity: 0.98; }
+    50% { transform: translateX(2px); opacity: 0.96; }
+    75% { transform: translateX(-1px); opacity: 0.99; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) { /* Original 768px breakpoint */
+    .hero__content {
+        padding: 3.5rem 3rem;
+    }
+
+    .hero__title {
+        font-size: 3.8rem;
+    }
+
+    .hero__title > span {
+        font-size: 3.8rem;
+    }
+
+    .hero__animated-line {
+        font-size: 3.5rem;
+    }
+}

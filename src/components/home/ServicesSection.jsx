@@ -124,32 +124,17 @@ export default function ServicesSection() {
               <div className="service-card__icon">{service.icon}</div>
               <h3 className="service-card__title">{service.title}</h3>
               <p className="service-card__description">{service.description}</p>
-              {/* === MODIFIED BUTTON STRUCTURE: ONLY ONE ARROW === */}
               <a href={service.link} className="service-card__link service-card__link--effect">
-                <span className="button-effect__fill"></span> {/* This is the fill background */}
+                <span className="button-effect__fill"></span>
                 <span className="button-effect__arrow button-effect__arrow--right">
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </span>
-                <span className="button-effect__text">{service.linkText || "Explore"}</span> {/* This is the visible text */}
+                <span className="button-effect__text">{service.linkText || "Explore"}</span>
               </a>
-              {/* === END MODIFIED BUTTON STRUCTURE === */}
             </div>
           ))}
         </div>
       </div>
-      <style jsx>{`
-        .service-icon {
-          width: 64px;
-          height: 64px;
-          color: var(--light-purple);
-          transition: var(--transition);
-        }
-
-        /* MODIFIED: ICON COLOR CHANGES ONLY WHEN BUTTON IS HOVERED */
-        .service-card:has(.service-card__link--effect:hover) .service-icon {
-          color: var(--text-primary);
-        }
-      `}</style>
     </section>
   );
 }

@@ -1,0 +1,38 @@
+/* components/about.css */
+
+/* About Section */
+.about {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr; /* More asymmetric for visual tension */
+    /* Reduced gap */
+    gap: 3.5rem; /* Was 5rem */
+    align-items: center;
+}
+
+.about__icon img {
+    width: 100%;
+    height: 100%;
+    /* REMOVED: filter, border-radius, box-shadow */
+    filter: none; /* Removed grayscale, contrast, brightness */
+    border-radius: 0; /* Removed explicit border-radius for a natural image shape */
+    box-shadow: none; /* Removed box-shadow */
+    transition: none; /* Removed transition for hover (as there's no hover effect) */
+}
+
+/* REMOVED hover transform and filter effect for about image */
+.about__icon img:hover {
+    transform: none; /* Remove subtle scale and rotate on hover */
+    filter: none; /* Ensure no filter applies on hover either */
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 992px) { /* Adjusted breakpoint for slightly larger tablets */
+    .about {
+        grid-template-columns: 1fr;
+        gap: 2.5rem; /* Adjusted from 3.5rem */
+    }
+
+    .about__icon {
+        order: -1; /* Puts image/icon above text on smaller screens */
+    }
+}

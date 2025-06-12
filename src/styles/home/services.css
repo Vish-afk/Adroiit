@@ -1,0 +1,183 @@
+/* components/services.css */
+
+/* Services Section */
+.services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Slightly larger min-width for more substantial cards */
+    /* Reduced gap */
+    gap: 2rem; /* Was 3rem */
+}
+
+/* Service Card Component - Refined */
+.service-card {
+    background: var(--tertiary-dark); /* Slightly darker background for more depth */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px var(--shadow-medium); /* Stronger initial shadow */
+    border-radius: 8px; /* Sharper corners, more industrial */
+    /* Reduced padding */
+    padding: 2.5rem; /* Was 3.5rem */
+    transition: var(--transition-slow);
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0); /* For smooth 3D transforms */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+/* Service card effects triggered by button hover */
+.service-card:has(.service-card__link--effect:hover) {
+    box-shadow: 0 28px 80px var(--shadow-dark), inset 0 0 18px rgba(255,255,255,0.05); /* Deeper, more immersive shadow with a faint inner glint */
+    border-color: var(--purple-main); /* More pronounced purple border on hover */
+    transform: translateY(-12px) scale(1.009) translateZ(20px); /* More noticeable lift with a slight, almost imperceptible scale */
+}
+
+/* ::before effect triggered by button hover */
+.service-card:has(.service-card__link--effect:hover)::before {
+    left: 0;
+    opacity: 0.15; /* Slightly more noticeable subtle sheen */
+    transform: scale(1.02) skewX(0deg); /* Minimal scale for depth, unskew */
+}
+
+.service-card__icon {
+    /* Reduced icon size and margin */
+    font-size: 4rem; /* Was 5rem */
+    margin-bottom: 1.5rem; /* Was 2.2rem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px; /* Was 100px */
+    color: var(--purple-main); /* Base color is rich purple */
+    filter: brightness(1.4) contrast(1.2); /* Slightly brighter, more defined glow */
+    text-shadow: 0 0 15px rgba(94, 60, 126, 0.6); /* Subtle purple glow around the icon */
+    transition: var(--transition);
+    width: 52px; /* Was 64px */
+    height: 52px; /* Was 64px */
+}
+
+/* Icon effects triggered by button hover */
+.service-card:has(.service-card__link--effect:hover) .service-card__icon {
+    color: var(--text-primary); /* Icon changes to light text color on card hover */
+    transform: rotateY(18deg) scale(1.08); /* Slightly more pronounced 3D rotation and scale */
+}
+
+.service-card__title {
+    /* Reduced font size and margin */
+    font-size: 1.5rem; /* Was 1.8rem */
+    font-weight: 700;
+    margin-bottom: 1rem; /* Was 1.6rem */
+    color: var(--text-highlight); /* Use text-highlight for key titles */
+    line-height: 1.3;
+}
+
+.service-card__description {
+    color: var(--text-secondary);
+    /* Reduced margin and font size */
+    margin-bottom: 1.8rem; /* Was 2.8rem */
+    line-height: 1.9; /* More generous line height for readability */
+    flex-grow: 1; /* Ensures descriptions take up available space uniformly */
+    font-size: 1rem; /* Was 1.1rem */
+}
+
+/* Service Card Link */
+.service-card__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 600;
+    /* Reduced padding and font size */
+    padding: 0.8rem 1.6rem; /* Was 1rem 2rem */
+    border: 2px solid var(--platinum-main); /* Keeping platinum border for contrast */
+    border-radius: 6px; /* Sharper corners */
+    transition: var(--transition-slow);
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem; /* Was 1.1rem */
+    position: relative;
+    overflow: hidden;
+    color: var(--platinum-main); /* Keeping platinum color for contrast */
+    transform: translateZ(0); /* For smoother 3D transforms */
+}
+
+.service-card__link--effect .button-effect__fill {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 100%;
+    background: var(--gradient-platinum); /* Keeping platinum gradient for fill */
+    transition: width 0.5s cubic-bezier(0.6, 0.05, 0.2, 0.9); /* Slower, more deliberate fill */
+    z-index: 1;
+    transform: skewX(-20deg);
+    transform-origin: right center;
+}
+
+.service-card__link--effect:hover .button-effect__fill {
+    width: 100%;
+    transform: skewX(0deg);
+}
+
+.service-card__link--effect .button-effect__text {
+    position: relative;
+    z-index: 2;
+    transition: color 0.4s ease-in-out, transform 0.5s ease-out, opacity 0.5s ease-out; /* Slower transitions */
+    color: var(--platinum-main); /* Keeping platinum color */
+    white-space: nowrap;
+}
+
+.service-card__link--effect:hover .button-effect__text {
+    color: var(--primary-dark);
+    transform: translateX(-150%); /* More dramatic slide out */
+    opacity: 0;
+}
+
+.service-card__link--effect .button-effect__arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease-out;
+    z-index: 2;
+    /* Reduced arrow size */
+    width: 45px; /* Was 55px */
+    height: 45px; /* Was 55px */
+}
+
+.service-card__link--effect .button-effect__arrow--right {
+    opacity: 0;
+}
+
+.service-card__link--effect:hover .button-effect__arrow--right {
+    opacity: 1;
+}
+
+.service-card__link--effect .button-effect__arrow svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    color: var(--primary-dark);
+    stroke: currentColor;
+    filter: brightness(0.7); /* Slightly darker arrow */
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 992px) { /* Adjusted breakpoint for slightly larger tablets */
+    .services__grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted min-width for smaller cards */
+        gap: 1.5rem; /* Adjusted from 2.5rem */
+    }
+}
+
+@media (max-width: 768px) { /* Original 768px breakpoint */
+    .service-card {
+        padding: 2rem; /* Adjusted from 2.8rem */
+    }
+}

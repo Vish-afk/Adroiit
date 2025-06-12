@@ -1,7 +1,7 @@
 // AboutSection.jsx
 import React from 'react';
 import { Lightbulb } from 'lucide-react';
-import sideImage from '../home/about-CmYOi0Js.png';
+import sideImage from '../assets/about-CmYOi0Js.png';
 
 export default function AboutSection() {
   return (
