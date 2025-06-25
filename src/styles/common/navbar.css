@@ -5,43 +5,69 @@
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(10, 5, 15, 0.96); /* Almost opaque, very dark purple, slight transparency */
-    backdrop-filter: blur(18px); /* Stronger blur, less transparency */
+    background: rgba(10, 5, 15, 0.6);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     padding: 0.5rem 0;
     z-index: 1000;
+    transition: background 0.5s ease, backdrop-filter 0.5s ease, border-bottom 0.5s ease;
 }
+
+.navbar.navbar--scrolled {
+    background: rgba(10, 5, 15, 0.7);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+}
+
 
 .navbar__container {
     width: 100%;
-    height: 60px;
+    height: 70px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-left: 15px;
     padding-right: 25px;
     justify-content: space-between;
 }
 
+/* NEW CLASS: For the HashLink wrapper around the logo */
+.navbar__logo-link {
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Ensures text color doesn't change unexpectedly if there was text */
+    height: 100%; /* Make it fill the container's height */
+    display: flex; /* Make it a flex container to center its child (.navbar__logo) */
+    align-items: center; /* Vertically center the .navbar__logo within this link wrapper */
+    /* Move the logo to the right from the left edge of the navbar */
+    margin-left: 30px; /* Adjust this value (e.g., 20px, 40px) to move it more/less */
+}
+
 .navbar__logo {
   padding: 0;
-  margin-left: 10;
+  /* margin-left: 10px; -- REMOVED THIS, now handled by .navbar__logo-link */
   box-sizing: border-box;
+  flex-shrink: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .navbar__logo img {
-  height: 70px;
-  width: 150px;
-  object-fit:fill;
+  height: auto;
+  max-height: 80%;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 
 .navbar__menu {
     display: flex;
-    gap: -10rem; /* MODIFIED: Reduced gap here (e.g., to 2rem, adjust as needed) */
+    gap: 1.5rem;
     align-items: center;
-    margin-left: auto; /* ADDED: This is key to pushing the menu to the far right */
-    /* REMOVED: flex: 1 or flex-grow: 1 as margin-left: auto handles the push */
+    margin-left: auto;
 }
 
 .navbar__link {
@@ -52,14 +78,12 @@
     text-decoration: none;
     padding: 0.75rem 1.6rem;
     border-radius: 6px;
-    transition: color var(--transition);
     font-weight: 500;
     position: relative;
     font-size: 1.15rem;
     transform: translateZ(0);
 }
 
-/* Navbar button effect: Underline from center */
 .navbar__link::before {
     content: '';
     position: absolute;
@@ -86,7 +110,8 @@
 .navbar__icon {
     width: 26px;
     height: 26px;
-    fill: currentColor;
+    fill: none;
+    stroke: currentColor;
     filter: grayscale(0.1);
     transition: none;
     transform: none;
@@ -100,19 +125,49 @@
 @media (max-width: 992px) {
     .navbar__container {
         padding: 0 1.5rem;
-        height: 60px;
+        height: 65px;
     }
-
+    .navbar__logo-link {
+        margin-left: 20px; /* Adjust for tablets */
+    }
+    .navbar__logo {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
     .navbar__logo img {
-        height: 45px;
+        height: auto;
+        max-height: 80%;
+        width: auto;
+        object-fit: contain;
+        display: block;
     }
-
     .navbar__menu {
-        gap: 1.5rem;
+        gap: 1rem;
     }
 }
 
 @media (max-width: 768px) {
+    .navbar__container {
+        height: 55px;
+    }
+    .navbar__logo-link {
+        margin-left: 10px; /* Adjust for mobile */
+    }
+    .navbar__logo {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .navbar__logo img {
+        height: auto;
+        max-height: 80%;
+        width: auto;
+        object-fit: contain;
+        display: block;
+    }
     .navbar__link span {
         display: none;
     }
