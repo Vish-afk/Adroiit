@@ -46,6 +46,11 @@
     --text-secondary: #A0A0A0; /* Darker Grey for secondary text, almost faded */
     --text-muted: #7A7A7A; /* Deep, almost vanishing grey */
     --text-highlight: #FFFFFF; /* Pure white for absolute highlights, sparingly used */
+    
+    /* NEW: Background and Text Colors for form fields */
+    --bg-light: #F8F8F8; /* A very light grey for input/select backgrounds */
+    --text-dark: #1A1A1A; /* A very dark grey/near black for text on light backgrounds */
+
 
     /* Borders & Shadows - Sharper, more oppressive shadows, more industrial borders */
     --border-color: #403050; /* Darker, more defined purple border */
@@ -140,8 +145,7 @@ body::before {
 }
 
 .section--secondary {
-    /* THIS IS THE CHANGE YOU NEED TO MAKE */
-    background: var(--gradient-subtle-dark); /* Changed from var(--secondary-dark) */
+    background: var(--gradient-subtle-dark); 
     position: relative;
 }
 

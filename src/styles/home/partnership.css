@@ -1,64 +1,353 @@
-/* services.css */
+/* components/home/styles/partnership.css */
 
-/* Services Section Grid - no changes needed here */
-.services__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-}
-
-/* Services Section (Primary) Styles */
-.section--primary {
-    position: relative; /* Essential for positioning the ::before pseudo-element */
-    background-color: var(--section-primary-bg); /* Fallback color for the section */
-    overflow: hidden; /* Clips any content/background that might try to extend outside */
-    z-index: 1; /* Establishes a stacking context. Ensures this section's content is above its own background. */
-}
-
-/* Background image for the Services Section */
-.section--primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../../assets/output-onlinepngtools.png'); /* YOUR IMAGE URL HERE */
-    background-size: cover; /* Ensures the image covers the entire section */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents tiling */
-    opacity: 0.08; /* Adjust for desired subtlety */
-    mix-blend-mode: luminosity; /* Blends nicely with the section's background color */
-    z-index: 0; /* Ensures the image is behind the section's content (service cards) */
-}
-
-/* --- NEW: Styles for the Partnership Section's outer container --- */
-/* This ensures the PartnershipSection itself has a solid background and doesn't show through */
-.section--secondary { /* This class is now used by PartnershipSection.jsx */
-    background-color: var(--section-secondary-bg); /* Use your desired background color for this section */
-    position: relative; /* Needed for z-index to work */
-    z-index: 2; /* Ensures this section sits above the ServicesSection */
-    /* Add any other general styles you want for all 'secondary' sections */
-}
-
-
-/* Service Card Component - Refined (no changes here) */
-.service-card {
-    background: var(--purple-main);
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px var(--shadow-medium);
-    border-radius: 8px;
-    padding: 2.5rem;
-    transition: var(--transition-slow);
+/* Specific inverse gradient background for Partnership Section only */
+section.partnership-section--gradient-bg-inverse {
+    background: linear-gradient(to top right, var(--primary-dark) 0%, var(--secondary-dark) 100%);
     position: relative;
-    overflow: hidden;
-    transform: translateZ(0);
-    z-index: 1; /* Ensure service cards are above their own ::before background */
+    z-index: 2; 
+}
 
+.partnership {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Image + Text | Form */
+    gap: 4rem; 
+    align-items: center; 
+    width: 100%;
+}
+
+/* Styles for the Left Column (Heading/Text and Image) */
+.partnership__left-column {
+    display: flex;
+    flex-direction: column; /* Stack text content and image vertically */
+    align-items: flex-start; /* Align contents to the left */
+    text-align: left; /* Ensure text is left-aligned */
+    width: 100%;
+}
+
+/* Styles for the Heading and Text Content */
+.partnership__text-content {
+    width: 100%; 
+    margin-bottom: 2.5rem; /* Space between text content and the image below it */
+}
+
+.partnership__text-content .section__title {
+    color: var(--platinum-light);
+    margin-bottom: 1.5rem;
+    font-size: 2.8rem;
+    font-weight: 600;
+    position: relative; 
+    text-align: left; 
+}
+
+/* Ensure the ::after pseudo-element for section__title aligns left here */
+.partnership__text-content .section__title::after {
+    left: 0;
+    transform: none; 
+}
+
+.partnership__text-content .section__text {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-align: left; 
+}
+
+/* Image Container styles */
+.partnership__icon-container {
+    width: 100%; 
+    max-width: 500px; /* Limit image width */
+}
+
+.partnership__icon img {
+    max-width: 100%; 
+    height: auto;
+    display: block; 
+    object-fit: contain; 
+    border-radius: 8px; 
+}
+
+/* Styles for the Right Column (Form) */
+.partnership__form-column {
+    display: flex;
+    justify-content: flex-start; 
+    width: 100%;
+}
+
+/* Contact Form Styles */
+.contact-form {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem; 
+    max-width: 500px; 
+    width: 100%; 
+}
+
+.contact-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; 
+}
+
+.contact-form label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary); 
+}
+
+.contact-form .required {
+    color: var(--purple-main); 
+    margin-left: 0.25rem;
+}
+
+/* General input, textarea styling */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    background-color: var(--bg-light); 
+    border: 1px solid var(--border-color); 
+    border-radius: 8px; 
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    color: var(--text-dark); 
+    width: 100%;
+    box-sizing: border-box; 
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+}
+
+/* Focus/Hover effect for all inputs and textarea */
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    outline: none; 
+    border-color: var(--purple-main); 
+    box-shadow: 0 0 0 3px rgba(94, 60, 126, 0.3); 
+}
+
+.contact-form input[type="text"]:hover,
+.contact-form input[type="email"]:hover,
+.contact-form textarea:hover {
+    border-color: var(--purple-main); 
+}
+
+/* --- CUSTOM DROPDOWN STYLES --- */
+.custom-select-container {
+    position: relative;
+    width: 100%;
+    line-height: normal; 
+    font-size: 1rem; 
+}
+
+/* Style for the displayed selected value (the button part) */
+.select-selected {
+    background-color: var(--bg-light); 
+    border: 1px solid var(--border-color); 
+    border-radius: 8px; 
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    color: var(--text-dark); 
+    cursor: pointer;
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    text-align: center;
+    user-select: none; 
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+    box-sizing: border-box; 
 }
-/* ... (rest of your service-card and other styles) ... */
+
+.select-selected:focus {
+    outline: none; 
+    border-color: var(--purple-main); 
+    box-shadow: 0 0 0 3px rgba(94, 60, 126, 0.3); 
+}
+
+.select-selected:hover {
+    border-color: var(--purple-main); 
+}
+
+/* Style for the placeholder text when no option is selected */
+.select-selected.placeholder {
+    color: var(--text-secondary); 
+}
+
+/* Custom arrow for the dropdown */
+.select-arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--text-dark); 
+    margin-left: 10px; 
+    transition: transform 0.3s ease; 
+}
+
+.select-arrow.open {
+    transform: rotate(180deg); 
+}
+
+/* Style for the dropdown list (ul) */
+.select-items {
+    position: absolute;
+    /* TEMPORARY FIX: Hardcoding background color to confirm variable issue */
+    background-color: white; /* Changed from var(--bg-light) */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    top: 100%; 
+    left: 0;
+    right: 0;
+    z-index: 99; 
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0; 
+    overflow-y: auto; 
+    max-height: 200px; 
+    
+    opacity: 0; 
+    visibility: hidden; 
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+/* When dropdown is open, apply animation state */
+.custom-select-container .select-items {
+    max-height: 200px; 
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Style for individual dropdown items (li) */
+.select-items li {
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    color: var(--text-dark); 
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-bottom: 1px solid var(--border-color); 
+}
+
+.select-items li:last-child {
+    border-bottom: none; 
+}
+
+/* Hover and selected state for dropdown items */
+.select-items li:hover,
+.select-items li.same-as-selected {
+    background-color: var(--purple-light); 
+    color: var(--text-light); 
+}
+/* --- END CUSTOM DROPDOWN STYLES --- */
+
+
+/* Styles for the Submit button */
+.contact-form .submit-btn {
+    background: var(--purple-main); 
+    color: var(--text-light); 
+    border-color: var(--purple-main); 
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    align-self: flex-start; 
+    transition: filter 0.3s ease; 
+}
+
+/* Override default Button component hover effects */
+.contact-form .submit-btn .button-effect__fill,
+.contact-form .submit-btn .button-effect__text,
+.contact-form .submit-btn .button-effect__arrow {
+    transition: none; 
+}
+
+.contact-form .submit-btn:hover {
+    filter: brightness(1.15); 
+    color: var(--text-light); 
+}
+
+/* Hide default button effect elements if they appear */
+.contact-form .submit-btn .button-effect__fill,
+.contact-form .submit-btn .button-effect__arrow {
+    display: none !important;
+}
+
+.contact-form .submit-btn .button-effect__text {
+    transform: none !important; 
+    opacity: 1 !important;
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 992px) {
+    .partnership {
+        grid-template-columns: 1fr; /* Stack columns on tablets */
+        align-items: center; 
+        gap: 2.5rem;
+    }
+
+    .partnership__left-column,
+    .partnership__form-column {
+        align-items: center; 
+        text-align: center; 
+    }
+    
+    .partnership__left-column {
+        order: -1; /* Place the text/image block above the form on small screens */
+    }
+
+    /* Adjust spacing when stacked */
+    .partnership__text-content {
+        margin-bottom: 1.5rem; 
+    }
+
+    .partnership__icon-container {
+        max-width: 500px; 
+    }
+
+    .partnership__text-content .section__title::after {
+        left: 50%; 
+        transform: translateX(-50%);
+    }
+
+    .contact-form {
+        max-width: 100%; 
+    }
+    
+    .contact-form .submit-btn {
+        align-self: center; 
+    }
+}
+
+@media (max-width: 768px) {
+    .partnership {
+        gap: 2rem;
+    }
+
+    .partnership__left-column {
+        gap: 1.5rem; 
+    }
+
+    .partnership__icon-container {
+        margin-bottom: 1rem;
+    }
+
+    .partnership__text-content .section__title {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .partnership__text-content .section__text {
+        font-size: 1rem;
+    }
+
+    .contact-form {
+        gap: 1rem;
+    }
+
+    .contact-form label,
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+        font-size: 0.95rem;
+    }
+
+    .contact-form .submit-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+}

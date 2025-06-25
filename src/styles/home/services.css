@@ -1,6 +1,6 @@
 /* services.css */
 
-/* Services Section Grid - no changes needed here */
+/* Services Section Grid */
 .services__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -32,23 +32,23 @@
     z-index: 0; /* Ensures the image is behind the section's content (service cards) */
 }
 
-/* --- CRITICAL FIX: STYLE FOR THE COMPONENT BELOW SERVICES SECTION --- */
+/* --- Styles for the Partnership Section's outer container --- */
+/* This ensures the PartnershipSection itself has a solid background and doesn't show through */
+.section--secondary { /* This class is now used by PartnershipSection.jsx */
+    background-color: var(--section-secondary-bg); /* Use your desired background color for this section */
+    position: relative; /* Needed for z-index to work */
+    z-index: 2; /* Ensures this section sits above the ServicesSection */
+    /* Add any other general styles you want for all 'secondary' sections */
+}
+
+/* --- CRITICAL FIX COMMENT: STYLE FOR THE COMPONENT BELOW SERVICES SECTION --- */
 /* You MUST apply a solid background color to the component immediately below 'ServicesSection'. */
 /* Identify the CSS class of that component in your main layout file (e.g., App.js, Layout.js). */
 /* Replace '.your-next-section-class' with the actual class name. */
 
-/* Example: If the next section is something like an 'About Us' section */
-.about-us-section { /* <--- FIND AND REPLACE THIS WITH YOUR ACTUAL CLASS */
-    background-color: var(--section-secondary-bg, #1a1a1a); /* IMPORTANT: SET A SOLID BACKGROUND COLOR */
-    /* I've added a fallback to #1a1a1a (a dark grey) in case --section-secondary-bg isn't defined. */
-    position: relative; /* Crucial for proper z-indexing */
-    z-index: 2; /* Ensures this section is stacked above the ServicesSection */
-    /* Add any other existing styles for this section here */
-}
-
-/* If your next section uses a generic class like 'section' but needs a different background: */
-/* .section--some-other-type {
-    background-color: var(--color-dark-surface);
+/* Example: If the next section is something like an 'About Us' section, and it doesn't already have .section--secondary */
+/* .about-us-section { 
+    background-color: var(--section-secondary-bg, #1a1a1a);
     position: relative;
     z-index: 2;
 } */
