@@ -1,0 +1,40 @@
+/* src/stem-labs/stem-labs-hero.css */
+
+/* Hero section for individual service pages - Enhanced for visual impact */
+.service-page-hero {
+    padding-top: 8rem; /* Adjust to clear fixed navbar if any */
+    padding-bottom: 4rem;
+    text-align: center;
+    /* Ensure background is explicitly set with !important to override .section--primary shorthand */
+    background-color: var(--primary-dark) !important;
+    /* DOT GRID IS HERE: radial gradients for the dot pattern */
+    background-image: radial-gradient(circle, var(--purple-main) 1px, transparent 1px),
+                      radial-gradient(circle, var(--secondary-dark) 1px, transparent 1px) !important;
+    background-size: 40px 40px !important;
+    background-position: 0 0, 20px 20px !important;
+}
+
+.service-page-hero .section__title {
+    font-size: 4.5rem; /* SIGNIFICANTLY LARGER FOR MORE IMPACT */
+    font-weight: 800; /* Ensure bold */
+    color: var(--platinum-light); /* Changed from var(--purple-light) to var(--platinum-light) */
+    margin-bottom: 0.5rem; /* Reduced margin to keep it tight */
+    line-height: 1.1; /* Ensure good line spacing for large text */
+}
+
+/* No underline for the main hero title on service pages */
+.service-page-hero .section__title::after {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .service-page-hero .section__title {
+        font-size: 3.5rem; /* Adjust down for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .service-page-hero .section__title {
+        font-size: 2.8rem; /* Further adjust down for mobile */
+    }
+}

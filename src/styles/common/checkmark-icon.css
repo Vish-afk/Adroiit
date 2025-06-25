@@ -1,0 +1,9 @@
+/* src/components/common/checkmark-icon.css */
+
+.checkmark-icon {
+    min-width: 24px; /* Ensure icon doesn't shrink */
+    height: 24px;
+    color: var(--purple-main); /* Icon color */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    filter: drop-shadow(0 0 3px rgba(94, 60, 126, 0.5)); /* Little glow for icon */
+}

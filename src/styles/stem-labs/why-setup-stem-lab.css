@@ -1,0 +1,97 @@
+/* src/stem-labs/why-setup-stem-lab.css */
+
+/* .stem-labs-benefits-block is styled separately for background image */
+
+/* Styling for the bullet point lists */
+.benefits-list {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 1.5rem 0 0 0;
+}
+
+.benefits-list li {
+    display: flex;
+    align-items: flex-start; /* Align icon and text at the top if text wraps */
+    gap: 0.8rem; /* Space between icon and text */
+    margin-bottom: 1rem; /* Space between list items */
+    font-size: 1.1rem;
+    color: var(--text-primary); /* Text color for list items, slightly more prominent */
+    line-height: 1.5;
+}
+
+/* This icon style is imported separately per style.css, but kept here for context of the list item */
+/* If CheckmarkIcon.css handles this, it can be removed from here */
+.checkmark-icon {
+    min-width: 24px; /* Ensure icon doesn't shrink */
+    height: 24px;
+    color: var(--purple-main); /* Icon color */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    filter: drop-shadow(0 0 3px rgba(94, 60, 126, 0.5)); /* Little glow for icon */
+}
+
+/* Styling for the section with background image (Section 2: "Why set up a STEM Lab?") */
+.stem-labs-benefits-section-bg {
+    position: relative;
+    padding: 8rem 0; /* ENLARGED: Increased from 6rem to 8rem for more vertical space */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* REMOVED: background-attachment: fixed; */ /* This line has been removed */
+    background-color: transparent !important; /* Ensure no background color from .section overrides */
+    min-height: 700px; /* ENLARGED: Increased from 500px to 700px */
+    display: flex; /* Use flex to center content within the section */
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+    overflow: hidden; /* Hide anything outside */
+}
+
+.stem-labs-benefits-section-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 5, 16, 0.75); /* A dark, semi-transparent overlay using primary-dark */
+    z-index: 1; /* Place overlay above background image */
+}
+
+/* Adjust .stem-labs-benefits-block to center its content over the background */
+.stem-labs-benefits-block {
+    position: relative;
+    z-index: 2; /* Place content above the overlay */
+    text-align: center; /* Center text within this block */
+    display: flex; /* Make this a flex container too for its content */
+    flex-direction: column; /* Stack text content vertically */
+    align-items: center; /* Center content horizontally within the block */
+    justify-content: center; /* Center content vertically within the block */
+    max-width: 800px; /* Constrain width for readability */
+    margin: 0 auto; /* Center the block itself */
+    padding: 0; /* Remove padding here, controlled by parent section */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .stem-labs-benefits-block { /* Include this for responsive stacking of content inside */
+        flex-direction: column; /* Stack text and image vertically */
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .benefits-list {
+        margin-left: auto; /* Center list */
+        margin-right: auto; /* Center list */
+        max-width: 400px; /* Constrain list width for readability */
+        text-align: left; /* Keep list items left-aligned within their container */
+    }
+}
+
+@media (max-width: 768px) {
+    .benefits-list li {
+        font-size: 0.95rem;
+    }
+    .stem-labs-benefits-section-bg {
+        min-height: 500px; /* Adjusted min-height for background section on smaller screens */
+        padding: 5rem 0; /* Adjusted padding for background section on smaller screens */
+    }
+}

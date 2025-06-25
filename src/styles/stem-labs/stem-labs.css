@@ -1,0 +1,259 @@
+/* src/stem-labs/stem-labs.css */
+
+/* Hero section for individual service pages - Enhanced for visual impact */
+.service-page-hero {
+    padding-top: 8rem; /* Adjust to clear fixed navbar if any */
+    padding-bottom: 4rem;
+    text-align: center;
+    /* Ensure background is explicitly set with !important to override .section--primary shorthand */
+    background-color: var(--primary-dark) !important;
+    /* DOT GRID IS HERE: radial gradients for the dot pattern */
+    background-image: radial-gradient(circle, var(--purple-main) 1px, transparent 1px),
+                      radial-gradient(circle, var(--secondary-dark) 1px, transparent 1px) !important;
+    background-size: 40px 40px !important;
+    background-position: 0 0, 20px 20px !important;
+}
+
+.service-page-hero .section__title {
+    font-size: 4.5rem; /* SIGNIFICANTLY LARGER FOR MORE IMPACT */
+    font-weight: 800; /* Ensure bold */
+    color: var(--purple-light); /* Using a lighter purple for the main page title */
+    margin-bottom: 0.5rem; /* Reduced margin to keep it tight */
+    line-height: 1.1; /* Ensure good line spacing for large text */
+}
+
+/* No underline for the main hero title on service pages */
+.service-page-hero .section__title::after {
+    display: none;
+}
+
+/* Ensure the first content section has enough space from the hero */
+.stem-labs-section:first-of-type {
+    margin-top: 2rem; /* Add some margin from the hero section */
+}
+
+/* Common styling for content blocks (text + image) */
+.stem-labs-content-block,
+.stem-labs-partner-block {
+    display: flex;
+    align-items: center;
+    gap: 3rem; /* Space between text and image/list */
+    padding: 3rem 0; /* Vertical padding for each section content */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* .stem-labs-benefits-block is styled separately for background image */
+
+
+.stem-labs-text-content {
+    flex: 1; /* Allows text to take available space */
+    min-width: 50%; /* Ensures text block doesn't become too narrow */
+}
+
+.stem-labs-image-container {
+    flex: 1; /* Allows image to take available space */
+    display: flex;
+    justify-content: center; /* Center image horizontally */
+    align-items: center; /* Center image vertically */
+}
+
+.stem-labs-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px; /* Soften image corners, consistent with service cards */
+    object-fit: cover;
+    max-height: 600px; /* ENLARGED */
+}
+
+.service-content__heading {
+    font-family: 'Inter', sans-serif; /* Consistent with homepage headings */
+    font-size: 2.2rem; /* Consistent size for section sub-headings */
+    font-weight: 700;
+    color: var(--purple-main); /* Your vibrant accent color for sub-headings */
+    margin-bottom: 1.5rem;
+    position: relative;
+    text-shadow: 0 0 8px rgba(94, 60, 126, 0.2); /* Subtle glow for headings */
+}
+
+/* Ensure headings align to left for content blocks unless specified otherwise */
+.stem-labs-text-content .service-content__heading {
+    text-align: left;
+}
+
+/* Special styling for the main section text, inherits from section__text */
+.stem-labs-text-content .section__text {
+    font-size: 1.05rem; /* Slightly smaller for detailed content */
+    line-height: 1.9;
+    color: var(--text-secondary); /* Use secondary text color for main content blocks */
+}
+
+/* Styling for the bullet point lists */
+.benefits-list {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 1.5rem 0 0 0;
+}
+
+.benefits-list li {
+    display: flex;
+    align-items: flex-start; /* Align icon and text at the top if text wraps */
+    gap: 0.8rem; /* Space between icon and text */
+    margin-bottom: 1rem; /* Space between list items */
+    font-size: 1.1rem;
+    color: var(--text-primary); /* Text color for list items, slightly more prominent */
+    line-height: 1.5;
+}
+
+.checkmark-icon {
+    min-width: 24px; /* Ensure icon doesn't shrink */
+    height: 24px;
+    color: var(--purple-main); /* Icon color */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    filter: drop-shadow(0 0 3px rgba(94, 60, 126, 0.5)); /* Little glow for icon */
+}
+
+/* Call to Action section */
+.stem-labs-cta {
+    background: var(--primary-dark); /* Ensure this section is dark primary */
+}
+
+.stem-labs-cta .service-content__heading {
+    font-size: 2.8rem; /* Larger for a prominent CTA */
+    text-align: center;
+    color: var(--platinum-light); /* Make it stand out more with platinum */
+    margin-bottom: 0;
+    text-shadow: 0 0 10px rgba(167, 184, 208, 0.3); /* Subtle platinum glow */
+}
+
+/* Styling for the section with background image (Section 2: "Why set up a STEM Lab?") */
+.stem-labs-benefits-section-bg {
+    position: relative;
+    padding: 8rem 0; /* ENLARGED: Increased from 6rem to 8rem for more vertical space */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Optional: adds parallax effect */
+    background-color: transparent !important; /* Ensure no background color from .section overrides */
+    min-height: 700px; /* ENLARGED: Increased from 500px to 700px */
+    display: flex; /* Use flex to center content within the section */
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+    overflow: hidden; /* Hide anything outside */
+}
+
+.stem-labs-benefits-section-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 5, 16, 0.75); /* A dark, semi-transparent overlay using primary-dark */
+    z-index: 1; /* Place overlay above background image */
+}
+
+/* Adjust .stem-labs-benefits-block to center its content over the background */
+.stem-labs-benefits-block {
+    position: relative;
+    z-index: 2; /* Place content above the overlay */
+    text-align: center; /* Center text within this block */
+    display: flex; /* Make this a flex container too for its content */
+    flex-direction: column; /* Stack text content vertically */
+    align-items: center; /* Center content horizontally within the block */
+    justify-content: center; /* Center content vertically within the block */
+    max-width: 800px; /* Constrain width for readability */
+    margin: 0 auto; /* Center the block itself */
+    padding: 0; /* Remove padding here, controlled by parent section */
+}
+
+/* Adjust text content within the background section for readability */
+.stem-labs-benefits-section-bg .service-content__heading {
+    color: var(--platinum-light); /* Make heading brighter for contrast */
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); /* More pronounced shadow for readability */
+}
+
+.stem-labs-benefits-section-bg .benefits-list li {
+    color: var(--text-primary); /* Ensure list text is clearly visible */
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Subtle shadow for readability */
+}
+
+.stem-labs-benefits-section-bg .stem-labs-text-content {
+    min-width: unset; /* Remove min-width, as it's now centered single column */
+    text-align: center; /* Ensure text is centered */
+}
+
+.stem-labs-benefits-section-bg .benefits-list {
+    text-align: left; /* Keep list items themselves left-aligned within the centered container */
+}
+
+/* Ensure that the image container is hidden for this specific section */
+.stem-labs-benefits-section-bg .stem-labs-image-container {
+    display: none;
+}
+
+
+/* Responsive adjustments for service pages */
+@media (max-width: 992px) {
+    .stem-labs-content-block,
+    .stem-labs-benefits-block, /* Include this for responsive stacking of content inside */
+    .stem-labs-partner-block {
+        flex-direction: column; /* Stack text and image vertically */
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .stem-labs-text-content {
+        min-width: 100%; /* Take full width when stacked */
+        text-align: center; /* Center text when stacked */
+    }
+
+    .stem-labs-text-content .service-content__heading {
+        text-align: center; /* Center heading on smaller screens */
+    }
+
+    .benefits-list {
+        margin-left: auto; /* Center list */
+        margin-right: auto; /* Center list */
+        max-width: 400px; /* Constrain list width for readability */
+        text-align: left; /* Keep list items left-aligned within their container */
+    }
+
+    .stem-labs-image-container {
+        margin-top: 1.5rem; /* Space between text and image */
+    }
+
+    .service-page-hero .section__title {
+        font-size: 3.5rem; /* Adjust down for smaller screens */
+    }
+
+    .service-content__heading {
+        font-size: 2rem;
+    }
+
+    .stem-labs-cta .service-content__heading {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-page-hero .section__title {
+        font-size: 2.8rem; /* Further adjust down for mobile */
+    }
+    .service-content__heading {
+        font-size: 1.8rem;
+    }
+    .stem-labs-cta .service-content__heading {
+        font-size: 1.8rem;
+    }
+    .stem-labs-text-content .section__text,
+    .benefits-list li {
+        font-size: 0.95rem;
+    }
+    .stem-labs-image {
+        max-height: 400px; /* Adjusted max-height for images on smaller screens */
+    }
+    .stem-labs-benefits-section-bg {
+        min-height: 500px; /* Adjusted min-height for background section on smaller screens */
+        padding: 5rem 0; /* Adjusted padding for background section on smaller screens */
+    }
+}

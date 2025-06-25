@@ -1,0 +1,18 @@
+/* src/stem-labs/why-partner.css */
+
+.stem-labs-partner-block {
+    display: flex;
+    align-items: center;
+    gap: 3rem; /* Space between text and image/list */
+    padding: 3rem 0; /* Vertical padding for each section content */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .stem-labs-partner-block {
+        flex-direction: column; /* Stack text and image vertically */
+        text-align: center;
+        gap: 2rem;
+    }
+}

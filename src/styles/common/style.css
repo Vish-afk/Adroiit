@@ -2,37 +2,38 @@
 
 /* --- IMPORT GOOGLE FONTS HERE --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Source+Sans+Pro:wght@300;400;700&display=swap');
-/* Make sure to include the specific weights you need for Inter (e.g., 400, 700, 800)
-    and Source Sans Pro (e.g., 300, 400, 700) from Google Fonts */
-/* --- END OF GOOGLE FONT IMPORTS --- */
 
-
-/* --- IMPORT COMPONENT STYLES HERE --- */
-/* These are in components/home/styles, so relative path from components/styles is ../home/styles/ */
+/* --- IMPORT COMMON COMPONENT STYLES HERE --- */
 @import url('../home/hero.css');
-@import url('../home/about.css'); /* This is correctly imported */
+@import url('../home/about.css');
 @import url('../home/services.css');
-@import url('../home/partnership.css');
-
-/* These are in the same components/styles directory */
+@import url('../common/partnership.css');
 @import url('./navbar.css');
 @import url('./buttons.css');
 @import url('./footer.css');
-/* --- END OF IMPORT STATEMENTS --- */
+@import url('../common/checkmark-icon.css'); /* NEW: Import for the CheckmarkIcon styles */
+
+/* --- IMPORT STEM LABS PAGE COMPONENT STYLES HERE --- */
+/* REMOVED: @import url('../stem-labs/stem-labs.css'); */
+@import url('../stem-labs/stem-labs-hero.css');
+@import url('../stem-labs/what-is-stem-lab.css');
+@import url('../stem-labs/why-setup-stem-lab.css');
+@import url('../stem-labs/why-partner.css');
+@import url('../stem-labs/cta.css');
 
 
 /* CSS Custom Properties for Dark Purple Metallic Palette - NO BLUES */
 :root {
     /* Base Tones - Deeper, more desaturated, almost concrete-like */
-    --primary-dark: #0A0510; /* Made even deeper, closer to black */
-    --secondary-dark: #2C1F3A; /* Made noticeably lighter purple-grey */
-    --tertiary-dark: #3F2F50; /* New: For subtle background elements/card backs, slightly lighter purple-grey */
+    --primary-dark: #0A0510;
+    --secondary-dark: #2C1F3A;
+    --tertiary-dark: #3F2F50;
 
     /* Metallic Accents - Subdued Platinum & Rich Purple, aged and less vibrant */
-    --platinum-main: #7F8DA6; /* Desaturated, almost gunmetal platinum */
-    --platinum-light: #A7B8D0; /* Cooler, muted highlight platinum */
-    --purple-main: #5E3C7E; /* Deep, rich purple */
-    --purple-light: #8A6DAA; /* Subtler, desaturated purple */
+    --platinum-main: #7F8DA6;
+    --platinum-light: #A7B8D0;
+    --purple-main: #5E3C7E;
+    --purple-light: #8A6DAA;
 
     /* Gradients - More refined and subtle variations */
     --gradient-metallic: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
@@ -42,36 +43,36 @@
 
 
     /* Text Colors - More muted, less stark white */
-    --text-primary: #D0D0D0; /* Muted Off-White, slightly greyed */
-    --text-secondary: #A0A0A0; /* Darker Grey for secondary text, almost faded */
-    --text-muted: #7A7A7A; /* Deep, almost vanishing grey */
-    --text-highlight: #FFFFFF; /* Pure white for absolute highlights, sparingly used */
+    --text-primary: #D0D0D0;
+    --text-secondary: #A0A0A0;
+    --text-muted: #7A7A7A;
+    --text-highlight: #FFFFFF;
     
     /* NEW: Background and Text Colors for form fields */
-    --bg-light: #F8F8F8; /* A very light grey for input/select backgrounds */
-    --text-dark: #1A1A1A; /* A very dark grey/near black for text on light backgrounds */
+    --bg-light: #F8F8F8;
+    --text-dark: #1A1A1A;
 
 
     /* Borders & Shadows - Sharper, more oppressive shadows, more industrial borders */
-    --border-color: #403050; /* Darker, more defined purple border */
-    --border-subtle: rgba(255, 255, 255, 0.08); /* New: For subtle inner borders */
-    --shadow-light: rgba(0, 0, 0, 0.25); /* Slightly darker, more present light shadow */
-    --shadow-medium: rgba(0, 0, 0, 0.7); /* Stronger, more foreboding medium shadow */
-    --shadow-dark: rgba(0, 0, 0, 0.95); /* Opaque, oppressive shadow for deep contrast */
+    --border-color: #403050;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --shadow-light: rgba(0, 0, 0, 0.25);
+    --shadow-medium: rgba(0, 0, 0, 0.7);
+    --shadow-dark: rgba(0, 0, 0, 0.95);
 
     /* Transitions - Slower, more deliberate and slightly uneasy transition, with a hint of bounce */
     --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     --transition-slow: all 0.7s cubic-bezier(0.6, 0.05, 0.2, 0.9);
 
     /* Vibrant Accent (for typewriter text, etc.) - Now a very subtle, clinical aqua/electric blue */
-    --vibrant-accent: #9A2E72; /* Changed to a bright, vibrant pink-purple */
-    --vibrant-accent-subtle: #C96DB8; /* Subtler, desaturated pink-purple for text content */
+    --vibrant-accent: #9A2E72;
+    --vibrant-accent-subtle: #C96DB8;
 
-    /* Optional: Subtle background texture/pattern - Increased opacity for a more tangible grit */
+    /* Re-enabled: Subtle background texture/pattern for selective use */
     --background-texture: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.08"/></svg>');
 }
 
-/* Reset and Base Styles (no changes here for this issue) */
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -94,26 +95,10 @@ body {
     perspective: 1000px;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: var(--background-texture);
-    pointer-events: none;
-    z-index: -1;
-    opacity: 1;
-    animation: texturePan 60s linear infinite;
-}
+/* The body::before rule and its animation were removed to eliminate the global background image. */
 
-@keyframes texturePan {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
-}
 
-/* Selection Color (no changes here for this issue) */
+/* Selection Color */
 ::selection {
     background: var(--purple-main);
     color: var(--primary-dark);
@@ -122,43 +107,20 @@ body::before {
 /* Section Base Styles */
 .section {
     padding: 6rem 0;
-    animation: fadeInGritty 1.2s ease-out forwards;
     position: relative;
     overflow: hidden;
 }
 
-@keyframes fadeInGritty {
-    from {
-        opacity: 0;
-        transform: translateY(60px) scale(0.96);
-        filter: blur(8px) grayscale(0.7);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0) grayscale(0);
-    }
-}
 
 .section--primary {
     background: var(--primary-dark);
 }
 
 .section--secondary {
-    background: var(--gradient-subtle-dark); 
+    background: var(--gradient-subtle-dark);
     position: relative;
 }
 
-.section--secondary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gradient-platinum);
-    box-shadow: 0 1px 8px rgba(0,0,0,0.7);
-}
 
 .section__container {
     max-width: 1300px;
@@ -166,7 +128,7 @@ body::before {
     padding: 0 2.5rem;
 }
 
-/* Headings: h1, h2, h4 (no changes here for this issue) */
+/* Headings: h1, h2, h4 */
 h1, h2, h4 {
     font-family: 'Inter', sans-serif;
     letter-spacing: -0.04em;
@@ -209,7 +171,7 @@ h1, h2, h4 {
     line-height: 2;
 }
 
-/* Responsive Design Adjustments (no changes here for this issue) */
+/* Responsive Design Adjustments */
 @media (max-width: 992px) {
     .section {
         padding: 5rem 0;

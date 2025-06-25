@@ -1,5 +1,7 @@
-//servicessectoin.jsx
+// src/components/home/ServicesSection.jsx
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+
 // Custom SVG Icons (remain unchanged)
 const MicroscopeIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="service-icon">
@@ -115,7 +117,8 @@ export default function ServicesSection() {
   ];
 
   return (
-    <section className="section section--primary">
+    // !!! IMPORTANT CHANGE: Ensure 'services-section-unique' is present here !!!
+    <section className="section section--primary services-section-unique">
       <div className="section__container">
         <h2 className="section__title section__title--center">Our Services</h2>
         <div className="services__grid">
@@ -124,13 +127,14 @@ export default function ServicesSection() {
               <div className="service-card__icon">{service.icon}</div>
               <h3 className="service-card__title">{service.title}</h3>
               <p className="service-card__description">{service.description}</p>
-              <a href={service.link} className="service-card__link service-card__link--effect">
+              {/* Changed <a> to <Link> and href to to */}
+              <Link to={service.link} className="service-card__link service-card__link--effect">
                 <span className="button-effect__fill"></span>
                 <span className="button-effect__arrow button-effect__arrow--right">
                   <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </span>
                 <span className="button-effect__text">{service.linkText || "Explore"}</span>
-              </a>
+              </Link>
             </div>
           ))}
         </div>

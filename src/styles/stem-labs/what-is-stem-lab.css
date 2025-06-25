@@ -1,0 +1,95 @@
+/* src/stem-labs/what-is-stem-lab.css */
+
+/* Ensure the first content section has enough space from the hero */
+.stem-labs-section:first-of-type {
+    margin-top: 2rem; /* Add some margin from the hero section */
+}
+
+/* Common styling for content blocks (text + image) */
+.stem-labs-content-block {
+    display: flex;
+    align-items: center;
+    gap: 3rem; /* Space between text and image/list */
+    padding: 3rem 0; /* Vertical padding for each section content */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.stem-labs-text-content {
+    flex: 1; /* Allows text to take available space */
+    min-width: 50%; /* Ensures text block doesn't become too narrow */
+}
+
+.stem-labs-image-container {
+    flex: 1; /* Allows image to take available space */
+    display: flex;
+    justify-content: center; /* Center image horizontally */
+    align-items: center; /* Center image vertically */
+}
+
+.stem-labs-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px; /* Soften image corners, consistent with service cards */
+    object-fit: cover;
+    max-height: 600px; /* ENLARGED */
+}
+
+.service-content__heading {
+    font-family: 'Inter', sans-serif; /* Consistent with homepage headings */
+    font-size: 2.2rem; /* Consistent size for section sub-headings */
+    font-weight: 700;
+    color: var(--purple-main); /* Your vibrant accent color for sub-headings */
+    margin-bottom: 1.5rem;
+    position: relative;
+    text-shadow: 0 0 8px rgba(94, 60, 126, 0.2); /* Subtle glow for headings */
+}
+
+/* Ensure headings align to left for content blocks unless specified otherwise */
+.stem-labs-text-content .service-content__heading {
+    text-align: left;
+}
+
+/* Special styling for the main section text, inherits from section__text */
+.stem-labs-text-content .section__text {
+    font-size: 1.05rem; /* Slightly smaller for detailed content */
+    line-height: 1.9;
+    color: var(--text-secondary); /* Use secondary text color for main content blocks */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .stem-labs-content-block {
+        flex-direction: column; /* Stack text and image vertically */
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .stem-labs-text-content {
+        min-width: 100%; /* Take full width when stacked */
+        text-align: center; /* Center text when stacked */
+    }
+
+    .stem-labs-text-content .service-content__heading {
+        text-align: center; /* Center heading on smaller screens */
+    }
+
+    .stem-labs-image-container {
+        margin-top: 1.5rem; /* Space between text and image */
+    }
+
+    .service-content__heading {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-content__heading {
+        font-size: 1.8rem;
+    }
+    .stem-labs-text-content .section__text {
+        font-size: 0.95rem;
+    }
+    .stem-labs-image {
+        max-height: 400px; /* Adjusted max-height for images on smaller screens */
+    }
+}

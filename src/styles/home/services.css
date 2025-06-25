@@ -7,37 +7,39 @@
     gap: 2rem;
 }
 
-/* Services Section (Primary) Styles */
+/* Services Section (Primary) Styles - Base styles for any primary section */
 .section--primary {
     position: relative; /* Essential for positioning the ::before pseudo-element */
-    background-color: var(--section-primary-bg); /* Fallback color for the section */
     overflow: hidden; /* Clips any content/background that might try to extend outside */
     z-index: 1; /* Establishes a stacking context. Ensures this section's content is above its own background. */
 }
 
-/* Background image for the Services Section */
-.section--primary::before {
+/* Wavy Background: ONLY for the Services Section Component */
+.services-section-unique.section--primary::before { /* <-- CHANGED SELECTOR HERE */
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../../assets/output-onlinepngtools.png'); /* YOUR IMAGE URL HERE */
-    background-size: cover; /* Ensures the image covers the entire section */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents tiling */
-    opacity: 0.08; /* Adjust for desired subtlety */
-    mix-blend-mode: luminosity; /* Blends nicely with the section's background color */
-    z-index: 0; /* Ensures the image is behind the section's content (service cards) */
+    /* Direct SVG data URL for the wavy texture */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.2"/></svg>'); /* Use your chosen opacity here */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8; /* Use your chosen opacity here (e.g., 0.15, 0.2, whatever looked good) */
+    mix-blend-mode: luminosity; /* Use your chosen blend mode here */
+    z-index: 0; /* Ensures it's behind the service cards and other content */
+    pointer-events: none; /* Crucial so it doesn't block interactions */
 }
+
 
 /* --- Styles for the Partnership Section's outer container --- */
 /* This ensures the PartnershipSection itself has a solid background and doesn't show through */
 .section--secondary { /* This class is now used by PartnershipSection.jsx */
-    background-color: var(--section-secondary-bg); /* Use your desired background color for this section */
+    /* Removed background-color: var(--section-secondary-bg); as it's defined in base .section--secondary */
     position: relative; /* Needed for z-index to work */
-    z-index: 2; /* Ensures this section sits above the ServicesSection */
+    z-index: 2; /* Ensures this section sits above the ServicesSection if overlapping */
     /* Add any other general styles you want for all 'secondary' sections */
 }
 
@@ -57,7 +59,7 @@
 
 /* Service Card Component - Refined */
 .service-card {
-    background: var(--purple-main);
+    background: var(--purple-main); /* Base background color for the card */
     border: 1px solid var(--border-color);
     box-shadow: 0 10px 30px var(--shadow-medium);
     border-radius: 8px;
@@ -66,7 +68,7 @@
     position: relative;
     overflow: hidden;
     transform: translateZ(0);
-    z-index: 1; /* Ensures service cards are above their own ::before background */
+    z-index: 1; /* Ensures service cards are above the section's wavy background (z-index: 0) */
 
     display: flex;
     flex-direction: column;
@@ -75,7 +77,7 @@
     text-align: center;
 }
 
-/* Dark Gradient Background for Service Card */
+/* Dark Gradient Background for Service Card (remains on the card) */
 .service-card::before {
     content: '';
     position: absolute;
@@ -87,9 +89,12 @@
     mix-blend-mode: overlay;
     opacity: 0.8;
     pointer-events: none;
-    z-index: 0;
+    z-index: 0; /* Positioned behind the card's content but above its base background */
     transition: opacity 0.5s var(--transition-slow);
 }
+
+/* Removed: The .service-card::after rule that previously put waves on the cards */
+
 
 /* Service card effects triggered by button hover */
 .service-card:has(.service-card__link--effect:hover) {
@@ -102,6 +107,8 @@
     opacity: 0.15;
     transform: scale(1.02) skewX(0deg);
 }
+
+/* No ::after hover effect now, as ::after is removed from the card */
 
 .service-card__icon {
     font-size: 4rem;
@@ -116,6 +123,8 @@
     transition: var(--transition);
     width: 72px;
     height: 72px;
+    position: relative; /* Ensure icon is above card's ::before gradient */
+    z-index: 1;
 }
 
 /* Icon effects triggered by button hover */
@@ -130,6 +139,8 @@
     margin-bottom: 1rem;
     color: var(--text-highlight);
     line-height: 1.3;
+    position: relative; /* Ensure title is above card's ::before gradient */
+    z-index: 1;
 }
 
 .service-card__description {
@@ -138,6 +149,8 @@
     line-height: 1.9;
     flex-grow: 1;
     font-size: 1rem;
+    position: relative; /* Ensure description is above card's ::before gradient */
+    z-index: 1;
 }
 
 /* Service Card Link */
@@ -158,7 +171,7 @@
     overflow: hidden;
     color: var(--platinum-main);
     transform: translateZ(0);
-    z-index: 2; /* Ensures link is above button fill */
+    z-index: 2; /* Ensure link is above button fill and card's ::before */
 }
 
 .service-card__link--effect .button-effect__fill {
@@ -169,7 +182,7 @@
     height: 100%;
     background: var(--gradient-platinum);
     transition: width 0.5s cubic-bezier(0.6, 0.05, 0.2, 0.9);
-    z-index: 1;
+    z-index: 1; /* Relative to parent .service-card__link--effect */
 }
 
 .service-card__link--effect:hover .button-effect__fill {
@@ -179,7 +192,7 @@
 
 .service-card__link--effect .button-effect__text {
     position: relative;
-    z-index: 2;
+    z-index: 2; /* Relative to parent .service-card__link--effect */
     transition: color 0.4s ease-in-out, transform 0.5s ease-out, opacity 0.5s ease-out;
     color: var(--platinum-main);
     white-space: nowrap;
@@ -201,7 +214,7 @@
     align-items: center;
     justify-content: center;
     transition: opacity 0.5s ease-out;
-    z-index: 2;
+    z-index: 2; /* Relative to parent .service-card__link--effect */
     width: 45px;
     height: 45px;
 }
