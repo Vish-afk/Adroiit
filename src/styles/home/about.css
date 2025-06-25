@@ -1,38 +1,216 @@
-/* components/about.css */
+/* components/home/about.css */
 
-/* About Section */
-.about {
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr; /* More asymmetric for visual tension */
-    /* Reduced gap */
-    gap: 3.5rem; /* Was 5rem */
-    align-items: center;
+/* Specific gradient background for About Section only */
+section.about-section--gradient-bg {
+    background: var(--gradient-metallic);
+    /* Add overall vertical padding to the section's content container */
+    padding-block: 6rem; /* More top/bottom padding for the entire section */
 }
 
+/* About Section Main Container */
+.about {
+    display: flex;
+    flex-direction: column; /* Stacks the top layout and items vertically */
+    gap: 6rem; /* INCREASED: Gap between the top content and the items for more breathing room */
+    align-items: center; /* Centers content horizontally within the .about div */
+    text-align: center; /* Centers text globally for the section */
+}
+
+/* Wrapper for the original two-column content (about__content & about__icon-container) */
+.about__top-layout {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr; /* Retains your original two-column layout */
+    gap: 4rem; /* Slightly increased gap for top layout */
+    align-items: center;
+    width: 100%; /* Ensure it spans full width of .about */
+    max-width: 1200px; /* Max width for the content layout */
+}
+
+/* Existing about__content styles */
+.about__content {
+    text-align: left; /* Keep text aligned left within its column */
+    max-width: none; 
+    margin-bottom: 0;
+}
+
+/* Existing about__icon-container styles */
+.about__icon-container {
+    /* Fits into the grid column */
+}
+
+/* Existing about__icon img styles */
 .about__icon img {
     width: 100%;
     height: 100%;
-    /* REMOVED: filter, border-radius, box-shadow */
-    filter: none; /* Removed grayscale, contrast, brightness */
-    border-radius: 0; /* Removed explicit border-radius for a natural image shape */
-    box-shadow: none; /* Removed box-shadow */
-    transition: none; /* Removed transition for hover (as there's no hover effect) */
+    filter: none;
+    border-radius: 0;
+    box-shadow: none;
+    transition: none;
 }
 
-/* REMOVED hover transform and filter effect for about image */
 .about__icon img:hover {
-    transform: none; /* Remove subtle scale and rotate on hover */
-    filter: none; /* Ensure no filter applies on hover either */
+    transform: none;
+    filter: none;
 }
+
+
+/* NEW DESIGN: Container for Vision and Mission items (no boxes) */
+.vm-items-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for items */
+    gap: 8rem; /* SIGNIFICANTLY INCREASED: Large gap for visual separation */
+    width: 100%;
+    max-width: 1200px; /* Wider container for more expansive look */
+    justify-content: center;
+    margin-top: 2rem;
+
+    /* NEW: Vertical line between the items using a background gradient */
+    background-image: linear-gradient(to right, transparent calc(50% - 1px), var(--text-secondary) calc(50% - 1px), var(--text-secondary) calc(50% + 1px), transparent calc(50% + 1px));
+    background-size: 100% 100%; /* Ensure the gradient covers the full height */
+    background-repeat: no-repeat;
+    background-position: center; /* Center the line */
+}
+
+/* NEW DESIGN: Individual Vision/Mission Item Styles (NO BOX STYLING) */
+.vm-item { 
+    /* Removed all box-related styling: background-color, border-radius, padding, box-shadow, transition */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1; /* Allows items to grow vertically to match each other */
+    padding: 0; /* No internal padding, rely on gap for spacing */
+}
+
+/* Icon styles for Vision/Mission items */
+.vm-item__icon {
+    width: 80px; 
+    height: 80px;
+    color: var(--platinum-light); 
+    margin-bottom: 1.2rem; /* Adjusted for less vertical space, relying on overall item height */
+    stroke-width: 1.8px;
+}
+
+/* Title styles for Vision/Mission items */
+.vm-item__title {
+    color: var(--platinum-light); 
+    font-size: 2.6rem; 
+    font-weight: 600;
+    margin-bottom: 0.8rem; /* Adjusted for less vertical space */
+}
+
+/* Text styles for Vision/Mission item descriptions */
+.vm-item__text {
+    color: var(--text-primary);
+    font-size: 1.1rem; 
+    line-height: 1.7; 
+}
+
 
 /* Responsive Design Adjustments */
-@media (max-width: 992px) { /* Adjusted breakpoint for slightly larger tablets */
-    .about {
-        grid-template-columns: 1fr;
-        gap: 2.5rem; /* Adjusted from 3.5rem */
+@media (max-width: 992px) {
+    section.about-section--gradient-bg {
+        padding-block: 4rem; /* Adjust padding for tablets */
     }
 
-    .about__icon {
-        order: -1; /* Puts image/icon above text on smaller screens */
+    .about {
+        gap: 4rem; /* Adjust main gap */
+    }
+    
+    .about__top-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .about__content {
+        text-align: center;
+    }
+
+    .about__icon-container {
+        order: -1;
+    }
+
+    .section__title {
+        font-size: 2.4rem;
+    }
+
+    .vm-items-container {
+        grid-template-columns: 1fr; /* Stack items vertically on tablets */
+        gap: 3rem; /* Gap between stacked items */
+        max-width: 500px; /* Adjust max-width for stacked items */
+        background-image: none; /* IMPORTANT: REMOVE vertical line when items stack */
+    }
+
+    /* Add a subtle bottom border for stacked items instead of the removed vertical line */
+    .vm-items-container .vm-item:first-child {
+        border-bottom: 1px solid var(--text-secondary); /* Subtle horizontal line */
+        padding-bottom: 2.5rem; /* Space below content before border */
+        margin-bottom: 2.5rem; /* Space between the first item and the next stacked item */
+    }
+
+    .vm-item {
+        padding: 0; /* Keep minimal padding */
+    }
+
+    .vm-item__icon {
+        width: 65px;
+        height: 65px;
+        margin-bottom: 1.5rem;
+    }
+
+    .vm-item__title {
+        font-size: 2.2rem;
+    }
+
+    .vm-item__text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    section.about-section--gradient-bg {
+        padding-block: 3rem; /* Adjust padding for mobile */
+    }
+
+    .about {
+        gap: 3rem;
+    }
+
+    .about__top-layout {
+        gap: 2rem;
+    }
+
+    .section__title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .section__text {
+        font-size: 0.95rem;
+    }
+
+    .vm-items-container {
+        gap: 2rem;
+        max-width: 90%;
+    }
+
+    .vm-items-container .vm-item:first-child {
+        border-bottom: 1px solid var(--text-secondary);
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .vm-item__icon {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 1rem;
+    }
+
+    .vm-item__title {
+        font-size: 2rem;
+    }
+
+    .vm-item__text {
+        font-size: 0.95rem;
     }
 }

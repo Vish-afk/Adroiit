@@ -3,14 +3,14 @@
 /* --- IMPORT GOOGLE FONTS HERE --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Source+Sans+Pro:wght@300;400;700&display=swap');
 /* Make sure to include the specific weights you need for Inter (e.g., 400, 700, 800)
-   and Source Sans Pro (e.g., 300, 400, 700) from Google Fonts */
+    and Source Sans Pro (e.g., 300, 400, 700) from Google Fonts */
 /* --- END OF GOOGLE FONT IMPORTS --- */
 
 
 /* --- IMPORT COMPONENT STYLES HERE --- */
 /* These are in components/home/styles, so relative path from components/styles is ../home/styles/ */
 @import url('../home/hero.css');
-@import url('../home/about.css');
+@import url('../home/about.css'); /* This is correctly imported */
 @import url('../home/services.css');
 @import url('../home/partnership.css');
 
@@ -114,7 +114,7 @@ body::before {
     color: var(--primary-dark);
 }
 
-/* Section Base Styles (no changes here for this issue) */
+/* Section Base Styles */
 .section {
     padding: 6rem 0;
     animation: fadeInGritty 1.2s ease-out forwards;
@@ -140,7 +140,8 @@ body::before {
 }
 
 .section--secondary {
-    background: var(--secondary-dark);
+    /* THIS IS THE CHANGE YOU NEED TO MAKE */
+    background: var(--gradient-subtle-dark); /* Changed from var(--secondary-dark) */
     position: relative;
 }
 
