@@ -1,0 +1,131 @@
+/* src/styles/technical-workshops/technical-workshops.css */
+
+/* --- TechnicalWorkshopsHero.css content --- */
+.technical-workshops-hero {
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+    text-align: left;
+    background-color: var(--primary-dark) !important; /* Dark background */
+    background-image: radial-gradient(circle, var(--purple-main) 1px, transparent 1px),
+                      radial-gradient(circle, var(--secondary-dark) 1px, transparent 1px) !important;
+    background-size: 40px 40px !important;
+    background-position: 0 0, 20px 20px !important;
+    color: var(--text-primary);
+}
+
+.technical-workshops-hero__container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.technical-workshops-hero__image-container {
+    flex: 0 0 350px;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.technical-workshops-hero__image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.technical-workshops-hero__text-content {
+    flex: 1;
+    min-width: 500px;
+}
+
+.technical-workshops-hero .section__title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--purple-light);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    text-shadow: 0 0 10px rgba(138, 109, 170, 0.5);
+}
+
+.technical-workshops-hero .section__title::after {
+    display: none;
+}
+
+.technical-workshops-hero .section__text {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+    max-width: 900px;
+}
+
+/* --- CTA Section (reused from workshops/advanced-labs) --- */
+.technical-workshops-cta {
+    padding: 6rem 0;
+    background-color: var(--primary-dark);
+    text-align: center;
+}
+
+.technical-workshops-cta .service-content__heading {
+    font-size: 2.5rem;
+    color: var(--platinum-light);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.3;
+}
+
+
+/* --- Responsive adjustments --- */
+@media (max-width: 1200px) {
+    .technical-workshops-hero__text-content {
+        min-width: 400px;
+    }
+}
+
+@media (max-width: 992px) {
+    .technical-workshops-hero {
+        padding-top: 6rem;
+        padding-bottom: 3rem;
+        text-align: center;
+    }
+    .technical-workshops-hero__container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .technical-workshops-hero__image-container {
+        flex: none;
+        width: 300px;
+        height: 200px;
+    }
+    .technical-workshops-hero__text-content {
+        min-width: 100%;
+    }
+    .technical-workshops-hero .section__title {
+        font-size: 2.8rem;
+        text-align: center;
+    }
+    .technical-workshops-hero .section__text {
+        font-size: 1rem;
+        text-align: center;
+    }
+    .technical-workshops-cta .service-content__heading {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .technical-workshops-hero .section__title {
+        font-size: 2.2rem;
+    }
+    .technical-workshops-cta .service-content__heading {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .technical-workshops-hero__image-container {
+        width: 250px;
+        height: 180px;
+    }
+}
