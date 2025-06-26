@@ -88,19 +88,19 @@ export default function ServicesSection() {
       title: "STEM WORKSHOPS",
       description: "Interactive hands-on sessions to inspire young minds in science, technology, engineering, and math.",
       icon: <FlaskIcon />,
-      link: "/services/stem-workshops" // This link correctly points to the new STEM Workshops page
+      link: "/services/stem-workshops"
     },
     {
       title: "ADVANCED LABS",
       description: "Tailored laboratory solutions to meet academic and research demands.",
       icon: <TelescopeIcon />,
-      link: "/services/advanced-labs"
+      link: "/services/advanced-labs" // This link is now active
     },
     {
       title: "WORKSHOPS",
       description: "Specialized workshops to upskill students in advanced technologies and engineering concepts.",
       icon: <CogIcon />,
-      link: "/services/workshops" // Updated this link for general workshops page
+      link: "/services/workshops"
     },
     {
       title: "3D PRINTING",

@@ -1,0 +1,279 @@
+/* src/styles/advanced-labs/advanced-labs.css */
+
+/* --- AdvancedLabsHero.css content --- */
+.advanced-labs-hero {
+    padding-top: 8rem;
+    padding-bottom: 4rem;
+    text-align: left;
+    background-color: var(--primary-dark) !important; /* Dark background */
+    background-image: radial-gradient(circle, var(--purple-main) 1px, transparent 1px),
+                      radial-gradient(circle, var(--secondary-dark) 1px, transparent 1px) !important;
+    background-size: 40px 40px !important;
+    background-position: 0 0, 20px 20px !important;
+    color: var(--text-primary);
+}
+
+.advanced-labs-hero__container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.advanced-labs-hero__image-container {
+    flex: 0 0 350px;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.advanced-labs-hero__image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.advanced-labs-hero__text-content {
+    flex: 1;
+    min-width: 500px;
+}
+
+.advanced-labs-hero .section__title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--purple-light);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    text-shadow: 0 0 10px rgba(138, 109, 170, 0.5);
+}
+
+.advanced-labs-hero .section__title::after {
+    display: none;
+}
+
+.advanced-labs-hero .section__text {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+    max-width: 900px;
+}
+
+/* --- Our Offerings Section --- */
+.our-offerings-section {
+    padding: 6rem 0;
+    background-color: var(--background-secondary); /* A lighter dark background */
+    text-align: center;
+}
+
+.our-offerings-section .section__title {
+    color: var(--purple-main);
+    font-size: 3rem;
+}
+
+.offerings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+    justify-content: center;
+}
+
+.offering-card {
+    background: var(--primary-dark); /* Dark background for cards */
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 8px 20px var(--shadow-dark);
+    transition: transform var(--transition);
+    overflow: hidden;
+}
+
+.offering-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.8);
+}
+
+.offering-card__image-container {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px; /* Square with rounded corners */
+    overflow: hidden;
+    margin-bottom: 1rem;
+    border: 3px solid var(--purple-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.offering-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.offering-card__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--platinum-light);
+    margin-top: 0.5rem;
+    line-height: 1.4;
+}
+
+/* --- Why Choose Us (Advanced Labs specific) --- */
+.why-choose-us-advanced-section {
+    padding: 6rem 0;
+    background: var(--gradient-subtle-dark);
+    text-align: center;
+}
+
+.why-choose-us-advanced-section .section__title {
+    color: var(--purple-light);
+    font-size: 3rem;
+    margin-bottom: 4rem;
+}
+
+.why-choose-us-advanced-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    justify-content: center;
+}
+
+.why-choose-us-advanced-card {
+    background: var(--primary-dark);
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: left;
+    box-shadow: 0 6px 15px var(--shadow-medium);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.why-choose-us-advanced-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--shadow-dark);
+}
+
+.why-choose-us-advanced-card__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--platinum-light);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+.why-choose-us-advanced-card__description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+/* --- CTA Section (reused from workshops) --- */
+.advanced-labs-cta {
+    padding: 6rem 0;
+    background-color: var(--primary-dark);
+    text-align: center;
+}
+
+.advanced-labs-cta .service-content__heading {
+    font-size: 2.5rem;
+    color: var(--platinum-light);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.3;
+}
+
+
+/* --- Responsive adjustments --- */
+@media (max-width: 1200px) {
+    .advanced-labs-hero__text-content {
+        min-width: 400px;
+    }
+}
+
+@media (max-width: 992px) {
+    .advanced-labs-hero {
+        padding-top: 6rem;
+        padding-bottom: 3rem;
+        text-align: center;
+    }
+    .advanced-labs-hero__container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .advanced-labs-hero__image-container {
+        flex: none;
+        width: 300px;
+        height: 200px;
+    }
+    .advanced-labs-hero__text-content {
+        min-width: 100%;
+    }
+    .advanced-labs-hero .section__title {
+        font-size: 2.8rem;
+        text-align: center;
+    }
+    .advanced-labs-hero .section__text {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .our-offerings-section .section__title,
+    .why-choose-us-advanced-section .section__title {
+        font-size: 2.5rem;
+    }
+
+    .offerings-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 2rem;
+    }
+
+    .offering-card__image-container {
+        width: 100px;
+        height: 100px;
+    }
+    .offering-card__title {
+        font-size: 1.1rem;
+    }
+    .why-choose-us-advanced-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    .why-choose-us-advanced-card {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .advanced-labs-hero .section__title {
+        font-size: 2.2rem;
+    }
+    .our-offerings-section .section__title,
+    .why-choose-us-advanced-section .section__title {
+        font-size: 2.2rem;
+    }
+    .offerings-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    .offering-card__title {
+        font-size: 1rem;
+    }
+    .why-choose-us-advanced-grid {
+        grid-template-columns: 1fr;
+    }
+    .advanced-labs-cta .service-content__heading {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .advanced-labs-hero__image-container {
+        width: 250px;
+        height: 180px;
+    }
+}
