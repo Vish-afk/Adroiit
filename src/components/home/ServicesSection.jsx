@@ -100,7 +100,7 @@ export default function ServicesSection() {
       title: "WORKSHOPS",
       description: "Specialized workshops to upskill students in advanced technologies and engineering concepts.",
       icon: <CogIcon />,
-      link: "/services/workshops"
+      link: "/services/technical-workshops"
     },
     {
       title: "3D PRINTING",
