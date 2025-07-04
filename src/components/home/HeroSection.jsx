@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '../ui/Button';
 import { ArrowRight } from 'lucide-react';
 import SequentialTypewriter from './SequentialTypewriter';
+import AnimatedBackground from '../home/EducationBackground'; // Corrected path and alias for EducationBackground
 
 export default function HeroSection() {
   const handleLearnMore = () => {
@@ -23,6 +24,9 @@ export default function HeroSection() {
 
   return (
     <section className="hero">
+      {/* Place the animated background component here */}
+      <AnimatedBackground /> {/* This component will render the div with class "education-background" */}
+
       <div className="hero__content">
         <h1 className="hero__title">
           <span className="hero__line-one">Empowering Next-</span>

@@ -11,10 +11,9 @@
 @import url('./navbar.css');
 @import url('./buttons.css');
 @import url('./footer.css');
-@import url('../common/checkmark-icon.css'); /* NEW: Import for the CheckmarkIcon styles */
+@import url('../common/checkmark-icon.css');
 
 /* --- IMPORT STEM LABS PAGE COMPONENT STYLES HERE --- */
-/* REMOVED: @import url('../stem-labs/stem-labs.css'); */
 @import url('../stem-labs/stem-labs-hero.css');
 @import url('../stem-labs/what-is-stem-lab.css');
 @import url('../stem-labs/why-setup-stem-lab.css');
@@ -23,54 +22,53 @@
 
 @import url('../stem-workshops/stem-workshops.css');
 
-/* CSS Custom Properties for Dark Purple Metallic Palette - NO BLUES */
+/* CSS Custom Properties for Bright Mode Palette */
 :root {
-    /* Base Tones - Deeper, more desaturated, almost concrete-like */
-    --primary-dark: #0A0510;
-    --secondary-dark: #2C1F3A;
-    --tertiary-dark: #3F2F50;
+    /* Base Tones - Lighter, cleaner */
+    --primary-light: #FFFFFF; /* Main background white */
+    --secondary-light: #F8F8F8; /* Subtle secondary background */
+    --tertiary-light: #EDEDED; /* Even darker light grey for specific areas */
 
-    /* Metallic Accents - Subdued Platinum & Rich Purple, aged and less vibrant */
-    --platinum-main: #7F8DA6;
-    --platinum-light: #A7B8D0;
-    --purple-main: #5E3C7E;
-    --purple-light: #8A6DAA;
+    /* Accent Colors - Using the user's provided purple #43169c */
+    --main-accent-purple: #43169c;
+    --main-accent-purple-light: #6C3DAB; /* Lighter shade for hovers/accents */
+    --main-accent-purple-dark: #311075; /* Darker shade for deeper tones */
 
-    /* Gradients - More refined and subtle variations */
-    --gradient-metallic: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
-    --gradient-platinum: linear-gradient(135deg, var(--platinum-main) 0%, var(--platinum-light) 100%);
-    --gradient-purple: linear-gradient(135deg, var(--purple-main) 0%, var(--purple-light) 100%);
-    --gradient-subtle-dark: linear-gradient(135deg, var(--secondary-dark) 0%, var(--tertiary-dark) 100%);
+    /* Gradients */
+    --gradient-accent: linear-gradient(135deg, var(--main-accent-purple) 0%, var(--main-accent-purple-light) 100%);
+    --gradient-subtle-light: linear-gradient(135deg, var(--secondary-light) 0%, var(--tertiary-light) 100%);
 
-
-    /* Text Colors - More muted, less stark white */
-    --text-primary: #D0D0D0;
-    --text-secondary: #A0A0A0;
-    --text-muted: #7A7A7A;
-    --text-highlight: #FFFFFF;
+    /* Text Colors - Darker for readability on light backgrounds */
+    --text-dark-primary: #1A1A1A; /* Primary text (almost black) */
+    --text-dark-secondary: #4A4A4A; /* Secondary text (dark grey for links, etc.) */
+    --text-dark-muted: #7A7A7A; /* Muted text (medium grey) - good for subtle background icons */
+    --text-highlight-light: #FFFFFF; /* For text on dark accents/buttons */
     
-    /* NEW: Background and Text Colors for form fields */
+    /* Background and Text Colors for form fields */
     --bg-light: #F8F8F8;
-    --text-dark: #1A1A1A;
+    --text-dark: #1A1A1A; /* Consider consolidating with --text-dark-primary */
 
+    /* Borders & Shadows - Lighter borders, subtle shadows */
+    --border-light-color: #E0E0E0; /* Light grey border */
+    --border-subtle-light: rgba(0, 0, 0, 0.08); /* Subtle light border */
+    --shadow-light: rgba(0, 0, 0, 0.05); /* Very subtle shadow */
+    --shadow-medium: rgba(0, 0, 0, 0.1); /* Medium subtle shadow */
+    --shadow-dark: rgba(0, 0, 0, 0.2); /* Still dark, but less opaque */
 
-    /* Borders & Shadows - Sharper, more oppressive shadows, more industrial borders */
-    --border-color: #403050;
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --shadow-light: rgba(0, 0, 0, 0.25);
-    --shadow-medium: rgba(0, 0, 0, 0.7);
-    --shadow-dark: rgba(0, 0, 0, 0.95);
-
-    /* Transitions - Slower, more deliberate and slightly uneasy transition, with a hint of bounce */
+    /* Transitions */
     --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     --transition-slow: all 0.7s cubic-bezier(0.6, 0.05, 0.2, 0.9);
+    --transition-fast: all 0.3s ease-out;
 
-    /* Vibrant Accent (for typewriter text, etc.) - Now a very subtle, clinical aqua/electric blue */
-    --vibrant-accent: #9A2E72;
-    --vibrant-accent-subtle: #C96DB8;
+    /* Vibrant Accent (for typewriter text, etc.) */
+    --vibrant-accent: var(--main-accent-purple);
+    --vibrant-accent-subtle: var(--main-accent-purple-light);
 
-    /* Re-enabled: Subtle background texture/pattern for selective use */
-    --background-texture: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.08"/></svg>');
+    /* Background texture (optional: removing for a cleaner bright look) */
+    --background-texture: none;
+
+    /* Border Radius (assuming this was intended for button) */
+    --border-radius-large: 8px; /* Example value */
 }
 
 /* Reset and Base Styles */
@@ -88,21 +86,18 @@ html {
 
 body {
     font-family: 'Source Sans Pro', sans-serif;
-    background: var(--primary-dark);
-    color: var(--text-primary);
+    background: var(--primary-light);
+    color: var(--text-dark-primary);
     line-height: 1.8;
     overflow-x: hidden;
     position: relative;
     perspective: 1000px;
 }
 
-/* The body::before rule and its animation were removed to eliminate the global background image. */
-
-
 /* Selection Color */
 ::selection {
-    background: var(--purple-main);
-    color: var(--primary-dark);
+    background: var(--main-accent-purple);
+    color: var(--text-highlight-light);
 }
 
 /* Section Base Styles */
@@ -112,16 +107,14 @@ body {
     overflow: hidden;
 }
 
-
 .section--primary {
-    background: var(--primary-dark);
+    background: var(--primary-light);
 }
 
 .section--secondary {
-    background: var(--gradient-subtle-dark);
+    background: var(--gradient-subtle-light);
     position: relative;
 }
-
 
 .section__container {
     max-width: 1300px;
@@ -139,9 +132,9 @@ h1, h2, h4 {
     font-size: 3rem;
     font-weight: 800;
     margin-bottom: 2rem;
-    color: var(--text-primary);
+    color: var(--text-dark-primary);
     position: relative;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.03);
+    text-shadow: none;
 }
 
 .section__title--center {
@@ -156,9 +149,9 @@ h1, h2, h4 {
     left: 0;
     width: 80px;
     height: 6px;
-    background: var(--gradient-purple);
+    background: var(--gradient-accent);
     border-radius: 3px;
-    box-shadow: 0 0 10px rgba(94, 60, 126, 0.5);
+    box-shadow: 0 0 10px rgba(67, 22, 156, 0.2);
 }
 
 .section__title--center::after {
@@ -168,7 +161,7 @@ h1, h2, h4 {
 
 .section__text {
     font-size: 1.15rem;
-    color: var(--text-secondary);
+    color: var(--text-dark-secondary);
     line-height: 2;
 }
 
