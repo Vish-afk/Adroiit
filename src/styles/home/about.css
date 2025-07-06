@@ -63,7 +63,7 @@ section.about-section--gradient-bg {
     margin-top: 2rem;
 }
 
-/* MODIFIED: Individual Vision/Mission Item Styles - WHITE BACKGROUND & SUBTLE PURPLE CONCENTRIC LINES */
+/* Individual Vision/Mission Item Styles - WHITE BACKGROUND & SUBTLE PURPLE CONCENTRIC LINES */
 .vm-item {
     display: flex;
     flex-direction: column;
@@ -78,7 +78,6 @@ section.about-section--gradient-bg {
     background-color: var(--primary-light); 
     
     /* Layer subtle, diffused purple concentric circles on top of the white background */
-    /* Using a fixed rgba for the purple lines as `var()` cannot be used directly inside `rgba()` with hex values */
     background-image: repeating-radial-gradient(
         circle,
         rgba(102, 51, 153, 0.15) 0px,           /* Start of subtle purple line (15% opacity, assuming --main-accent-purple is ~#663399) */
@@ -94,26 +93,26 @@ section.about-section--gradient-bg {
     box-shadow: none; 
 }
 
-/* Icon styles for Vision/Mission items - Color adjusted for contrast on white background */
+/* MODIFIED: Icon styles - Color changed to black/dark primary */
 .vm-item__icon {
     width: 80px;
     height: 80px;
-    color: var(--main-accent-purple); /* Icon color set to purple */
+    color: var(--text-dark-primary); /* Icon color set to black/dark primary */
     margin-bottom: 1.5rem;
     stroke-width: 1.8px;
 }
 
-/* Title styles for Vision/Mission items - Color adjusted for contrast on white background */
+/* MODIFIED: Title styles - Color changed to black/dark primary */
 .vm-item__title {
-    color: var(--main-accent-purple); /* Title color set to purple */
+    color: var(--text-dark-primary); /* Title color set to black/dark primary */
     font-size: 2.8rem;
     font-weight: 700;
     margin-bottom: 1rem;
 }
 
-/* Text styles for Vision/Mission item descriptions - Color adjusted for contrast on white background */
+/* Text styles for Vision/Mission item descriptions (already dark) */
 .vm-item__text {
-    color: var(--text-dark-primary); /* Darker text for readability */
+    color: var(--text-dark-primary); /* Already dark, no change needed here */
     font-size: 1.15rem;
     line-height: 1.7;
 }
@@ -176,18 +175,21 @@ section.about-section--gradient-bg {
         box-shadow: none;
     }
 
+    /* MODIFIED: Icon styles for mobile - Color changed to black/dark primary */
     .vm-item__icon {
         width: 65px;
         height: 65px;
         margin-bottom: 1.5rem;
-        color: var(--main-accent-purple);
+        color: var(--text-dark-primary);
     }
 
+    /* MODIFIED: Title styles for mobile - Color changed to black/dark primary */
     .vm-item__title {
         font-size: 2.4rem;
-        color: var(--main-accent-purple);
+        color: var(--text-dark-primary);
     }
 
+    /* Text styles for mobile (already dark) */
     .vm-item__text {
         font-size: 1rem;
         color: var(--text-dark-primary);
@@ -244,18 +246,21 @@ section.about-section--gradient-bg {
         box-shadow: none;
     }
 
+    /* MODIFIED: Icon styles for very small mobile - Color changed to black/dark primary */
     .vm-item__icon {
         width: 55px;
         height: 55px;
         margin-bottom: 1rem;
-        color: var(--main-accent-purple);
+        color: var(--text-dark-primary);
     }
 
+    /* MODIFIED: Title styles for very small mobile - Color changed to black/dark primary */
     .vm-item__title {
         font-size: 2.2rem;
-        color: var(--main-accent-purple);
+        color: var(--text-dark-primary);
     }
 
+    /* Text styles for very small mobile (already dark) */
     .vm-item__text {
         font-size: 0.95rem;
         color: var(--text-dark-primary);
