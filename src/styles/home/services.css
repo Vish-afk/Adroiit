@@ -4,43 +4,64 @@
 .services__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
+    gap: 3rem; 
+    padding: 2rem; /* Space around the grid of cards */
+    background-image: 
+        /* --- MODIFIED: Inverted gradient direction to 'to bottom' --- */
+        linear-gradient(to bottom, 
+            rgba(43, 12, 81, 0.9) 0%,    /* --purple-main (very dark) with high opacity */
+            rgba(67, 22, 156, 0.8) 50%,   /* --main-accent-purple (darker) with medium opacity */
+            rgba(108, 61, 171, 0.7) 100% /* --main-accent-purple-light (medium) with lower opacity */
+        ),
+        /* Subtle radial glow originating from the top-left corner */
+        radial-gradient(circle at 10% 10%, 
+            rgba(108, 61, 171, 0.2) 0%, 
+            transparent 30%
+        ),
+        /* Subtle radial glow originating from the bottom-right corner */
+        radial-gradient(circle at 90% 90%, 
+            rgba(67, 22, 156, 0.2) 0%,   
+            transparent 30%
+        );
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    mix-blend-mode: normal;
+    opacity: 1;
 }
 
 /* Services Section (Primary) Styles - Base styles for any primary section */
 .section--primary {
-    position: relative; /* Essential for positioning the ::before pseudo-element */
-    overflow: hidden; /* Clips any content/background that might try to extend outside */
-    z-index: 1; /* Establishes a stacking context. Ensures this section's content is above its own background. */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background: var(--main-accent-purple); 
 }
 
-/* Wavy Background: ONLY for the Services Section Component */
-.services-section-unique.section--primary::before { /* <-- CHANGED SELECTOR HERE */
+/* Subtle fractal noise pattern for the section background */
+.services-section-unique.section--primary::before { 
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Direct SVG data URL for the wavy texture */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.2"/></svg>'); /* Use your chosen opacity here */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.2"/></svg>');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.8; /* Use your chosen opacity here (e.g., 0.15, 0.2, whatever looked good) */
-    mix-blend-mode: luminosity; /* Use your chosen blend mode here */
-    z-index: 0; /* Ensures it's behind the service cards and other content */
-    pointer-events: none; /* Crucial so it doesn't block interactions */
+    opacity: 0.05;
+    mix-blend-mode: normal;
+    z-index: 0;
+    pointer-events: none;
 }
 
 
 /* --- Styles for the Partnership Section's outer container --- */
-/* This ensures the PartnershipSection itself has a solid background and doesn't show through */
-.section--secondary { /* This class is now used by PartnershipSection.jsx */
-    /* Removed background-color: var(--section-secondary-bg); as it's defined in base .section--secondary */
-    position: relative; /* Needed for z-index to work */
-    z-index: 2; /* Ensures this section sits above the ServicesSection if overlapping */
-    /* Add any other general styles you want for all 'secondary' sections */
+.section--secondary {
+    position: relative;
+    z-index: 2;
 }
 
 /* --- CRITICAL FIX COMMENT: STYLE FOR THE COMPONENT BELOW SERVICES SECTION --- */
@@ -59,16 +80,22 @@
 
 /* Service Card Component - Refined */
 .service-card {
-    background: var(--purple-main); /* Base background color for the card */
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px var(--shadow-medium);
+    background: white !important; /* Force background to white, overriding everything else */
+    
+    /* --- MODIFIED: Added a subtle border to the cards --- */
+    border: 1px solid #e0e0e0; /* Light gray border */
+    
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7) !important; /* Keep the strong shadow */
+    
     border-radius: 8px;
     padding: 2.5rem;
     transition: var(--transition-slow);
     position: relative;
     overflow: hidden;
     transform: translateZ(0);
-    z-index: 1; /* Ensures service cards are above the section's wavy background (z-index: 0) */
+    z-index: 1;
+    opacity: 1 !important; /* Ensure full opacity */
+    isolation: isolate; 
 
     display: flex;
     flex-direction: column;
@@ -77,35 +104,19 @@
     text-align: center;
 }
 
-/* Dark Gradient Background for Service Card (remains on the card) */
+/* The ::before pseudo-element that previously added transparency/blending is removed. */
 .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--gradient-subtle-dark);
-    mix-blend-mode: overlay;
-    opacity: 0.8;
-    pointer-events: none;
-    z-index: 0; /* Positioned behind the card's content but above its base background */
-    transition: opacity 0.5s var(--transition-slow);
+    content: none;
 }
 
-/* Removed: The .service-card::after rule that previously put waves on the cards */
-
-
-/* Service card effects triggered by button hover */
+/* Service card effects triggered by button hover (NO CHANGES HERE) */
 .service-card:has(.service-card__link--effect:hover) {
     border-color: var(--purple-main);
 }
 
-/* ::before effect triggered by button hover */
+/* ::before effect triggered by button hover (NO LONGER HAS VISUAL EFFECT as ::before is removed) */
 .service-card:has(.service-card__link--effect:hover)::before {
-    left: 0;
-    opacity: 0.15;
-    transform: scale(1.02) skewX(0deg);
+    /* This rule will no longer have a visual effect as ::before is removed. */
 }
 
 /* No ::after hover effect now, as ::after is removed from the card */
@@ -117,20 +128,22 @@
     justify-content: center;
     align-items: center;
     height: 80px;
-    color: var(--purple-main);
-    filter: brightness(1.4) contrast(1.2);
-    text-shadow: 0 0 15px rgba(94, 60, 126, 0.6);
+    /* --- MODIFIED: Changed icon color to main accent purple, removed filter --- */
+    color: var(--main-accent-purple); 
+    filter: none; /* Ensure no filter alters the color */
+    text-shadow: 0 0 15px rgba(67, 22, 156, 0.4); /* Adjusted shadow for clarity */
     transition: var(--transition);
     width: 72px;
     height: 72px;
-    position: relative; /* Ensure icon is above card's ::before gradient */
+    position: relative;
     z-index: 1;
 }
 
-/* Icon effects triggered by button hover */
+/* Icon effects triggered by button hover (NO CHANGES HERE) */
 .service-card:has(.service-card__link--effect:hover) .service-card__icon {
-    color: var(--text-primary);
-    transform: rotateY(18deg) scale(1.08);
+    /* --- MODIFIED: Keep icon color same on hover as static --- */
+    color: var(--main-accent-purple); 
+    transform: rotateY(18deg) scale(1.08); /* Keep transform effect */
 }
 
 .service-card__title {
@@ -139,7 +152,7 @@
     margin-bottom: 1rem;
     color: var(--text-highlight);
     line-height: 1.3;
-    position: relative; /* Ensure title is above card's ::before gradient */
+    position: relative;
     z-index: 1;
 }
 
@@ -149,11 +162,11 @@
     line-height: 1.9;
     flex-grow: 1;
     font-size: 1rem;
-    position: relative; /* Ensure description is above card's ::before gradient */
+    position: relative;
     z-index: 1;
 }
 
-/* Service Card Link */
+/* Service Card Link (Button) */
 .service-card__link {
     display: inline-flex;
     align-items: center;
@@ -161,17 +174,19 @@
     text-decoration: none;
     font-weight: 600;
     padding: 0.8rem 1.6rem;
-    border: 2px solid var(--platinum-main);
+    /* --- MODIFIED: Removed border --- */
+    border: none !important; 
     border-radius: 6px;
     transition: var(--transition-slow);
-    background: transparent;
+    /* --- MODIFIED: Ensure no background fill --- */
+    background: transparent !important; 
     cursor: pointer;
     font-size: 1rem;
     position: relative;
     overflow: hidden;
-    color: var(--platinum-main);
+    color: var(--main-accent-purple); /* Initial text color */
     transform: translateZ(0);
-    z-index: 2; /* Ensure link is above button fill and card's ::before */
+    z-index: 2;
 }
 
 .service-card__link--effect .button-effect__fill {
@@ -180,28 +195,31 @@
     right: 0;
     width: 0;
     height: 100%;
-    background: var(--gradient-platinum);
-    transition: width 0.5s cubic-bezier(0.6, 0.05, 0.2, 0.9);
-    z-index: 1; /* Relative to parent .service-card__link--effect */
+    /* --- MODIFIED: No background fill and no transition for it --- */
+    background: none !important; 
+    transition: none; 
+    z-index: 1;
 }
 
+/* On hover, text disappears */
 .service-card__link--effect:hover .button-effect__fill {
-    width: 100%;
-    transform: skewX(0deg);
+    width: 0; /* Ensure it stays at width 0 */
 }
 
 .service-card__link--effect .button-effect__text {
     position: relative;
-    z-index: 2; /* Relative to parent .service-card__link--effect */
-    transition: color 0.4s ease-in-out, transform 0.5s ease-out, opacity 0.5s ease-out;
-    color: var(--platinum-main);
+    z-index: 2;
+    /* --- MODIFIED: Adjust transition for text disappearance --- */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out; 
+    color: var(--main-accent-purple); /* Initial text color */
     white-space: nowrap;
 }
 
 .service-card__link--effect:hover .button-effect__text {
-    color: var(--primary-dark);
+    /* --- MODIFIED: Make text invisible and slide out --- */
+    color: var(--main-accent-purple); /* Text color remains purple even as it fades */
     transform: translateX(-150%);
-    opacity: 0;
+    opacity: 0 !important; 
 }
 
 .service-card__link--effect .button-effect__arrow {
@@ -209,49 +227,44 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--primary-dark);
+    /* --- MODIFIED: Initial arrow color set to purple, but still hidden --- */
+    color: var(--main-accent-purple); 
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.5s ease-out;
-    z-index: 2; /* Relative to parent .service-card__link--effect */
+    transition: opacity 0.5s ease-out; /* Keep arrow opacity transition */
+    z-index: 2;
     width: 45px;
     height: 45px;
 }
 
-/* Exclude h3 from Telegraf font where it's a service card title */
-h3:not(.service-card__title) {
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Re-apply Inter to service card titles specifically */
-.service-card__title {
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    letter-spacing: normal;
-}
-
 .service-card__link--effect .button-effect__arrow--right {
-    opacity: 0;
+    opacity: 0; /* Arrow hidden initially */
 }
 
 .service-card__link--effect:hover .button-effect__arrow--right {
-    opacity: 1;
+    /* --- MODIFIED: Arrow appears on hover --- */
+    opacity: 1 !important; 
 }
 
 .service-card__link--effect .button-effect__arrow svg {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    color: var(--primary-dark);
+    /* --- MODIFIED: Arrow SVG color set to purple, no filter --- */
+    color: var(--main-accent-purple); 
     stroke: currentColor;
-    filter: brightness(0.7);
+    filter: none; 
 }
 
-/* Responsive Design Adjustments */
+/* No change needed for hover on arrow svg, as it takes color from parent '.button-effect__arrow' */
+
+/* Responsive Design Adjustments (NO CHANGES HERE) */
 @media (max-width: 992px) {
     .services__grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 1.5rem;
+        padding: 1.5rem; 
     }
 }
 

@@ -1,9 +1,10 @@
 // Navbar.jsx
 import React, { useState, useEffect } from 'react';
 import logo from '../../assets/logowhite2.png';
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from 'react-router-hash-link'; // Keep HashLink for main navigation links
+import { Link } from 'react-router-dom'; // <--- NEW: Import Link from react-router-dom
 
-// NEW CUSTOM ICONS (Sleek, Minimal, and Transparent)
+// NEW CUSTOM ICONS (Sleek, Minimal, and Transparent) - (These remain unchanged)
 const HomeIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="navbar__icon">
     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
@@ -73,10 +74,26 @@ export default function Navbar() {
             <AboutIcon />
             <span>About Us</span>
           </HashLink>
-          <HashLink smooth to="/#services-section" className="navbar__link">
-            <ServicesIcon />
-            <span>Services</span>
-          </HashLink>
+
+          {/* Services Dropdown Menu Start */}
+          <div className="navbar__dropdown-container">
+            {/* The main Services link can still be a HashLink if you want it to scroll to the top of the services section on the home page */}
+            <HashLink smooth to="/#services-section" className="navbar__link navbar__dropdown-trigger">
+              <ServicesIcon />
+              <span>Services</span>
+            </HashLink>
+            <div className="navbar__dropdown-menu">
+              {/* IMPORTANT: Changed to <Link> for external routing */}
+              <Link to="/services/stem-labs" className="navbar__dropdown-item">STEM Lab</Link>
+              <Link to="/services/stem-workshops" className="navbar__dropdown-item">STEM Workshops</Link>
+              <Link to="/services/advanced-labs" className="navbar__dropdown-item">Advanced Labs</Link>
+              <Link to="/services/workshops" className="navbar__dropdown-item">Technical Workshops</Link> {/* Note: Mapped 'workshops' to 'Technical Workshops' based on your provided data */}
+              <Link to="/services/3d-printing" className="navbar__dropdown-item">3D Printing</Link>
+              <Link to="/services/mechanical-cad" className="navbar__dropdown-item">Mechanical CAD</Link>
+            </div>
+          </div>
+          {/* Services Dropdown Menu End */}
+
           <HashLink smooth to="/#partnership-section" className="navbar__link">
             <ContactIcon />
             <span>Reach Out</span>

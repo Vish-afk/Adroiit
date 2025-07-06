@@ -1,4 +1,4 @@
-/* components/hero.css */
+/* styles/home/hero.css */
 
 /* Hero Section */
 .hero {
@@ -8,19 +8,43 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
-    background-color: var(--primary-dark); /* Solid dark base */
-    /* Create the dot grid pattern using radial gradients */
-    background-image: radial-gradient(circle, var(--purple-main) 1px, transparent 1px),
-                      radial-gradient(circle, var(--secondary-dark) 1px, transparent 1px);
-    background-size: 40px 40px; /* Dot spacing */
-    background-position: 0 0, 20px 20px; /* Offset for staggered effect */
-    /* NO ANIMATION HERE - the grid will be static */
+    background-color: var(--primary-light); /* Set to light background for bright mode */
 }
 
-/* Remove any background animation keyframes if they were declared separately and no longer used */
-/* If you had @keyframes like gridDrift, gridPulse, waveGrid, or gridRotateDrift, they can be deleted
-   from your CSS file if this is the only place they are used. */
+/* Education Background Container */
+.education-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Placed behind content */
+}
 
+/* Individual Background Icons */
+.bg-icon {
+    position: absolute;
+    color: var(--text-dark-muted); /* Muted dark color for icons on a light background */
+    opacity: 0.5; /* INCREASED OPACITY */
+    transform-origin: center center;
+    transition: none;
+    animation:
+        float 30s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
+}
+
+/* Keyframes for a smoother, gentle floating effect (unchanged) */
+@keyframes float {
+    0% {
+        transform: translate(-50%, -50%) translateY(0px) translateX(0px) rotate(0deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(-20px) translateX(15px) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateY(0px) translateX(0px) rotate(0deg);
+    }
+}
 
 /* Ensure hero content is above the background */
 .hero__content {
@@ -30,7 +54,9 @@
     position: relative;
     z-index: 2; /* Ensure content is above the background */
     transition: var(--transition-slow);
-    transform: translateZ(0); /* Promotes hardware acceleration */
+    transform: translateZ(0);
+    backdrop-filter: none; /* No blur */
+    background-color: transparent; /* Ensures transparency */
 }
 
 .hero__content:hover {
@@ -41,22 +67,19 @@
     font-size: 5.5rem;
     font-weight: 900;
     margin-bottom: 2.8rem;
-    line-height: 1;
+    line-height: 1.1;
     letter-spacing: -0.05em;
     font-family: 'Inter', sans-serif;
     text-align: center;
-    color: var(--text-primary);
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+    color: var(--text-dark-primary); /* Use dark text for light background */
+    text-shadow: none;
 }
 
-.hero__title > span {
-    display: block;
-    text-align: center;
-}
-
+/* Base style for static lines (e.g., "Empowering Next-", "Gen through") */
 .hero__line-one,
 .hero__line-two {
-    color: var(--text-primary);
+    color: var(--text-dark-primary); /* Use dark text for light background */
+    text-shadow: none;
 }
 
 /* Base style for animated lines (e.g., "and", "Education", "Innovation!") */
@@ -64,8 +87,9 @@
     margin-bottom: 0.1em;
     letter-spacing: -0.03em;
     text-indent: -0.03em;
-    animation: type-blink 1s steps(40, end) infinite,
-               unsettle-text 0.8s ease-out;
+    animation:
+        type-blink 1s steps(40, end) infinite,
+        unsettle-text 0.8s ease-out;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 900;
@@ -75,14 +99,44 @@
     border-radius: 0;
     position: relative;
     z-index: 1;
-    background: var(--gradient-purple);
+    background: var(--gradient-accent); /* This purple gradient should be visible on white */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: none;
+
+    /* Adjust drop-shadow for bright background: */
+    filter: drop-shadow(0 0 8px rgba(160, 32, 240, 0.2))
+            drop-shadow(0 0 5px rgba(0, 0, 0, 0.05));
 }
 
-/* Typing and Unsettling Animations (These remain as they are for text, not the background) */
+/* --- Learn More Button Styling --- */
+.hero__button {
+    background: var(--gradient-accent);
+    color: var(--text-highlight-light);
+    border: none;
+    padding: 1.2rem 3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: var(--border-radius-large);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-small);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.hero__button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.hero__button:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-small);
+}
+
+/* Typing and Unsettling Animations (unchanged) */
 @keyframes type-blink {
     from, to { border-color: transparent; }
     50% { border-color: var(--vibrant-accent); }
@@ -97,7 +151,7 @@
 }
 
 /* Responsive Design Adjustments */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .hero__content {
         padding: 3.5rem 3rem;
     }
@@ -112,5 +166,27 @@
 
     .hero__animated-line {
         font-size: 3.5rem;
+    }
+
+    .hero__button {
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero__content {
+        padding: 2.5rem 2rem;
+    }
+    .hero__title {
+        font-size: 3rem;
+    }
+    .hero__title > span,
+    .hero__animated-line {
+        font-size: 3rem;
+    }
+    .hero__button {
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
     }
 }

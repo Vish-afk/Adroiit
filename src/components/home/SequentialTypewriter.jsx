@@ -4,61 +4,72 @@ import TypewriterEffect from './TypewriterEffect'; // Assuming TypewriterEffect 
 
 const SequentialTypewriter = ({ lines, typingSpeed, deletingSpeed, pauseDuration, loopDelay }) => {
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
-  const [typedLines, setTypedLines] = useState(Array(lines.length).fill(false)); // To track which lines are fully typed
-  const [allTypedAndPaused, setAllTypedAndPaused] = useState(false); // To track if the whole phrase is done and paused
+  // Stores the final, fully typed content for each line. This ensures layout stability.
+  const [lineContent, setLineContent] = useState(() => lines.map(line => ''));
+  // Controls whether a TypewriterEffect instance is actively typing.
+  const [isTypingActive, setIsTypingActive] = useState(false);
+  // Tracks if all lines have been typed at least once in the current sequence.
+  const [allLinesCompleted, setAllLinesCompleted] = useState(false);
   const timeoutRef = useRef(null);
 
+  // Effect to manage the overall sequence and resets
   useEffect(() => {
-    // Reset when lines prop changes (if it ever does) or on initial mount
+    // Reset all states when the 'lines' prop changes or on initial mount
+    setLineContent(lines.map(line => '')); // Clear all displayed content
     setCurrentLineIndex(0);
-    setTypedLines(Array(lines.length).fill(false));
-    setAllTypedAndPaused(false);
+    setIsTypingActive(false);
+    setAllLinesCompleted(false);
+    clearTimeout(timeoutRef.current); // Clear any pending timeouts
   }, [lines]);
 
+  // Effect to control the typing flow for each line
   useEffect(() => {
-    if (allTypedAndPaused) {
-      // Phase 4: All typed and paused, now clear all and restart
-      const restartTimer = setTimeout(() => {
-        setTypedLines(Array(lines.length).fill(false)); // Clear all typed lines
-        setCurrentLineIndex(0); // Reset to the first line
-        setAllTypedAndPaused(false); // Reset this state
-      }, loopDelay); // Wait for the specified loop delay before restarting
-
-      return () => clearTimeout(restartTimer);
-    } else if (currentLineIndex < lines.length) {
-      // Phase 1, 2, 3: Typing out each line sequentially
-
-      const currentLineText = lines[currentLineIndex].text;
-      const typeTime = currentLineText.length * typingSpeed;
-
+    // If all lines have been completed, we enter the pause/reset phase
+    if (allLinesCompleted) {
+      setIsTypingActive(false); // Ensure no typewriter is active
       timeoutRef.current = setTimeout(() => {
-        // Mark current line as typed
-        setTypedLines(prev => {
-          const newTyped = [...prev];
-          newTyped[currentLineIndex] = true;
-          return newTyped;
-        });
+        // After the main pause, reset for the next loop
+        setLineContent(lines.map(line => '')); // Clear content to start fresh
+        setCurrentLineIndex(0); // Go back to the first line
+        setAllLinesCompleted(false); // Reset the completion flag
+      }, loopDelay); // Use loopDelay for the pause before restarting
+      return () => clearTimeout(timeoutRef.current);
+    }
 
-        // Move to the next line or trigger full-phrase pause
-        if (currentLineIndex < lines.length - 1) {
-          // If not the last line, move to next
-          setCurrentLineIndex(prev => prev + 1);
-        } else {
-          // If it's the last line, all are typed, now pause before clearing
-          setAllTypedAndPaused(true);
-        }
-      }, typeTime); // Wait for the typing of the current line to finish
-
-    } else if (currentLineIndex === lines.length && !allTypedAndPaused) {
-        // This state should theoretically not be hit much due to allTypedAndPaused handling.
-        // It implies all lines are typed but we haven't triggered the full pause/clear yet.
-        // This acts as a safeguard.
-        setAllTypedAndPaused(true);
+    // If there are still lines to type
+    if (currentLineIndex < lines.length) {
+      // Start the typewriter effect for the current line
+      setIsTypingActive(true);
+    } else {
+      // This case is hit when currentLineIndex becomes equal to lines.length,
+      // meaning all lines have been processed and the sequence is complete.
+      setAllLinesCompleted(true);
     }
 
     return () => clearTimeout(timeoutRef.current);
-  }, [currentLineIndex, lines, typingSpeed, deletingSpeed, pauseDuration, loopDelay, allTypedAndPaused]);
+  }, [currentLineIndex, lines, loopDelay, allLinesCompleted]);
 
+  // Callback function passed to TypewriterEffect, triggered when a line finishes typing
+  const handleTypewriterComplete = () => {
+    // Update the lineContent state with the fully typed text for the current line
+    setLineContent(prev => {
+      const newContent = [...prev];
+      newContent[currentLineIndex] = lines[currentLineIndex].text;
+      return newContent;
+    });
+
+    setIsTypingActive(false); // The typewriter for this line is no longer active
+
+    // Move to the next line after a brief delay
+    if (currentLineIndex < lines.length - 1) {
+      timeoutRef.current = setTimeout(() => {
+        setCurrentLineIndex(prev => prev + 1);
+      }, pauseDuration / 2); // Use a portion of pauseDuration for inter-line delay
+    } else {
+      // If this was the last line, mark the entire sequence as completed
+      setAllLinesCompleted(true);
+    }
+  };
 
   return (
     <>
@@ -67,28 +78,35 @@ const SequentialTypewriter = ({ lines, typingSpeed, deletingSpeed, pauseDuration
           key={index}
           className={`hero__animated-line hero__animated-line--${line.classNameModifier}`}
           style={{
-            // Visually hide if not yet typed or if the whole sequence is cleared
-            visibility: typedLines[index] || index <= currentLineIndex ? 'visible' : 'hidden',
-            // To ensure space is always allocated, even if hidden
-            height: typedLines[index] || index <= currentLineIndex ? 'auto' : '1.1em', // Adjust height based on your line-height
-            overflow: 'hidden', // Hide content that might still be typing
-            display: 'block', // Ensure each line gets its own block
-            textAlign: 'center', // Center each line
+            // Ensure each line occupies its own block space
+            display: 'block',
+            textAlign: 'center',
+            // Use opacity for smooth visual transitions without affecting layout space
+            opacity: (index < currentLineIndex || (index === currentLineIndex && !isTypingActive && !allLinesCompleted)) ? 1 :
+                     (index === currentLineIndex && isTypingActive) ? 1 :
+                     (allLinesCompleted && index >= currentLineIndex) ? 1 : 0,
+            transition: 'opacity 0.3s ease-in-out', // Smooth fade for lines
+            // Crucial for layout stability: ensure consistent height for each line
+            // Adjust '1.2em' based on the actual line-height of your text in hero.css
+            minHeight: '1.2em',
+            lineHeight: '1.2em',
           }}
         >
-          {/* Only render TypewriterEffect for the current typing line, or if already typed */}
-          {index === currentLineIndex && !allTypedAndPaused ? (
+          {/*
+            Conditionally render TypewriterEffect only for the line currently being typed.
+            Otherwise, display the full, stored text content for that line.
+          */}
+          {index === currentLineIndex && isTypingActive && !allLinesCompleted ? (
             <TypewriterEffect
               text={line.text}
               typingSpeed={typingSpeed}
-              // Deleting speed and pause duration are NOT used per line here
-              // The entire phrase deletes after the whole sequence
-              deletingSpeed={0}
-              pauseDuration={0}
+              deletingSpeed={0} // IMPORTANT: Ensure TypewriterEffect does NOT delete here
+              pauseDuration={0} // IMPORTANT: Ensure TypewriterEffect does NOT pause after typing
+              onComplete={handleTypewriterComplete} // Callback when this line is done typing
             />
           ) : (
-            // If line was already typed or current index is past it, show its full text
-            typedLines[index] ? line.text : '' // Show full text if typed, else empty (hidden by visibility)
+            // Display the full content from state for non-active or completed lines
+            lineContent[index]
           )}
         </span>
       ))}

@@ -1,7 +1,6 @@
-// AboutSection.jsx
+// AboutSection.jsx - NO CHANGES NEEDED
 import React from 'react';
 import sideImage from '../../assets/about-CmYOi0Js.png';
-// REMOVED: import { Lightbulb, Flag } from 'lucide-react'; 
 
 // NEW: Vision Icon (Puzzle - outline)
 const VisionIcon = () => (
