@@ -5,20 +5,23 @@
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.8); /* Changed to white with opacity for blur */
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-light-color); /* Changed to a light border color */
+    background: rgba(255, 255, 255, 0.4); /* More transparent white */
+    -webkit-backdrop-filter: blur(5px); /* Slightly less blur for a lighter feel */
+    backdrop-filter: blur(5px); /* Slightly less blur for a lighter feel */
+    /* Removed border-bottom from default state (appears only when scrolled) */
     padding: 0.5rem 0;
     z-index: 1000;
     transition: background 0.5s ease, backdrop-filter 0.5s ease, border-bottom 0.5s ease;
 }
 
 .navbar.navbar--scrolled {
-    background: rgba(255, 255, 255, 0.95); /* Changed to slightly less opaque white when scrolled */
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-light-color); /* Consistent light border color */
+    background: rgba(255, 255, 255, 0.7); /* More transparent when scrolled */
+    -webkit-backdrop-filter: blur(7px); /* Slightly less blur when scrolled */
+    backdrop-filter: blur(7px); /* Slightly less blur when scrolled */
+    /* Border appears only when scrolled, with reduced thickness */
+    border-bottom: 0.8px solid var(--main-accent-purple);
+    /* Note: Browser rendering of sub-pixel borders (e.8px, 0.5px) can vary. */
+    /* If it doesn't look thinner, consider making the border-color lighter or slightly transparent instead. */
 }
 
 
@@ -34,18 +37,17 @@
 
 /* NEW CLASS: For the HashLink wrapper around the logo */
 .navbar__logo-link {
-    text-decoration: none; /* Removes underline */
-    color: inherit; /* Ensures text color doesn't change unexpectedly if there was text */
-    height: 100%; /* Make it fill the container's height */
-    display: flex; /* Make it a flex container to center its child (.navbar__logo) */
-    align-items: center; /* Vertically center the .navbar__logo within this link wrapper */
-    /* Move the logo to the right from the left edge of the navbar */
-    margin-left: 30px; /* Adjust this value (e.g., 20px, 40px) to move it more/less */
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    /* Adjusted: Pushed to the end a bit (larger than 30px, less than auto) */
+    margin-left: 80px; /* You can adjust this value (e.g., 60px, 100px) to fine-tune */
 }
 
 .navbar__logo {
     padding: 0;
-    /* margin-left: 10px; -- REMOVED THIS, now handled by .navbar__logo-link */
     box-sizing: border-box;
     flex-shrink: 0;
     height: 100%;
@@ -65,60 +67,124 @@
 
 .navbar__menu {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.5rem; /* Gap between main menu items */
     align-items: center;
-    margin-left: auto;
+    margin-left: auto; /* This pushes the menu to the right */
 }
 
 .navbar__link {
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: var(--text-dark-secondary); /* Changed to a dark secondary text color */
+    color: var(--main-accent-purple); /* Default text color is theme purple */
     text-decoration: none;
     padding: 0.75rem 1.6rem;
     border-radius: 6px;
     font-weight: 500;
-    position: relative;
     font-size: 1.15rem;
-    transform: translateZ(0);
-}
-
-.navbar__link::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background-color: var(--main-accent-purple); /* Changed to your new main accent purple */
-    transition: all 0.3s ease-out;
-    transform: translateX(-50%);
-}
-
-.navbar__link:hover::before {
-    width: 100%;
+    position: relative; /* CRUCIAL for positioning the ::after underline */
+    overflow: hidden; /* Ensures the underline animation stays within bounds */
+    z-index: 1; /* Ensure link content is above the underline */
+    transition: color 0.3s ease; /* Smooth transition for text color */
+    transform: translateZ(0); /* For smooth GPU rendering */
 }
 
 .navbar__link:hover {
-    color: var(--main-accent-purple); /* Changed to your new main accent purple for hover */
-    box-shadow: none;
-    border-color: transparent;
-    transform: translateZ(0);
+    color: var(--main-accent-purple-light); /* Subtle text color change on hover */
 }
+
+/* SIMPLE UNDERLINE EFFECT */
+.navbar__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* Position at the bottom of the link */
+    left: 50%; /* Start from the center */
+    transform: translateX(-50%); /* Center the line */
+    width: 0; /* Start hidden */
+    height: 2px; /* Underline thickness */
+    background-color: var(--main-accent-purple); /* Underline color */
+    transition: width 0.3s ease-out; /* Smooth animation for width */
+}
+
+.navbar__link:hover::after {
+    width: 100%; /* Expand to full width on hover */
+}
+
+
+/* ----------------------------------- */
+/* Dropdown Styles Start */
+/* ----------------------------------- */
+.navbar__dropdown-container {
+    position: relative; /* Essential for positioning the dropdown menu */
+    display: flex; /* Make it behave like a flex item in the main menu */
+    align-items: center;
+    height: 100%; /* Match height of other links */
+    z-index: 100; /* Ensure dropdown appears above other content */
+}
+
+/* The actual dropdown menu */
+.navbar__dropdown-menu {
+    position: absolute;
+    top: 100%; /* Position right below the trigger link */
+    left: 0;
+    background-color: #f9f9f9; /* Light background for dropdown */
+    min-width: 180px; /* Adjust width as needed for your content */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 6px;
+    padding: 0.5rem 0;
+    z-index: 100; /* Ensure it's above other content */
+    display: flex; /* Use flexbox for vertical items */
+    flex-direction: column;
+
+    /* Hidden by default, with smooth transition */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px); /* Start slightly below, move up on hover */
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+/* Show dropdown menu on hover of the container */
+.navbar__dropdown-container:hover .navbar__dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Move to final position */
+}
+
+/* Individual links within the dropdown */
+.navbar__dropdown-item {
+    color: var(--main-accent-purple); /* Text color for dropdown items */
+    padding: 0.75rem 1.6rem;
+    text-decoration: none;
+    display: block; /* Make the whole area clickable */
+    font-weight: 500;
+    font-size: 1.05rem; /* Slightly smaller than main links for hierarchy */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping within dropdown */
+}
+
+.navbar__dropdown-item:hover {
+    background-color: var(--main-accent-purple-lightest); /* Light purple background on hover */
+    color: var(--main-accent-purple-light); /* Lighter purple text on hover */
+}
+
+/* ----------------------------------- */
+/* End Dropdown Styles */
+/* ----------------------------------- */
+
 
 .navbar__icon {
     width: 26px;
     height: 26px;
-    fill: none;
-    stroke: currentColor;
-    filter: grayscale(0); /* Removed grayscale effect for brighter icons */
-    transition: none;
-    transform: none;
+    transition: stroke 0.3s ease; /* Only transition stroke color */
+    fill: none; /* Default: no fill */
+    stroke: currentColor; /* Default: stroke matches parent text color */
+    filter: grayscale(0);
 }
 
 .navbar__link:hover .navbar__icon {
-    transform: none;
+    /* Icon's stroke color will automatically match the parent link's hover color */
+    stroke: currentColor;
+    fill: none; /* Explicitly ensure no fill on hover */
 }
 
 /* Responsive Design Adjustments */
@@ -128,7 +194,8 @@
         height: 65px;
     }
     .navbar__logo-link {
-        margin-left: 20px; /* Adjust for tablets */
+        /* Adjusted for responsiveness */
+        margin-left: 50px; /* Adjust this for smaller screens if needed */
     }
     .navbar__logo {
         height: 100%;
@@ -146,6 +213,12 @@
     .navbar__menu {
         gap: 1rem;
     }
+
+    /* DROPDOWN NOTE FOR RESPONSIVENESS */
+    /* For smaller screens, typical dropdowns should change to an accordion or full-screen menu. */
+    /* The current hover-based dropdown might not work well on touch devices. */
+    /* You would likely need JavaScript to toggle the dropdown on click for mobile. */
+    /* Also, the absolute positioning might need adjustment or complete re-thinking for mobile layouts. */
 }
 
 @media (max-width: 768px) {
@@ -153,7 +226,8 @@
         height: 55px;
     }
     .navbar__logo-link {
-        margin-left: 10px; /* Adjust for mobile */
+        /* Adjusted for responsiveness */
+        margin-left: 20px; /* Adjust this for mobile screens if needed */
     }
     .navbar__logo {
         height: 100%;
@@ -171,4 +245,11 @@
     .navbar__link span {
         display: none;
     }
+
+    /* Hide dropdown on very small screens if a mobile menu takes over */
+    .navbar__dropdown-container {
+        /* You might want to hide the entire dropdown for mobile menu */
+        /* display: none; */
+    }
+    /* Or, if you keep it, you'd likely need to change it to click-to-open and make it full-width */
 }

@@ -3,33 +3,32 @@
 /* Specific gradient background for About Section only */
 section.about-section--gradient-bg {
     background: var(--gradient-metallic);
-    /* Add overall vertical padding to the section's content container */
-    padding-block: 6rem; /* More top/bottom padding for the entire section */
+    padding-block: 6rem;
 }
 
 /* About Section Main Container */
 .about {
     display: flex;
-    flex-direction: column; /* Stacks the top layout and items vertically */
-    gap: 6rem; /* INCREASED: Gap between the top content and the items for more breathing room */
-    align-items: center; /* Centers content horizontally within the .about div */
-    text-align: center; /* Centers text globally for the section */
+    flex-direction: column;
+    gap: 6rem;
+    align-items: center;
+    text-align: center;
 }
 
 /* Wrapper for the original two-column content (about__content & about__icon-container) */
 .about__top-layout {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr; /* Retains your original two-column layout */
-    gap: 4rem; /* Slightly increased gap for top layout */
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 4rem;
     align-items: center;
-    width: 100%; /* Ensure it spans full width of .about */
-    max-width: 1200px; /* Max width for the content layout */
+    width: 100%;
+    max-width: 1200px;
 }
 
 /* Existing about__content styles */
 .about__content {
-    text-align: left; /* Keep text aligned left within its column */
-    max-width: none; 
+    text-align: left;
+    max-width: none;
     margin-bottom: 0;
 }
 
@@ -53,70 +52,83 @@ section.about-section--gradient-bg {
     filter: none;
 }
 
-
-/* NEW DESIGN: Container for Vision and Mission items (no boxes) */
+/* Container for Vision and Mission items */
 .vm-items-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two columns for items */
-    gap: 8rem; /* SIGNIFICANTLY INCREASED: Large gap for visual separation */
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
     width: 100%;
-    max-width: 1200px; /* Wider container for more expansive look */
+    max-width: 1200px;
     justify-content: center;
     margin-top: 2rem;
-
-    /* NEW: Vertical line between the items using a background gradient */
-    background-image: linear-gradient(to right, transparent calc(50% - 1px), var(--text-secondary) calc(50% - 1px), var(--text-secondary) calc(50% + 1px), transparent calc(50% + 1px));
-    background-size: 100% 100%; /* Ensure the gradient covers the full height */
-    background-repeat: no-repeat;
-    background-position: center; /* Center the line */
 }
 
-/* NEW DESIGN: Individual Vision/Mission Item Styles (NO BOX STYLING) */
-.vm-item { 
-    /* Removed all box-related styling: background-color, border-radius, padding, box-shadow, transition */
+/* MODIFIED: Individual Vision/Mission Item Styles - WHITE BACKGROUND & SUBTLE PURPLE CONCENTRIC LINES */
+.vm-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    flex-grow: 1; /* Allows items to grow vertically to match each other */
-    padding: 0; /* No internal padding, rely on gap for spacing */
+    flex-grow: 1;
+
+    border-radius: 12px; /* Keeping subtle rounded corners */
+    padding: 2.5rem;      /* Internal padding for content */
+
+    /* Set base background to white */
+    background-color: var(--primary-light); 
+    
+    /* Layer subtle, diffused purple concentric circles on top of the white background */
+    /* Using a fixed rgba for the purple lines as `var()` cannot be used directly inside `rgba()` with hex values */
+    background-image: repeating-radial-gradient(
+        circle,
+        rgba(102, 51, 153, 0.15) 0px,           /* Start of subtle purple line (15% opacity, assuming --main-accent-purple is ~#663399) */
+        rgba(102, 51, 153, 0.15) 8px,          /* End of subtle line (8px thick) */
+        transparent 8px,                        /* Start of transparent gap (reveals white background) */
+        transparent 60px                        /* End of transparent gap (total repeat cycle 60px, making wide gaps) */
+    );
+    background-position: center; /* Center the concentric circles within the box */
+    background-size: cover;      /* Ensure gradient covers the entire box smoothly without pixelation */
+    
+    /* No visible border or shadow based on the reference image */
+    border: none;
+    box-shadow: none; 
 }
 
-/* Icon styles for Vision/Mission items */
+/* Icon styles for Vision/Mission items - Color adjusted for contrast on white background */
 .vm-item__icon {
-    width: 80px; 
+    width: 80px;
     height: 80px;
-    color: var(--platinum-light); 
-    margin-bottom: 1.2rem; /* Adjusted for less vertical space, relying on overall item height */
+    color: var(--main-accent-purple); /* Icon color set to purple */
+    margin-bottom: 1.5rem;
     stroke-width: 1.8px;
 }
 
-/* Title styles for Vision/Mission items */
+/* Title styles for Vision/Mission items - Color adjusted for contrast on white background */
 .vm-item__title {
-    color: var(--platinum-light); 
-    font-size: 2.6rem; 
-    font-weight: 600;
-    margin-bottom: 0.8rem; /* Adjusted for less vertical space */
+    color: var(--main-accent-purple); /* Title color set to purple */
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
-/* Text styles for Vision/Mission item descriptions */
+/* Text styles for Vision/Mission item descriptions - Color adjusted for contrast on white background */
 .vm-item__text {
-    color: var(--text-primary);
-    font-size: 1.1rem; 
-    line-height: 1.7; 
+    color: var(--text-dark-primary); /* Darker text for readability */
+    font-size: 1.15rem;
+    line-height: 1.7;
 }
 
 
 /* Responsive Design Adjustments */
 @media (max-width: 992px) {
     section.about-section--gradient-bg {
-        padding-block: 4rem; /* Adjust padding for tablets */
+        padding-block: 4rem;
     }
 
     .about {
-        gap: 4rem; /* Adjust main gap */
+        gap: 4rem;
     }
-    
+
     .about__top-layout {
         grid-template-columns: 1fr;
         gap: 3rem;
@@ -135,41 +147,56 @@ section.about-section--gradient-bg {
     }
 
     .vm-items-container {
-        grid-template-columns: 1fr; /* Stack items vertically on tablets */
-        gap: 3rem; /* Gap between stacked items */
-        max-width: 500px; /* Adjust max-width for stacked items */
-        background-image: none; /* IMPORTANT: REMOVE vertical line when items stack */
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        max-width: 500px;
+        background-image: none;
     }
 
-    /* Add a subtle bottom border for stacked items instead of the removed vertical line */
     .vm-items-container .vm-item:first-child {
-        border-bottom: 1px solid var(--text-secondary); /* Subtle horizontal line */
-        padding-bottom: 2.5rem; /* Space below content before border */
-        margin-bottom: 2.5rem; /* Space between the first item and the next stacked item */
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
     }
 
     .vm-item {
-        padding: 0; /* Keep minimal padding */
+        padding: 2rem;
+        /* Mobile background: white base with subtle purple concentric circles */
+        background-color: var(--primary-light);
+        background-image: repeating-radial-gradient(
+            circle,
+            rgba(102, 51, 153, 0.15) 0px,
+            rgba(102, 51, 153, 0.15) 6px,    /* Slightly thinner lines for mobile */
+            transparent 6px,
+            transparent 45px                  /* Smaller repeat for mobile */
+        );
+        background-position: center;
+        background-size: cover;
+        border: none; 
+        box-shadow: none;
     }
 
     .vm-item__icon {
         width: 65px;
         height: 65px;
         margin-bottom: 1.5rem;
+        color: var(--main-accent-purple);
     }
 
     .vm-item__title {
-        font-size: 2.2rem;
+        font-size: 2.4rem;
+        color: var(--main-accent-purple);
     }
 
     .vm-item__text {
         font-size: 1rem;
+        color: var(--text-dark-primary);
     }
 }
 
 @media (max-width: 768px) {
     section.about-section--gradient-bg {
-        padding-block: 3rem; /* Adjust padding for mobile */
+        padding-block: 3rem;
     }
 
     .about {
@@ -190,27 +217,47 @@ section.about-section--gradient-bg {
     }
 
     .vm-items-container {
-        gap: 2rem;
+        gap: 1.5rem;
         max-width: 90%;
     }
 
     .vm-items-container .vm-item:first-child {
-        border-bottom: 1px solid var(--text-secondary);
-        padding-bottom: 2rem;
-        margin-bottom: 2rem;
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .vm-item {
+        padding: 1.5rem;
+        /* Mobile background: white base with subtle purple concentric circles */
+        background-color: var(--primary-light);
+        background-image: repeating-radial-gradient(
+            circle,
+            rgba(102, 51, 153, 0.15) 0px,
+            rgba(102, 51, 153, 0.15) 5px,    /* Even thinner lines for very small mobile */
+            transparent 5px,
+            transparent 35px                  /* Smaller repeat for very small mobile */
+        );
+        background-position: center;
+        background-size: cover;
+        border: none;
+        box-shadow: none;
     }
 
     .vm-item__icon {
         width: 55px;
         height: 55px;
         margin-bottom: 1rem;
+        color: var(--main-accent-purple);
     }
 
     .vm-item__title {
-        font-size: 2rem;
+        font-size: 2.2rem;
+        color: var(--main-accent-purple);
     }
 
     .vm-item__text {
         font-size: 0.95rem;
+        color: var(--text-dark-primary);
     }
 }

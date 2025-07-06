@@ -37,6 +37,7 @@
     /* Gradients */
     --gradient-accent: linear-gradient(135deg, var(--main-accent-purple) 0%, var(--main-accent-purple-light) 100%);
     --gradient-subtle-light: linear-gradient(135deg, var(--secondary-light) 0%, var(--tertiary-light) 100%);
+    --gradient-metallic: linear-gradient(0deg, var(--main-accent-purple-light) 0%, var(--tertiary-light) 70%); /* NEW: Light, cool grey gradient for a subtle metallic sheen */
 
     /* Text Colors - Darker for readability on light backgrounds */
     --text-dark-primary: #1A1A1A; /* Primary text (almost black) */
