@@ -1,12 +1,14 @@
 /* components/styles/style.css */
 
 /* --- IMPORT GOOGLE FONTS HERE --- */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&display=swap'); /* NEW: Bricolage Grotesque */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Source+Sans+Pro:wght@300;400;700&display=swap');
 
 /* --- IMPORT COMMON COMPONENT STYLES HERE --- */
 @import url('../home/hero.css');
 @import url('../home/about.css');
 @import url('../home/services.css');
+@import url('../home/testimonials.css'); /* NEW: Import the testimonials stylesheet */
 @import url('../common/partnership.css');
 @import url('./navbar.css');
 @import url('./buttons.css');
@@ -29,10 +31,14 @@
     --secondary-light: #F8F8F8; /* Subtle secondary background */
     --tertiary-light: #EDEDED; /* Even darker light grey for specific areas */
 
-    /* Accent Colors - Using the user's provided purple #43169c */
-    --main-accent-purple: #43169c;
-    --main-accent-purple-light: #6C3DAB; /* Lighter shade for hovers/accents */
-    --main-accent-purple-dark: #311075; /* Darker shade for deeper tones */
+    /* Accent Colors - Using the user's provided 'True Purple' from images */
+    --main-accent-purple: #6A1B9A; /* Updated to 'True Purple' */
+    --main-accent-purple-rgb: 106, 27, 154; /* NEW: RGB components for #6A1B9A for rgba() usage */
+    --main-accent-purple-light: #844FC4; /* Lighter shade for hovers/accents, based on True Purple */
+    --main-accent-purple-light-rgb: 132, 79, 196; /* NEW: RGB components for #844FC4 */
+    --main-accent-purple-lightest: #EAE6F3; /* NEW: Very light purple for dropdown hover background */
+    --main-accent-purple-dark: #4F117A; /* Darker shade for deeper tones, based on True Purple */
+    --main-accent-purple-dark-rgb: 79, 17, 122; /* NEW: RGB components for #4F117A */
 
     /* Gradients */
     --gradient-accent: linear-gradient(135deg, var(--main-accent-purple) 0%, var(--main-accent-purple-light) 100%);
@@ -41,13 +47,15 @@
 
     /* Text Colors - Darker for readability on light backgrounds */
     --text-dark-primary: #1A1A1A; /* Primary text (almost black) */
+    --text-dark-primary-rgb: 26, 26, 26; /* NEW: RGB components for #1A1A1A */
     --text-dark-secondary: #4A4A4A; /* Secondary text (dark grey for links, etc.) */
     --text-dark-muted: #7A7A7A; /* Muted text (medium grey) - good for subtle background icons */
     --text-highlight-light: #FFFFFF; /* For text on dark accents/buttons */
+    --text-highlight-light-rgb: 255, 255, 255; /* NEW: RGB components for #FFFFFF */
     
     /* Background and Text Colors for form fields */
-    --bg-light: #F8F8F8;
-    --text-dark: #1A1A1A; /* Consider consolidating with --text-dark-primary */
+    --bg-light: var(--secondary-light); /* Consolidated with existing var */
+    --text-dark: var(--text-dark-primary); /* Consolidated with existing var */
 
     /* Borders & Shadows - Lighter borders, subtle shadows */
     --border-light-color: #E0E0E0; /* Light grey border */
@@ -55,6 +63,7 @@
     --shadow-light: rgba(0, 0, 0, 0.05); /* Very subtle shadow */
     --shadow-medium: rgba(0, 0, 0, 0.1); /* Medium subtle shadow */
     --shadow-dark: rgba(0, 0, 0, 0.2); /* Still dark, but less opaque */
+    --shadow-small: rgba(0, 0, 0, 0.08); /* NEW: Added for hero button consistency */
 
     /* Transitions */
     --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -70,6 +79,9 @@
 
     /* Border Radius (assuming this was intended for button) */
     --border-radius-large: 8px; /* Example value */
+
+    /* FOOTER SPECIFIC VARIABLE (These are now redundant if main-accent-purple-dark is used directly) */
+    --text-on-dark-muted: #B0B0B0; /* NEW: Specific muted text for dark backgrounds */
 }
 
 /* Reset and Base Styles */
@@ -93,6 +105,7 @@ body {
     overflow-x: hidden;
     position: relative;
     perspective: 1000px;
+    font-size: 1.05rem; /* IMPROVEMENT: Slightly increased base font size */
 }
 
 /* Selection Color */
@@ -125,12 +138,26 @@ body {
 
 /* Headings: h1, h2, h4 */
 h1, h2, h4 {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Bricolage Grotesque', sans-serif; /* Apply Bricolage Grotesque to headings */
     letter-spacing: -0.04em;
 }
 
+h1 {
+    font-size: 4.5rem; /* IMPROVEMENT: Increased h1 font size */
+}
+
+h2 {
+    font-size: 3.5rem; /* IMPROVEMENT: Increased h2 font size */
+}
+
+h4 {
+    font-size: 2rem; /* IMPROVEMENT: Increased h4 font size */
+}
+
+
 .section__title {
-    font-size: 3rem;
+    font-family: 'Bricolage Grotesque', sans-serif; /* Apply Bricolage Grotesque to section titles */
+    font-size: 3.5rem; /* IMPROVEMENT: Increased section title font size */
     font-weight: 800;
     margin-bottom: 2rem;
     color: var(--text-dark-primary);
@@ -161,7 +188,7 @@ h1, h2, h4 {
 }
 
 .section__text {
-    font-size: 1.15rem;
+    font-size: 1.25rem; /* IMPROVEMENT: Increased section text font size */
     color: var(--text-dark-secondary);
     line-height: 2;
 }
@@ -172,17 +199,47 @@ h1, h2, h4 {
         padding: 5rem 0;
     }
 
+    h1 {
+        font-size: 3.5rem; /* IMPROVEMENT: Adjusted h1 for tablets */
+    }
+
+    h2 {
+        font-size: 3rem; /* IMPROVEMENT: Adjusted h2 for tablets */
+    }
+
+    h4 {
+        font-size: 1.8rem; /* IMPROVEMENT: Adjusted h4 for tablets */
+    }
+
     .section__title {
-        font-size: 2.5rem;
+        font-size: 3rem; /* IMPROVEMENT: Adjusted section title for tablets */
         margin-bottom: 1.8rem;
     }
     .section__title--center {
         margin-bottom: 3rem;
     }
+    .section__text {
+        font-size: 1.1rem; /* IMPROVEMENT: Adjusted section text for tablets */
+    }
 }
 
 @media (max-width: 768px) {
+    h1 {
+        font-size: 3rem; /* IMPROVEMENT: Adjusted h1 for mobile */
+    }
+
+    h2 {
+        font-size: 2.5rem; /* IMPROVEMENT: Adjusted h2 for mobile */
+    }
+
+    h4 {
+        font-size: 1.6rem; /* IMPROVEMENT: Adjusted h4 for mobile */
+    }
+
     .section__title {
-        font-size: 2.2rem;
+        font-size: 2.5rem; /* IMPROVEMENT: Adjusted section title for mobile */
+    }
+    .section__text {
+        font-size: 1rem; /* IMPROVEMENT: Adjusted section text for mobile */
     }
 }

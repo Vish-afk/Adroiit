@@ -127,7 +127,7 @@
     position: absolute;
     top: 100%; /* Position right below the trigger link */
     left: 0;
-    background-color: #f9f9f9; /* Light background for dropdown */
+    background-color: var(--primary-light); /* Changed to use variable for consistency */
     min-width: 180px; /* Adjust width as needed for your content */
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     border-radius: 6px;

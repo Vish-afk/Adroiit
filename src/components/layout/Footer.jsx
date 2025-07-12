@@ -1,6 +1,7 @@
 // Footer.jsx
 import React from 'react';
 import { Twitter, Instagram, Linkedin, Youtube, Phone, Mail, MapPin } from 'lucide-react';
+import logoWhite from '../../assets/logowhite02.png'; // Corrected logo import
 
 export default function Footer() {
   return (
@@ -8,20 +9,34 @@ export default function Footer() {
       <div className="footer__container">
         <div className="footer__content">
           <div className="footer__brand">
-            <h3>Adroiit Technovations</h3>
+            {/* Added Logo with correct import */}
+            <img 
+              src={logoWhite} // Using the imported logo variable
+              alt="Adroiit Technovations Logo" 
+              className="footer__logo" 
+            />
+            {/* Removed h3 "Adroiit Technovations" text as per request */}
             <p>Empowering Next-Gen Through Education and Technology</p>
             <div className="social-icons">
               <div className="social-icon">
-                <Twitter />
+                <a href="https://x.com/adroiittech" target="_blank" rel="noopener noreferrer">
+                  <Twitter />
+                </a>
               </div>
               <div className="social-icon">
-                <Instagram />
+                <a href="https://www.instagram.com/adroiit.technovations?igsh=MTIwNDA0ZHNocXI2cA==" target="_blank" rel="noopener noreferrer">
+                  <Instagram />
+                </a>
               </div>
               <div className="social-icon">
-                <Linkedin />
+                <a href="https://www.linkedin.com/company/adroiit-technovations/" target="_blank" rel="noopener noreferrer">
+                  <Linkedin />
+                </a>
               </div>
               <div className="social-icon">
-                <Youtube />
+                <a href="https://www.youtube.com/@adroiittechnovations" target="_blank" rel="noopener noreferrer">
+                  <Youtube />
+                </a>
               </div>
             </div>
           </div>
@@ -68,7 +83,7 @@ export default function Footer() {
         </div>
         
         <div className="footer__copyright">
-          <p>&copy; 2025 Adroiit Technovations. All rights reserved.</p>
+          <p>© 2025 Adroiit Technovations. All rights reserved.</p>
         </div>
       </div>
     </footer>

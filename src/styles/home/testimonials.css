@@ -1,0 +1,185 @@
+/* components/home/testimonials.css */
+
+#testimonials-section {
+    /* Overall section styling for bright theme */
+    background-color: var(--primary-light); /* Section background is explicitly white */
+    padding: 4rem 0 4rem;
+    color: var(--text-dark-primary); /* Default text color for the section (dark) */
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align: center;
+}
+
+.testimonials-section__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.testimonials-section__pre-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--main-accent-purple); /* Purple color for pre-title */
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.testimonials-section__main-title {
+    font-size: 3rem; /* Large font size for main title */
+    font-weight: 500;
+    color: var(--text-dark-primary); /* Main title color changed to dark for contrast on white background */
+    margin-bottom: 3rem;
+    line-height: 1.2;
+    font-family: 'Bricolage Grotesque', sans-serif; /* Applied Bricolage Grotesque font */
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: start;
+}
+
+.testimonial-card {
+    /* Card styling - now with subtle purple background and inline content */
+    background-color: var(--main-accent-purple-lightest); /* Subtle light purple card background */
+    border-radius: 50px;
+    padding: 1.5rem 2rem; /* IMPROVEMENT: Increased padding for more content space */
+    box-shadow: 0 4px 10px var(--shadow-small); /* Subtle shadow */
+    color: var(--text-dark-primary); /* Changed text color to dark for readability on light background */
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.8rem;
+    min-height: 80px;
+    border: 1px solid var(--border-light-color); /* Subtle light grey border for light card */
+}
+
+.testimonial-card__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--main-accent-purple); /* Purple border around avatar to stand out */
+    flex-shrink: 0;
+    margin-bottom: 0;
+}
+
+.testimonial-card__text {
+    font-size: 1.05rem; /* Increased testimonial text font size */
+    line-height: 1.5;
+    color: var(--text-dark-secondary); /* Dark text color for readability on light card */
+    flex-grow: 1;
+    font-family: 'Source Sans Pro', sans-serif;
+    display: block;
+    overflow: visible;
+    text-overflow: clip;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    margin-bottom: 0; /* Remove margin as it's part of the inline flow now */
+}
+
+.testimonial-card__reviewer-name {
+    /* Style for reviewer name, now inline with text */
+    font-size: inherit; /* Inherit font size from parent text */
+    font-weight: 700; /* Made bolder */
+    color: var(--text-dark-primary); /* Dark color for name */
+    font-family: 'Inter', sans-serif; /* Use Inter for name */
+    white-space: nowrap; /* Keep name from wrapping if possible */
+}
+
+
+/* Hide carousel navigation styles as this is a static grid */
+.carousel-navigation, .carousel-arrow, .carousel-dots, .dot {
+    display: none;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .testimonials-grid {
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    #testimonials-section {
+        padding: 3rem 0;
+    }
+    .testimonials-section__container {
+        max-width: 90%;
+    }
+    .testimonials-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.2rem;
+    }
+    .testimonial-card {
+        padding: 1.2rem 1.5rem; /* IMPROVEMENT: Adjusted padding for tablets */
+        min-height: 70px;
+        border-radius: 40px;
+    }
+    .testimonial-card__avatar {
+        width: 40px;
+        height: 40px;
+    }
+    .testimonial-card__text {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #testimonials-section {
+        padding: 2.5rem 0;
+    }
+    .testimonials-section__main-title {
+        font-size: 2.5rem;
+    }
+    .testimonials-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .testimonial-card {
+        padding: 1rem 1.2rem; /* IMPROVEMENT: Adjusted padding for mobile */
+        min-height: 60px;
+        border-radius: 35px;
+    }
+    .testimonial-card__avatar {
+        width: 36px;
+        height: 36px;
+    }
+    .testimonial-card__text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+}
+
+@media (max-width: 480px) {
+    #testimonials-section {
+        padding: 2rem 0;
+    }
+    .testimonials-section__pre-title {
+        font-size: 0.75rem;
+    }
+    .testimonials-section__main-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .testimonial-card {
+        padding: 0.8rem 1rem; /* IMPROVEMENT: Adjusted padding for small mobile */
+        min-height: auto;
+        border-radius: 30px;
+    }
+    .testimonial-card__avatar {
+        width: 32px;
+        height: 32px;
+    }
+    .testimonial-card__text {
+        font-size: 0.8rem;
+    }
+}

@@ -2,21 +2,8 @@
 
 /* Specific inverse gradient background for Partnership Section only */
 section.partnership-section--gradient-bg-inverse {
-    /* --- Local Variable Definitions for BRIGHT MODE within this section --- */
-    /* These variables will ensure the partnership section uses its specific bright/purple palette */
-    --section-primary-light: #FFFFFF;       /* Pure white for main background */
-    --section-secondary-light: #F8F8F8;      /* Off-white for subtle gradient/variation */
-    --section-bg-ui: #EFEFEF;               /* Very light gray for UI elements like inputs/dropdowns */
-    --section-border-ui: #DDDDDD;           /* Light gray border for UI elements */
-    --section-text-primary-dark: #333333;   /* Dark gray for most text */
-    --section-text-heading: #000000;        /* Black for main titles, high contrast */
-    --section-text-secondary-dark: #666666; /* Medium gray for secondary text/descriptions */
-    --section-purple-main: #6C3DAA;         /* Main accent purple - #6C3DAA */
-    --section-purple-light: #6C3DAA;        /* Lighter purple for accents/hovers (now same as main) */
-    --section-text-on-purple: #FFFFFF;      /* White text for elements on purple backgrounds */
-    /* --- END Local Variable Definitions --- */
-
-    background: linear-gradient(to top right, var(--section-primary-light) 0%, var(--section-secondary-light) 100%);
+    /* --- Local Variable Definitions REMOVED - using global variables for consistency --- */
+    background: linear-gradient(to top right, var(--primary-light) 0%, var(--secondary-light) 100%); /* Using global vars */
     position: relative;
     z-index: 2; 
     box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.05); 
@@ -46,7 +33,7 @@ section.partnership-section--gradient-bg-inverse {
 }
 
 .partnership__text-content .section__title {
-    color: var(--section-text-heading);
+    color: var(--text-dark-primary); /* Using global var */
     margin-bottom: 1.5rem;
     font-size: 2.8rem;
     font-weight: 600;
@@ -63,14 +50,14 @@ section.partnership-section--gradient-bg-inverse {
     left: 0;
     width: 60px; /* Adjusted width */
     height: 4px; /* Adjusted height */
-    background: linear-gradient(to right, var(--section-purple-main), var(--section-purple-light)); 
+    background: linear-gradient(to right, var(--main-accent-purple), var(--main-accent-purple-light)); /* Using global vars */
     border-radius: 3px; /* Added border-radius for consistency */
-    box-shadow: 0 0 10px rgba(108, 61, 170, 0.2); /* Used 6C3DAA directly here for consistency */
+    box-shadow: 0 0 10px rgba(var(--main-accent-purple-rgb), 0.2); /* Using global var */
     transform: none; /* Ensure no unwanted transform from common styles */
 }
 
 .partnership__text-content .section__text {
-    color: var(--section-text-secondary-dark);
+    color: var(--text-dark-secondary); /* Using global var */
     font-size: 1.1rem;
     line-height: 1.8;
     text-align: left; 
@@ -104,11 +91,11 @@ section.partnership-section--gradient-bg-inverse {
     gap: 1.5rem; 
     max-width: 500px; 
     width: 100%; 
-    background-color: var(--section-purple-main); /* This is now #6C3DAA */
+    background-color: var(--main-accent-purple); /* Using global var */
     border-radius: 12px;
     padding: 2rem;
-    box-shadow: 0 15px 50px rgba(108, 61, 170, 0.4); /* Updated shadow color for consistency */
-    border: 1px solid var(--section-purple-light); 
+    box-shadow: 0 15px 50px rgba(var(--main-accent-purple-rgb), 0.4); /* Using global var */
+    border: 1px solid var(--main-accent-purple-light); /* Using global var */
 }
 
 .contact-form .form-group {
@@ -120,11 +107,11 @@ section.partnership-section--gradient-bg-inverse {
 .contact-form label {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--section-text-on-purple); 
+    color: var(--text-highlight-light); /* Using global var */
 }
 
 .contact-form .required {
-    color: var(--section-purple-light); 
+    color: var(--main-accent-purple-light); /* Using global var */
     margin-left: 0.25rem;
 }
 
@@ -132,12 +119,12 @@ section.partnership-section--gradient-bg-inverse {
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form textarea {
-    background-color: var(--section-bg-ui); 
-    border: 1px solid var(--section-border-ui); 
+    background-color: var(--bg-light); /* Using global var */
+    border: 1px solid var(--border-light-color); /* Using global var */
     border-radius: 8px; 
     padding: 0.8rem 1rem;
     font-size: 1rem;
-    color: var(--section-text-primary-dark); 
+    color: var(--text-dark-primary); /* Using global var */
     width: 100%;
     box-sizing: border-box; 
     transition: border-color 0.3s ease, box-shadow 0.3s ease; 
@@ -148,14 +135,14 @@ section.partnership-section--gradient-bg-inverse {
 .contact-form input[type="email"]:focus,
 .contact-form textarea:focus {
     outline: none; 
-    border-color: var(--section-purple-light); 
-    box-shadow: 0 0 0 3px rgba(108, 61, 170, 0.4); /* Used 6C3DAA directly here for consistency */
+    border-color: var(--main-accent-purple-light); /* Using global var */
+    box-shadow: 0 0 0 3px rgba(var(--main-accent-purple-rgb), 0.4); /* Using global var */
 }
 
 .contact-form input[type="text"]:hover,
 .contact-form input[type="email"]:hover,
 .contact-form textarea:hover {
-    border-color: var(--section-purple-light); 
+    border-color: var(--main-accent-purple-light); /* Using global var */
 }
 
 /* --- CUSTOM DROPDOWN STYLES --- */
@@ -168,12 +155,12 @@ section.partnership-section--gradient-bg-inverse {
 
 /* Style for the displayed selected value (the button part) */
 .select-selected {
-    background-color: var(--section-bg-ui); 
-    border: 1px solid var(--section-border-ui); 
+    background-color: var(--bg-light); /* Using global var */
+    border: 1px solid var(--border-light-color); /* Using global var */
     border-radius: 8px; 
     padding: 0.8rem 1rem;
     font-size: 1rem;
-    color: var(--section-text-primary-dark); 
+    color: var(--text-dark-primary); /* Using global var */
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -185,17 +172,17 @@ section.partnership-section--gradient-bg-inverse {
 
 .select-selected:focus {
     outline: none; 
-    border-color: var(--section-purple-light); 
-    box-shadow: 0 0 0 3px rgba(108, 61, 170, 0.4); /* Used 6C3DAA directly here for consistency */
+    border-color: var(--main-accent-purple-light); /* Using global var */
+    box-shadow: 0 0 0 3px rgba(var(--main-accent-purple-rgb), 0.4); /* Using global var */
 }
 
 .select-selected:hover {
-    border-color: var(--section-purple-light); 
+    border-color: var(--main-accent-purple-light); /* Using global var */
 }
 
 /* Style for the placeholder text when no option is selected */
 .select-selected.placeholder {
-    color: var(--section-text-secondary-dark); 
+    color: var(--text-dark-secondary); /* Using global var */
 }
 
 /* Custom arrow for the dropdown */
@@ -204,7 +191,7 @@ section.partnership-section--gradient-bg-inverse {
     height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid var(--section-text-primary-dark); 
+    border-top: 6px solid var(--text-dark-primary); /* Using global var */
     margin-left: 10px; 
     transition: transform 0.3s ease; 
 }
@@ -216,8 +203,8 @@ section.partnership-section--gradient-bg-inverse {
 /* Style for the dropdown list (ul) */
 .select-items {
     position: absolute;
-    background-color: var(--section-primary-light); 
-    border: 1px solid var(--section-border-ui);
+    background-color: var(--primary-light); /* Using global var */
+    border: 1px solid var(--border-light-color); /* Using global var */
     border-radius: 8px;
     top: 100%; 
     left: 0;
@@ -247,9 +234,9 @@ section.partnership-section--gradient-bg-inverse {
 .select-items li {
     padding: 0.8rem 1rem;
     cursor: pointer;
-    color: var(--section-text-primary-dark); 
+    color: var(--text-dark-primary); /* Using global var */
     transition: background-color 0.2s ease, color 0.2s ease;
-    border-bottom: 1px solid var(--section-border-ui); 
+    border-bottom: 1px solid var(--border-light-color); /* Using global var */
 }
 
 .select-items li:last-child {
@@ -259,17 +246,17 @@ section.partnership-section--gradient-bg-inverse {
 /* Hover and selected state for dropdown items */
 .select-items li:hover,
 .select-items li.same-as-selected {
-    background-color: var(--section-purple-light); 
-    color: var(--section-text-on-purple); 
+    background-color: var(--main-accent-purple-light); /* Using global var */
+    color: var(--text-highlight-light); /* Using global var */
 }
 /* --- END CUSTOM DROPDOWN STYLES --- */
 
 
 /* Styles for the Submit button */
 .contact-form .submit-btn {
-    background: var(--section-text-on-purple); /* White background by default */
-    color: var(--section-purple-main);       /* Purple text by default */
-    border: 1px solid var(--section-purple-main); /* Purple border by default */
+    background: var(--text-highlight-light); /* Using global var */
+    color: var(--main-accent-purple); /* Using global var */
+    border: 1px solid var(--main-accent-purple); /* Using global var */
     padding: 1rem 2rem;
     font-size: 1.1rem;
     font-weight: 700;
@@ -287,11 +274,11 @@ section.partnership-section--gradient-bg-inverse {
 
 .contact-form .submit-btn:hover {
     filter: none; 
-    background: var(--section-purple-main); /* Button fills with purple on hover */
-    color: var(--section-text-on-purple);   /* Text becomes white on hover */
-    border: 1px solid var(--section-text-on-purple); /* Added: White border on hover */
+    background: var(--main-accent-purple); /* Using global var */
+    color: var(--text-highlight-light); /* Using global var */
+    border: 1px solid var(--text-highlight-light); /* Using global var */
     transform: none; /* Explicitly removed all movement */
-    box-shadow: 0 8px 30px rgba(108, 61, 170, 0.4); /* More prominent shadow */
+    box-shadow: 0 8px 30px rgba(var(--main-accent-purple-rgb), 0.4); /* Using global var */
 }
 
 /* Hide default button effect elements if they appear */
