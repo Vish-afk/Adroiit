@@ -2,36 +2,75 @@
 
 /* --- General Section Styling (for the new design) --- */
 .services-section-redesigned {
-    background-color: var(--primary-light); /* White background for the entire section */
-    padding: 2rem 0; /* ADJUSTED: Reduced vertical padding from 5rem to 2rem */
-    color: var(--text-dark-primary); /* Default text color */
+    position: relative;
+    z-index: 1;
+    /* Darker purple base remains for the graph feel */
+    background-color: #1F0E33; /* Changed to a specific darker hex code for less brightness */
+    overflow: hidden;
+    padding: 2rem 0;
+    /* Light text for readability on dark background */
+    color: var(--text-highlight-light);
+
+    /* No backgroundPulse animation for this aesthetic */
+    animation: none;
 }
 
+/* Pseudo-element for the Graph Paper Grid Lines */
+.services-section-redesigned::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place behind the main content */
+
+    /* NEW: Graph Paper Grid Pattern with major and minor lines */
+    background-image:
+        /* Minor lines (fainter, closer together) - Opacity remains as last adjusted */
+        repeating-linear-gradient(0deg, rgba(var(--main-accent-purple-light-rgb), 0.15) 0, rgba(var(--main-accent-purple-light-rgb), 0.15) 1px, transparent 1px, transparent 25px),
+        repeating-linear-gradient(90deg, rgba(var(--main-accent-purple-light-rgb), 0.15) 0, rgba(var(--main-accent-purple-light-rgb), 0.15) 1px, transparent 1px, transparent 25px),
+        /* Major lines (brighter, further apart) - Opacity remains as last adjusted */
+        repeating-linear-gradient(0deg, rgba(var(--main-accent-purple-light-rgb), 0.35) 0, rgba(var(--main-accent-purple-light-rgb), 0.35) 2px, transparent 2px, transparent 100px),
+        repeating-linear-gradient(90deg, rgba(var(--main-accent-purple-light-rgb), 0.35) 0, rgba(var(--main-accent-purple-light-rgb), 0.35) 2px, transparent 2px, transparent 100px);
+    
+    background-size: 100px 100px, 100px 100px, 100px 100px, 100px 100px; /* Each layer aligned to the major grid size */
+    background-position: 0 0, 0 0, 0 0, 0 0; /* Align all patterns from top-left */
+
+    opacity: 1; /* Ensure full visibility */
+    filter: none; /* No blur */
+    transform: none; /* No scaling */
+    animation: none; /* No pattern shift animation */
+}
+
+
 .services-section-redesigned .section__container {
-    max-width: 1280px; /* Slightly wider container */
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 0 2rem; /* Increased horizontal padding */
-    text-align: center; /* Center align section titles */
+    padding: 0 2rem;
+    text-align: center;
 }
 
 /* --- NEW: Main Section Heading ("SERVICES") --- */
 .services-section-redesigned .section__main-heading {
-    font-size: 3rem; /* Significantly larger font size */
-    font-weight: 700; /* Bolder font weight */
-    color: var(--text-dark-primary); /* Darker text */
-    margin-bottom: 1.5rem; /* Increased margin to space from description now that line is gone */
-    font-family: 'Bricolage Grotesque', sans-serif; /* Applied Bricolage Grotesque font */
-    text-transform: uppercase; /* Ensure it's all caps */
+    font-size: 3rem;
+    font-weight: 700;
+    /* Light text for visibility */
+    color: var(--text-highlight-light);
+    margin-bottom: 1.5rem;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    text-transform: uppercase;
 }
 
 /* --- Section Main Title (Descriptive Text) --- */
 .services-section-redesigned .section__title--description {
-    font-size: 1.3rem; /* Increased font size */
+    font-size: 1.3rem;
     font-weight: 400;
-    color: var(--text-dark-secondary); /* Lighter dark text */
-    margin-bottom: 3.5rem; /* Adjusted to create space before the grid, as all lines are removed */
+    /* Muted light text for description */
+    color: var(--text-on-dark-muted);
+    margin-bottom: 3.5rem;
     line-height: 1.6;
-    max-width: 900px; /* Slightly wider for longer text */
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
     font-family: 'Source Sans Pro', sans-serif;
@@ -39,164 +78,163 @@
 
 /* --- IMPORTANT: Hide the global ::after line for the description in this section --- */
 .services-section-redesigned .section__title--description::after {
-    content: none; /* This removes the line */
-    display: none; /* Ensure it's completely gone */
+    content: none;
+    display: none;
 }
 
 
 /* --- Services Grid Layout --- */
 .services__grid-redesigned {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted min-width for cards */
-    gap: 2.5rem; /* Increased space between cards */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
     padding: 0;
-    background: none; /* Ensure no background from previous designs */
+    background: none;
 }
 
 /* --- Individual Service Card Styles --- */
 .service-card-redesigned {
-    background: var(--primary-light); /* White background for cards */
-    border: 1px solid var(--border-light-color); /* Light gray border */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-    padding: 1.4rem 1.8rem; /* Adjusted: Reduced top/bottom padding */
+    /* White background for cards */
+    background: var(--primary-light);
+    border: 1px solid var(--border-light-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 1.4rem 1.8rem;
     transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     display: flex;
-    flex-direction: column; /* Stack content vertically */
-    align-items: flex-start; /* Align content to the left */
-    text-align: left; /* Text aligns left inside cards */
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
 }
 
 /* Card fill and shadow animation when button is hovered */
 .service-card-redesigned:has(.service-card-redesigned__button:hover) {
-    background-color: var(--main-accent-purple-lightest); /* Card fills with light purple */
-    border-color: var(--border-light-color); /* Keep original border color, or set to transparent if no border is desired on hover */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Slightly more pronounced shadow for "lift" */
+    background-color: var(--main-accent-purple-lightest);
+    border-color: var(--border-light-color);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* --- Header for Icon and Title in Same Row --- */
 .service-card-redesigned__header {
     display: flex;
-    align-items: center; /* Vertically align icon and title */
-    justify-content: flex-start; /* Adjusted: Align icon and heading to the left */
-    margin-bottom: 1.3rem; /* Adjusted: Increased space below header */
-    width: 100%; /* Take full width */
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 1.3rem;
+    width: 100%;
 }
 
 /* --- Icon Wrapper (NO BACKGROUND, NO SHINE PSEUDO-ELEMENT) --- */
 .service-card-redesigned__icon-wrapper {
-    width: 65px; /* Keep dimensions for consistent alignment and glow space */
-    height: 65px; 
+    width: 65px;
+    height: 65px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 0; /* Adjusted: Removed space to the right of the icon */
-    flex-shrink: 0; /* Prevents shrinking */
-    transition: background-color 0.3s ease; /* Keep for future if needed, currently no bg */
+    margin-right: 0;
+    flex-shrink: 0;
+    transition: background-color 0.3s ease;
 }
 
 /* --- Actual SVG Icon (NO GLOW/SHINE) --- */
 .service-card-redesigned .service-icon {
-    width: 36px; /* Increased icon size */
-    height: 36px; /* Increased icon size */
-    color: var(--main-accent-purple); /* Initial purple icon color */
+    width: 36px;
+    height: 36px;
+    color: var(--main-accent-purple);
     stroke-width: 2;
-    filter: none; /* !!! REMOVED ALL FILTERS/GLOWS !!! */
-    transition: color 0.3s ease; /* Transition only for color */
+    filter: none;
+    transition: color 0.3s ease;
 }
 
 /* --- Service Card Title --- */
 .service-card-redesigned__title {
-    font-size: 1.55rem; /* Increased font size */
+    font-size: 1.55rem;
     font-weight: 600;
     color: var(--text-dark-primary);
     line-height: 1.3;
-    margin: 0; /* Remove previous margins */
-    flex-grow: 1; /* Allow title to take remaining space */
-    font-family: 'Bricolage Grotesque', sans-serif; /* NEW: Applied Bricolage Grotesque font */
-    transition: color 0.3s ease; /* Transition for hover effect */
+    margin: 0;
+    flex-grow: 1;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    transition: color 0.3s ease;
 }
 
 /* --- Service Card Description --- */
 .service-card-redesigned__description {
-    font-size: 1.15rem; /* Increased font size */
+    font-size: 1.15rem;
     color: var(--text-dark-secondary);
-    margin-bottom: 1.4rem; /* Adjusted: Increased space below description */
+    margin-bottom: 1.4rem;
     line-height: 1.6;
-    flex-grow: 1; /* Allows description to take available vertical space */
+    flex-grow: 1;
 }
 
 /* --- Service Card Features List --- */
 .service-card-redesigned__features {
-    list-style: none; /* Remove default bullets */
+    list-style: none;
     padding: 0;
-    margin-bottom: 1.4rem; /* Adjusted: Increased space below features list */
-    flex-grow: 1; /* Allows the list to take vertical space */
+    margin-bottom: 1.4rem;
+    flex-grow: 1;
 }
 
 .service-card-redesigned__features li {
     display: flex;
-    align-items: flex-start; /* Align icon and text vertically */
-    font-size: 1.05rem; /* Increased font size */
+    align-items: flex-start;
+    font-size: 1.05rem;
     color: var(--text-dark-secondary);
-    margin-bottom: 1rem; /* Increased space between list items */
+    margin-bottom: 1rem;
     line-height: 1.5;
-    font-weight: 550; /* Toned down boldness to 550 */
+    font-weight: 550;
 }
 
 .service-card-redesigned__features li:last-child {
-    margin-bottom: 0; /* No margin after last item */
+    margin-bottom: 0;
 }
 
 /* --- Checkmark Icon in Features List --- */
 .feature-icon {
-    width: 22px; /* Increased icon size */
-    height: 22px; /* Increased icon size */
-    color: var(--main-accent-purple); /* Purple color for checkmark */
-    margin-right: 0.7rem; /* Increased space between icon and text */
-    flex-shrink: 0; /* Prevent icon from shrinking */
-    margin-top: 3px; /* Slight vertical alignment adjustment */
+    width: 22px;
+    height: 22px;
+    color: var(--main-accent-purple);
+    margin-right: 0.7rem;
+    flex-shrink: 0;
+    margin-top: 3px;
 }
 
 /* --- Button Wrapper for Centering --- */
 .service-card-redesigned__button-wrapper {
-    width: 100%; /* Take full width of card */
-    text-align: center; /* Center the inline-flex button */
-    margin-top: 0.8rem; /* Reduced space above the button */
-    margin-bottom: 0; /* No space below (controlled by card padding) */
+    width: 100%;
+    text-align: center;
+    margin-top: 0.8rem;
+    margin-bottom: 0;
 }
 
 /* --- Service Card Button (Transparent, no border, no shadow, just text. Purple arrow on hover) --- */
 .service-card-redesigned__button {
-    display: inline-flex; /* Keep as inline-flex for content alignment */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     font-weight: 600;
-    padding: 0.5rem 0; /* Minimal padding for clickable area, visually just text */
+    padding: 0.5rem 0;
     border-radius: 0;
     white-space: nowrap;
     font-size: 1.05rem;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    z-index: 1; 
+    z-index: 1;
 
-    background-color: transparent; /* No background */
-    border: none; /* No border */
-    box-shadow: none; /* No shadow */
-    color: var(--main-accent-purple); /* Initial text color is purple */
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: var(--main-accent-purple);
 
-    transition: color 0.3s ease; /* Transition only for text color */
+    transition: color 0.3s ease;
 }
 
-/* Hover state for the button: Text turns purple (already purple), no background, no border, no shadow */
-/* The text itself effectively slides out, revealing the purple arrow */
 .service-card-redesigned__button:hover {
     background-color: transparent;
     border: none;
     box-shadow: none;
-    color: var(--main-accent-purple); /* Stays purple */
+    color: var(--main-accent-purple);
 }
 
 /* --- Original 'Explore' Button Effect Elements (adapted for transparent button with purple arrow) --- */
@@ -205,107 +243,103 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 100%; 
+    width: 100%;
     height: 100%;
-    background: transparent; 
-    transition: none; 
+    background: transparent;
+    transition: none;
     z-index: 1;
 }
 
-/* The text initially appears */
 .service-card-redesigned__button .button-effect__text {
     position: relative;
-    z-index: 2; 
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out; 
-    color: currentColor; /* Inherits initial purple color */
+    z-index: 2;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    color: currentColor;
     white-space: nowrap;
 }
 
-/* On hover, text slides out */
 .service-card-redesigned__button:hover .button-effect__text {
-    transform: translateX(-150%); 
-    opacity: 0 !important; 
+    transform: translateX(-150%);
+    opacity: 0 !important;
 }
 
-/* The arrow initially hidden, appears and centers on hover in purple */
 .service-card-redesigned__button .button-effect__arrow {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
-    color: var(--main-accent-purple, #6A1BAA); /* Arrow is always purple */
+    transform: translate(-50%, -50%);
+    color: var(--main-accent-purple, #6A1BAA);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.5s ease-out; 
-    z-index: 2; 
-    width: 50px; 
-    height: 50px; 
+    transition: opacity 0.5s ease-out;
+    z-index: 2;
+    width: 50px;
+    height: 50px;
 }
 
 .service-card-redesigned__button .button-effect__arrow--right {
-    opacity: 0; 
+    opacity: 0;
 }
 
 .service-card-redesigned__button:hover .button-effect__arrow--right {
-    opacity: 1 !important; 
+    opacity: 1 !important;
 }
 
 .service-card-redesigned__button .button-effect__arrow svg {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    stroke: currentColor; 
-    filter: none; 
+    stroke: currentColor;
+    filter: none;
 }
 
 /* --- Hover effects for Icon and Title when button is hovered --- */
 .service-card-redesigned:has(.service-card-redesigned__button:hover) .service-card-redesigned__icon-wrapper {
-    background-color: transparent; /* Ensure it stays transparent */
+    background-color: transparent;
 }
 
-/* Icon color changes to main purple on hover (no glow/shine) */
 .service-card-redesigned:has(.service-card-redesigned__button:hover) .service-card-redesigned__icon {
-    color: var(--main-accent-purple); /* Icon color remains purple */
-    filter: none; /* !!! ENSURE NO GLOW/SHINE !!! */
+    color: var(--main-accent-purple);
+    filter: none;
 }
 
 .service-card-redesigned:has(.service-card-redesigned__button:hover) .service-card-redesigned__title {
-    color: var(--main-accent-purple); /* Title color turns main purple */
+    color: var(--main-accent-purple);
 }
 
 
 /* --- Responsive Design Adjustments --- */
 @media (max-width: 992px) {
     .services-section-redesigned {
-        padding: 1.8rem 0; /* ADJUSTED for tablet */
+        padding: 1.8rem 0;
     }
     .services__grid-redesigned {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 2rem;
     }
     .service-card-redesigned {
-        padding: 1.2rem 1.6rem; /* Adjusted: Reduced top/bottom padding for tablet */
+        padding: 1.2rem 1.6rem;
     }
     .services-section-redesigned .section__main-heading {
-        font-size: 2.5rem; /* Adjusted for tablet */
-        margin-bottom: 1.2rem; /* Adjusted to space from description now that line is gone */
+        font-size: 2.5rem;
+        margin-bottom: 1.2rem;
     }
     .services-section-redesigned .section__title--description {
         font-size: 1.15rem;
-        margin-bottom: 2.5rem; /* Adjusted for tablet, as all lines are removed */
+        margin-bottom: 2.5rem;
     }
     .services-section-redesigned .section__title--description::after {
         content: none;
         display: none;
     }
     .service-card-redesigned__header {
-        margin-bottom: 1.1rem; /* Adjusted: Increased space below header for tablet */
+        margin-bottom: 1.1rem;
     }
     .service-card-redesigned__icon-wrapper {
         width: 60px;
         height: 60px;
-        margin-right: 0; /* Adjusted: Removed space for tablet */
+        margin-right: 0;
     }
     .service-card-redesigned .service-icon {
         width: 32px;
@@ -316,10 +350,10 @@
     }
     .service-card-redesigned__description {
         font-size: 1.05rem;
-        margin-bottom: 1.2rem; /* Adjusted: Increased space below description for tablet */
+        margin-bottom: 1.2rem;
     }
     .service-card-redesigned__features {
-        margin-bottom: 1.7rem; /* Adjusted: Increased space below features for tablet */
+        margin-bottom: 1.7rem;
     }
     .feature-icon {
         width: 20px;
@@ -340,15 +374,15 @@
 
 @media (max-width: 768px) {
     .services-section-redesigned {
-        padding: 1.5rem 0; /* ADJUSTED for mobile */
+        padding: 1.5rem 0;
     }
     .services-section-redesigned .section__main-heading {
-        font-size: 2rem; /* Adjusted for mobile */
-        margin-bottom: 1rem; /* Adjusted to space from description now that line is gone */
+        font-size: 2rem;
+        margin-bottom: 1rem;
     }
     .services-section-redesigned .section__title--description {
         font-size: 1.05rem;
-        margin-bottom: 2rem; /* Adjusted for mobile, as all lines are removed */
+        margin-bottom: 2rem;
     }
     .services-section-redesigned .section__title--description::after {
         content: none;
@@ -358,19 +392,19 @@
         gap: 1.8rem;
     }
     .service-card-redesigned {
-        padding: 1.0rem 1.3rem; /* Adjusted: Reduced top/bottom padding for mobile */
+        padding: 1.0rem 1.3rem;
     }
     .service-card-redesigned__header {
-        margin-bottom: 0.9rem; /* Adjusted: Increased space below header for mobile */
+        margin-bottom: 0.9rem;
     }
     .service-card-redesigned__icon-wrapper {
-        margin-right: 0; /* Adjusted: Removed space for mobile */
+        margin-right: 0;
     }
     .service-card-redesigned__description {
-        margin-bottom: 1rem; /* Adjusted: Increased space below description for mobile */
+        margin-bottom: 1rem;
     }
     .service-card-redesigned__features {
-        margin-bottom: 1.4rem; /* Adjusted: Increased space below features for mobile */
+        margin-bottom: 1.4rem;
     }
     .service-card-redesigned__button-wrapper {
         margin-top: 0.6rem;
@@ -379,22 +413,22 @@
 
 @media (max-width: 480px) {
     .services-section-redesigned {
-        padding: 1rem 0; /* ADJUSTED for small mobile */
+        padding: 1rem 0;
     }
     .services__grid-redesigned {
-        grid-template-columns: 1fr; /* Single column on very small screens */
+        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
     .service-card-redesigned {
-        padding: 0.9rem 1.1rem; /* Adjusted: Reduced top/bottom padding for small mobile */
+        padding: 0.9rem 1.1rem;
     }
     .services-section-redesigned .section__main-heading {
-        font-size: 1.8rem; /* Adjusted for small mobile */
-        margin-bottom: 0.8rem; /* Adjusted to space from description now that line is gone */
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
     }
     .services-section-redesigned .section__title--description {
         font-size: 0.95rem;
-        margin-bottom: 1.5rem; /* Adjusted for small mobile, as all lines are removed */
+        margin-bottom: 1.5rem;
     }
     .services-section-redesigned .section__title--description::after {
         content: none;
@@ -404,16 +438,16 @@
         font-size: 1.3rem;
     }
     .service-card-redesigned__header {
-        margin-bottom: 0.7rem; /* Adjusted: Increased space below header for small mobile */
+        margin-bottom: 0.7rem;
     }
     .service-card-redesigned__icon-wrapper {
-        margin-right: 0; /* Adjusted: Removed space for small mobile */
+        margin-right: 0;
     }
     .service-card-redesigned__description {
-        margin-bottom: 0.6rem; /* Adjusted for small mobile */
+        margin-bottom: 0.6rem;
     }
     .service-card-redesigned__features {
-        margin-bottom: 1.2rem; /* Adjusted: Increased space below features for small mobile */
+        margin-bottom: 1.2rem;
     }
     .service-card-redesigned__button-wrapper {
         margin-top: 0.5rem;
