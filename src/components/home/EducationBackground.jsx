@@ -1,7 +1,7 @@
 // components/home/EducationBackground.jsx
 import React, { useState, useEffect } from 'react';
 import {
-    // Core Education & STEM (Relevant icons list - unchanged from last iteration)
+    // Core Education & STEM icons (Relevant icons list - unchanged)
     Book, Compass, PenTool, Ruler, FlaskConical, Lightbulb,
     GraduationCap,
     Microscope, Calculator, Globe, Atom, Code,
@@ -40,17 +40,17 @@ export default function EducationBackground() {
     const edgeBuffer = 0.1; // 10% buffer on each side
     const virtualRange = 1 + 2 * edgeBuffer;
 
-    // *** Increased Density for Desktop ***
+    // Increased Density for Desktop (unchanged from previous)
     const numRows = windowWidth < 768 ? 7 : 15; // More rows on desktop
     const numCols = windowWidth < 768 ? 10 : 25; // Significantly more columns on desktop
     const totalIcons = numRows * numCols;
 
-    const getRandomSize = () => {
+    // KEY CHANGE: Removed random size generation
+    const getFixedSize = () => {
         if (windowWidth < 768) {
-            return Math.floor(Math.random() * (80 - 40 + 1)) + 40;
+            return 60; // Fixed size for mobile
         } else {
-            // Slightly smaller max size for desktop to accommodate higher density
-            return Math.floor(Math.random() * (50 - 20 + 1)) + 20; // Sizes between 20px and 50px
+            return 40; // Fixed size for desktop
         }
     };
 
@@ -80,24 +80,23 @@ export default function EducationBackground() {
         const finalTop = `calc(${baseTopVirtual}% - ${edgeBuffer * 100}%)`;
         const finalLeft = `calc(${baseLeftVirtual}% - ${edgeBuffer * 100}%)`;
 
-        // *** Reduced Random Offset Range ***
-        const randomOffsetRangeX = (100 / numCols) * 0.15; // Offset up to 15% of cell width
-        const randomOffsetRangeY = (100 / numRows) * 0.15; // Offset up to 15% of cell height
-
-        const randomOffsetX = (Math.random() * randomOffsetRangeX) - (randomOffsetRangeX / 2);
-        const randomOffsetY = (Math.random() * randomOffsetRangeY) - (randomOffsetRangeY / 2);
+        // KEY CHANGE: Removed random offsets, now they are 0
+        const randomOffsetX = 0;
+        const randomOffsetY = 0;
 
         const finalTopWithOffset = `calc(${finalTop} + ${randomOffsetY}%)`;
         const finalLeftWithOffset = `calc(${finalLeft} + ${randomOffsetX}%)`;
 
-        const animationDelay = Math.random() * 20;
+        // KEY CHANGE: Removed random animation delay, now it's 0
+        const animationDelay = 0; // Or index * 0.05 for a sequential fade-in
 
         return {
             icon: item,
             style: {
                 top: finalTopWithOffset,
                 left: finalLeftWithOffset,
-                transform: `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`,
+                // KEY CHANGE: Removed random rotation, now it's 0deg
+                transform: `translate(-50%, -50%) rotate(0deg)`,
                 animationDelay: `${animationDelay}s`,
             }
         };
@@ -112,7 +111,7 @@ export default function EducationBackground() {
                         key={index}
                         className="bg-icon"
                         style={item.style}
-                        size={getRandomSize()}
+                        size={getFixedSize()} // KEY CHANGE: Using fixed size
                     />
                 );
             })}

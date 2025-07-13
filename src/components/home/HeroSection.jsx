@@ -1,13 +1,22 @@
 // components/HeroSection.jsx
 import React from 'react';
-import Button from '../ui/Button';
-import { ArrowRight } from 'lucide-react';
+// import Button from '../ui/Button'; // REMOVED
+import { ChevronDown } from 'lucide-react'; // ADDED: ChevronDown icon
 import SequentialTypewriter from './SequentialTypewriter';
-import AnimatedBackground from '../home/EducationBackground'; // Corrected path and alias for EducationBackground
+import AnimatedBackground from '../home/EducationBackground';
 
 export default function HeroSection() {
-  const handleLearnMore = () => {
-    window.location.href = '/about';
+  // REMOVED: handleLearnMore as it's no longer a button
+  // const handleLearnMore = () => {
+  //   window.location.href = '/about';
+  // };
+
+  // ADDED: Function to smoothly scroll down the page
+  const handleScrollDown = () => {
+    window.scrollBy({
+      top: window.innerHeight, // Scrolls down by the height of the viewport
+      behavior: 'smooth'
+    });
   };
 
   const animatedLinesData = [
@@ -16,23 +25,20 @@ export default function HeroSection() {
     { text: "Innovation!", classNameModifier: "innovation" },
   ];
 
-  // Define global animation parameters for consistency
-  const commonTypingSpeed = 100;
-  const commonDeletingSpeed = 50;
-  const commonPauseDuration = 1500;
+  const commonTypingSpeed = 50;
+  const commonDeletingSpeed = 25;
+  const commonPauseDuration = 500;
   const commonLoopDelay = 1000;
 
   return (
     <section className="hero">
-      {/* Place the animated background component here */}
-      <AnimatedBackground /> {/* This component will render the div with class "education-background" */}
+      <AnimatedBackground />
 
       <div className="hero__content">
         <h1 className="hero__title">
           <span className="hero__line-one">Empowering Next-</span>
           <span className="hero__line-two">Gen through</span>
 
-          {/* Use the new SequentialTypewriter component */}
           <SequentialTypewriter
             lines={animatedLinesData}
             typingSpeed={commonTypingSpeed}
@@ -41,11 +47,13 @@ export default function HeroSection() {
             loopDelay={commonLoopDelay}
           />
         </h1>
-        {/* Simply set the outline prop to true */}
-        <Button onClick={handleLearnMore} aria-label="Learn more about us" outline={true}>
-          Learn More
-          <ArrowRight className="btn__icon" />
-        </Button>
+        {/* KEY CHANGE: Replaced Button with ChevronDown icon */}
+        <ChevronDown
+          className="hero__scroll-arrow"
+          onClick={handleScrollDown}
+          size={60} // Adjust size as needed
+          aria-label="Scroll down"
+        />
       </div>
     </section>
   );

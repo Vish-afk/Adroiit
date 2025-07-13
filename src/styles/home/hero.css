@@ -2,13 +2,13 @@
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
-    background-color: var(--primary-light); /* Set to light background for bright mode */
+    background-color: var(--primary-light);
 }
 
 /* Education Background Container */
@@ -19,32 +19,22 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 0; /* Placed behind content */
+    z-index: 0;
 }
 
 /* Individual Background Icons */
 .bg-icon {
     position: absolute;
-    color: var(--text-dark-muted); /* Muted dark color for icons on a light background */
-    opacity: 0.5; /* INCREASED OPACITY */
+    color: var(--text-dark-muted);
+    opacity: 0.35; /* Fixed opacity for visibility */
     transform-origin: center center;
     transition: none;
-    animation:
-        float 30s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
+    /* KEY CHANGE: Removed all animation properties */
+    /* animation: slow-rotate 250s linear infinite; <-- This line is removed */
 }
 
-/* Keyframes for a smoother, gentle floating effect (unchanged) */
-@keyframes float {
-    0% {
-        transform: translate(-50%, -50%) translateY(0px) translateX(0px) rotate(0deg);
-    }
-    50% {
-        transform: translate(-50%, -50%) translateY(-20px) translateX(15px) rotate(0deg);
-    }
-    100% {
-        transform: translate(-50%, -50%) translateY(0px) translateX(0px) rotate(0deg);
-    }
-}
+/* REMOVED: @keyframes slow-rotate { ... } block is removed */
+
 
 /* Ensure hero content is above the background */
 .hero__content {
@@ -52,16 +42,14 @@
     max-width: 900px;
     padding: 4.5rem 6rem;
     position: relative;
-    z-index: 2; /* Ensure content is above the background */
+    z-index: 2;
     transition: var(--transition-slow);
     transform: translateZ(0);
-    backdrop-filter: none; /* No blur */
-    background-color: transparent; /* Ensures transparency */
+    backdrop-filter: none;
+    background-color: transparent;
+    margin-top: -5vh;
 }
 
-.hero__content:hover {
-    transform: translateY(-3px) translateZ(10px);
-}
 
 .hero__title {
     font-size: 5.5rem;
@@ -71,14 +59,14 @@
     letter-spacing: -0.05em;
     font-family: 'Inter', sans-serif;
     text-align: center;
-    color: var(--text-dark-primary); /* Use dark text for light background */
+    color: var(--text-dark-primary);
     text-shadow: none;
 }
 
 /* Base style for static lines (e.g., "Empowering Next-", "Gen through") */
 .hero__line-one,
 .hero__line-two {
-    color: var(--text-dark-primary); /* Use dark text for light background */
+    color: var(--text-dark-primary);
     text-shadow: none;
 }
 
@@ -99,7 +87,7 @@
     border-radius: 0;
     position: relative;
     z-index: 1;
-    background: var(--gradient-accent); /* This purple gradient should be visible on white */
+    background: var(--gradient-accent);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -110,31 +98,23 @@
             drop-shadow(0 0 5px rgba(0, 0, 0, 0.05));
 }
 
-/* --- Learn More Button Styling --- */
-.hero__button {
-    background: var(--gradient-accent);
-    color: var(--text-highlight-light);
-    border: none;
-    padding: 1.2rem 3rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border-radius: var(--border-radius-large);
+/* Style for the scroll-down arrow icon */
+.hero__scroll-arrow {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--main-accent-purple);
     cursor: pointer;
-    transition: var(--transition-fast);
-    box-shadow: var(--shadow-small);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    transition: transform 0.3s ease, color 0.3s ease;
+    z-index: 3;
 }
 
-.hero__button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-medium);
+.hero__scroll-arrow:hover {
+    color: var(--main-accent-purple-dark);
+    transform: translateX(-50%) translateY(-5px);
 }
 
-.hero__button:active {
-    transform: translateY(0);
-    box-shadow: var(--shadow-small);
-}
 
 /* Typing and Unsettling Animations (unchanged) */
 @keyframes type-blink {
@@ -154,6 +134,7 @@
 @media (max-width: 992px) {
     .hero__content {
         padding: 3.5rem 3rem;
+        margin-top: -3vh;
     }
 
     .hero__title {
@@ -168,15 +149,16 @@
         font-size: 3.5rem;
     }
 
-    .hero__button {
-        padding: 1rem 2.5rem;
-        font-size: 1.1rem;
+    /* Adjust arrow position for smaller screens if needed */
+    .hero__scroll-arrow {
+        bottom: 3%;
     }
 }
 
 @media (max-width: 767px) {
     .hero__content {
         padding: 2.5rem 2rem;
+        margin-top: -1vh;
     }
     .hero__title {
         font-size: 3rem;
@@ -185,8 +167,8 @@
     .hero__animated-line {
         font-size: 3rem;
     }
-    .hero__button {
-        padding: 0.9rem 2rem;
-        font-size: 1rem;
+    /* Adjust arrow position/size for mobile */
+    .hero__scroll-arrow {
+        bottom: 2%;
     }
 }
