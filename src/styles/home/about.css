@@ -18,7 +18,7 @@ section.about-section--gradient-bg {
 /* New: Main grid container for left (about content) and right (visuals) */
 .about__main-layout {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr; 
+    grid-template-columns: 0.8fr 1.2fr;
     gap: 3rem;
     align-items: stretch; 
     width: 100%;
@@ -30,8 +30,8 @@ section.about-section--gradient-bg {
     text-align: left;
     display: flex;
     flex-direction: column;
-    justify-content: center; 
-    height: 100%; 
+    justify-content: space-between;
+    height: 100%;
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
@@ -39,26 +39,29 @@ section.about-section--gradient-bg {
 /* Basic styling for the hr tag */
 .about__content hr {
     border: 0;
-    border-top: 1px solid var(--border-light-color); 
-    margin: 1.5rem 0;
+    border-top: 1px solid var(--border-light-color);
+    /* KEY CHANGE 1: Reduced margin-bottom for the hr */
+    margin: 1.5rem 0 0.8rem 0; 
 }
 
 /* .section__title and .section__text will now primarily inherit from the global style.css. */
 .section__title {
-    margin-bottom: 1.5rem; 
+    margin-bottom: 1.5rem;
 }
 
 .section__text {
     /* Uses global font-size: 1.25rem, line-height: 2 */
 }
 
-/* Right div: Contains Image + Vision/Mission */
+/* Right div: Contains Image + Vision and Mission */
 .about__visual-column {
     display: flex;
     flex-direction: column;
-    gap: 0; 
+    justify-content: space-between; 
+    gap: 0;
     align-items: center;
     width: 100%;
+    height: 100%; /* Ensure it takes full height of its grid cell */
 }
 
 /* Wrapper for the image */
@@ -67,13 +70,14 @@ section.about-section--gradient-bg {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0; 
+    padding: 0;
+    margin-bottom: 1.5rem; /* Space between image and VM cards */
 }
 
 /* Make the img larger, removed box behind image */
 .about__icon-wrapper img {
     width: 100%;
-    max-width: 550px; 
+    max-width: 550px;
     height: auto;
     border-radius: 0;
     box-shadow: none;
@@ -85,13 +89,13 @@ section.about-section--gradient-bg {
 .vm-items-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0; /* KEY CHANGE: Removed gap between cards */
+    gap: 1.5rem; /* Gap between cards */
     width: 100%;
     justify-content: center;
-    margin-top: 0;
+    margin-top: 0; /* Ensures it sits at the bottom pushed by flex-end on parent */
 }
 
-/* Individual Vision/Mission Item Styles - Borders added */
+/* Individual Vision/Mission Item Styles - All borders visible, added border-radius */
 .vm-item {
     display: flex;
     flex-direction: column;
@@ -99,50 +103,46 @@ section.about-section--gradient-bg {
     text-align: center;
     flex-grow: 1;
 
-    border-radius: 0; /* KEY CHANGE: Remove border-radius to allow joining smoothly */
+    border-radius: 12px; /* More rounded borders */
     padding: 1.5rem;
 
-    background-color: transparent; 
-    background-image: none; 
-    border: 1px solid var(--main-accent-purple-light); 
-    box-shadow: none; 
-    transition: none; /* KEY CHANGE: Removed transition */
+    /* Filled with soft palette color instead of a border */
+    background-color: var(--main-accent-purple-lightest);
+    border: none; /* Removed the purple border */
+    background-image: none;
+    /* Shadow on all sides, 60% less opaque, with 30% blur (6px) */
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+    transition: none; /* Removed transition for hover effects */
 }
 
-/* KEY CHANGE: Removed hover effects */
-/* .vm-item:hover {
-    border-color: var(--main-accent-purple);
-    box-shadow: 0 4px 12px rgba(var(--main-accent-purple-rgb), 0.1);
-    transform: translateY(-2px);
-} */
+/* Removed the .vm-item:hover rule entirely */
 
-/* Ensure only vertical borders are present for joining */
+
+/* Removed specific border-none rules for first/last child as they are no longer needed */
 .vm-items-container .vm-item:first-child {
-    border-right: none; /* Remove right border of the first card to join */
-    border-top-left-radius: 8px; /* Apply border radius only to corners */
-    border-bottom-left-radius: 8px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
 }
 
 .vm-items-container .vm-item:last-child {
-    border-left: none; /* Remove left border of the second card to join */
-    border-top-right-radius: 8px; /* Apply border radius only to corners */
-    border-bottom-right-radius: 8px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
 }
 
 /* MODIFIED: Icon styles - Color changed to purple */
 .vm-item__icon {
     width: 60px;
     height: 60px;
-    color: var(--main-accent-purple); 
+    color: var(--main-accent-purple-light); 
     margin-bottom: 0.8rem;
     stroke-width: 1.8px;
 }
 
 /* MODIFIED: Title styles - Color changed to purple, font changed to Bricolage Grotesque */
 .vm-item__title {
-    color: var(--main-accent-purple); 
-    font-family: 'Bricolage Grotesque', sans-serif; 
-    font-size: 2rem; 
+    color: var(--main-accent-purple); /* This is the target color */
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 2rem;
     font-weight: 700;
     margin-bottom: 0.6rem;
 }
@@ -150,8 +150,55 @@ section.about-section--gradient-bg {
 /* Text styles for Vision/Mission item descriptions - Now matches .section__text font size */
 .vm-item__text {
     color: var(--text-dark-primary);
-    font-size: 1.25rem; 
-    line-height: 1.6; 
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
+
+/* Styles for the Empowering Innovators Subtitle */
+.section__subtitle {
+    font-family: 'Bricolage Grotesque', sans-serif; 
+    font-size: 1.8rem; 
+    font-weight: 700; 
+    margin-bottom: 1rem; 
+    color: var(--text-dark-primary); 
+}
+
+/* Styles for the new box containing the subtitle and points */
+.about__points-box {
+    margin-top: 0.8rem; /* KEY CHANGE 2: Reduced margin-top for the points box */
+    display: flex; 
+    flex-direction: column; 
+    flex-grow: 1; 
+}
+
+/* Adjust margin for the subtitle inside the box */
+.about__points-box .section__subtitle {
+    margin-bottom: 0.8rem; 
+}
+
+/* NEW: Styles for the individual point items with icons */
+.about__point-item {
+    display: flex;
+    align-items: center; 
+    gap: 0.75rem; 
+    margin-bottom: 0.75rem; 
+}
+
+.about__point-item:last-child {
+    margin-bottom: 0; 
+}
+
+/* NEW: Styles for the Lucide icons within the points */
+.about__point-icon {
+    color: var(--main-accent-purple); 
+    min-width: 20px; 
+    height: 20px;   
+    stroke-width: 2.2px; 
+}
+
+/* Ensure the text within the point item does not have extra bottom margin from .section__text */
+.about__point-item .section__text {
+    margin-bottom: 0;
 }
 
 
@@ -162,85 +209,112 @@ section.about-section--gradient-bg {
     }
 
     .about__main-layout {
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr;
         gap: 2.5rem;
-        align-items: center; 
-        max-width: 90%; 
+        align-items: center;
+        max-width: 90%;
     }
 
     .about__content {
         text-align: center;
         height: auto;
+        justify-content: flex-start; 
     }
 
     .about__visual-column {
         order: -1;
-        gap: 0; 
+        gap: 0;
+        justify-content: flex-start; 
+    }
+    .about__icon-wrapper {
+        margin-top: 0; 
+        margin-bottom: 1.5rem;
     }
 
     .section__title {
-        margin-bottom: 1.2rem; 
+        margin-bottom: 1.2rem;
     }
-    
+
     /* Basic styling for the hr tag in responsive view */
     .about__content hr {
-        margin: 1rem 0;
+        /* KEY CHANGE 3: Reduced margin-bottom for responsive hr */
+        margin: 1rem 0 0.8rem 0; 
     }
 
     /* .section__text uses global font-size: 1.1rem */
 
     .about__icon-wrapper img {
-        max-width: 90%; 
+        max-width: 90%;
     }
 
     .vm-items-container {
-        grid-template-columns: 1fr; /* Cards stack vertically */
-        gap: 0; /* KEY CHANGE: Set gap to 0 for vertical joining on responsive */
-        max-width: 350px;
+        grid-template-columns: 1fr; 
+        gap: 1.5rem; 
     }
 
     .vm-item {
         padding: 1.2rem;
-        background-color: transparent; 
-        background-image: none; 
-        border: 1px solid var(--main-accent-purple-light); 
-        border-radius: 0; /* Ensure no radius when stacked */
+        background-color: var(--main-accent-purple-lightest); 
+        border: none; 
+        background-image: none;
+        border-radius: 12px; 
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
     }
 
-    /* Adjust borders for stacked cards */
+    /* Responsive border radius rules will now apply full radius */
     .vm-items-container .vm-item:first-child {
-        border-right: 1px solid var(--main-accent-purple-light); /* Restore right border */
-        border-bottom: none; /* Remove bottom border to join */
-        border-top-left-radius: 8px; /* Only top corners */
-        border-top-right-radius: 8px;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
     }
-    
+
     .vm-items-container .vm-item:last-child {
-        border-left: 1px solid var(--main-accent-purple-light); /* Restore left border */
-        border-top: none; /* Remove top border to join */
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 8px; /* Only bottom corners */
-        border-bottom-right-radius: 8px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
     }
 
     .vm-item__icon {
         width: 55px;
         height: 55px;
-        color: var(--main-accent-purple); 
+        color: var(--main-accent-purple-light); 
         margin-bottom: 1rem;
     }
 
     .vm-item__title {
-        font-size: 1.8rem; 
-        color: var(--main-accent-purple); 
-        font-family: 'Bricolage Grotesque', sans-serif; 
+        font-size: 1.8rem;
+        color: var(--main-accent-purple);
+        font-family: 'Bricolage Grotesque', sans-serif;
     }
 
     .vm-item__text {
-        font-size: 1.1rem; 
+        font-size: 1.1rem;
+    }
+
+    /* Responsive adjustments for .section__subtitle */
+    .section__subtitle {
+        font-size: 1.6rem; 
+    }
+    
+    /* Responsive adjustments for .about__points-box */
+    .about__points-box {
+        padding: 1.2rem; 
+        margin-top: 0.8rem; /* KEY CHANGE 4: Reduced margin-top for responsive points box */
+        flex-grow: 0; 
+        background-color: transparent;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    /* Responsive adjustments for point icons */
+    .about__point-item {
+        margin-bottom: 0.6rem;
+    }
+    .about__point-icon {
+        min-width: 18px;
+        height: 18px;
     }
 }
 
@@ -254,45 +328,86 @@ section.about-section--gradient-bg {
     }
 
     .section__title {
-        margin-bottom: 0.8rem; 
+        margin-bottom: 0.8rem;
     }
     /* Basic styling for the hr tag in mobile view */
     .about__content hr {
-        margin: 0.8rem 0;
+        /* KEY CHANGE 5: Reduced margin-bottom for mobile hr */
+        margin: 0.8rem 0 0.5rem 0; 
     }
+
     /* .section__text uses global font-size: 1rem */
 
     .about__visual-column {
-        gap: 0; 
+        gap: 0;
     }
 
     .vm-items-container {
-        gap: 0; /* KEY CHANGE: Set gap to 0 for vertical joining on mobile */
+        gap: 1.5rem; 
     }
 
     .vm-item {
         padding: 1rem;
-        background-color: transparent; 
-        background-image: none; 
-        border: 1px solid var(--main-accent-purple-light); 
-        border-radius: 0;
+        background-color: var(--main-accent-purple-lightest); 
+        border: none; 
+        background-image: none;
+        border-radius: 12px; 
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
     }
-    /* Responsive border radius rules from 992px will apply here too */
+
+    /* Responsive border radius rules will now apply full radius */
+    .vm-items-container .vm-item:first-child {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+
+    .vm-items-container .vm-item:last-child {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
 
     .vm-item__icon {
         width: 45px;
         height: 45px;
-        color: var(--main-accent-purple); 
+        color: var(--main-accent-purple-light); 
         margin-bottom: 0.6rem;
     }
 
     .vm-item__title {
         font-size: 1.6rem;
-        color: var(--main-accent-purple); 
-        font-family: 'Bricolage Grotesque', sans-serif; 
+        color: var(--main-accent-purple);
+        font-family: 'Bricolage Grotesque', sans-serif;
     }
 
     .vm-item__text {
         font-size: 1rem;
+    }
+
+    /* Responsive adjustments for .section__subtitle */
+    .section__subtitle {
+        font-size: 1.4rem; 
+    }
+
+    /* Responsive adjustments for .about__points-box */
+    .about__points-box {
+        padding: 1rem; 
+        margin-top: 0.5rem; /* KEY CHANGE 6: Reduced margin-top for mobile points box */
+        flex-grow: 0; 
+        background-color: transparent;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    /* Responsive adjustments for point icons */
+    .about__point-item {
+        margin-bottom: 0.5rem;
+    }
+    .about__point-icon {
+        min-width: 16px;
+        height: 16px;
     }
 }
